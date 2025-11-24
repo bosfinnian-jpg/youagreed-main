@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Timeline - You Agreed.</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        /* ============================================
+           CSS VARIABLES
+           ============================================ */
+        :root {
+            --primary: #000;
+            --accent: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --danger: #ef4444;
+            --success: #10b981;
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --text-secondary: #6b7280;
+            --text-light: #e5e7eb;
+            
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-accent: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.2s ease;
+            --transition-slow: 0.3s ease;
+            
+            --shadow-sm: 0 10px 40px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 20px 50px rgba(102, 126, 234, 0.12);
+            --shadow-lg: 0 30px 80px rgba(102, 126, 234, 0.15);
+            
+            --font-size-sm: 0.95rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.1rem;
+            --font-size-xl: 1.15rem;
+            --font-size-2xl: 1.8rem;
+            --font-size-3xl: 2rem;
+            --font-size-4xl: 2.2rem;
+            --font-size-hero: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: rgba(102, 126, 234, 0.3);
+            color: var(--primary);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-40px);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes progressPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        /* BACKGROUND */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            opacity: 0.03;
+            animation: gradientShift 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s infinite;
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+            z-index: 200;
+            transition: width var(--transition-fast);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        /* HEADER */
+        .site-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: var(--text);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: all var(--transition-base);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+        }
+
+        .back-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .back-link::before {
+            content: "← ";
+        }
+
+        .site-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        /* NAVIGATION */
+        .site-nav {
+            background: rgba(248, 249, 250, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: var(--spacing-sm);
+            color: var(--text);
+            position: absolute;
+            right: var(--spacing-lg);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 60px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: all var(--transition-base);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            display: block;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 60%;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: transform var(--transition-base);
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::before {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+            background: rgba(59, 130, 246, 0.12);
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            padding: var(--spacing-2xl) 0 6rem 0;
+        }
+
+        .page-title {
+            font-size: var(--font-size-hero);
+            font-weight: 800;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .page-subtitle {
+            font-size: var(--font-size-xl);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-2xl);
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.15s;
+        }
+
+        /* WEEK REFERENCE GUIDE */
+        .week-reference {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.2s;
+        }
+
+        .week-reference-header {
+            background: var(--gradient-accent);
+            color: white;
+            padding: var(--spacing-md) var(--spacing-lg);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: var(--font-size-lg);
+            transition: all var(--transition-base);
+            user-select: none;
+        }
+
+        .week-reference-header:hover {
+            background: linear-gradient(90deg, #3b82f6, #6366f1);
+        }
+
+        .week-reference-toggle {
+            font-size: 1.5rem;
+            transition: transform var(--transition-base);
+        }
+
+        .week-reference-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .week-reference-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .week-reference-content.open {
+            max-height: 1200px;
+        }
+
+        .week-reference-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--spacing-sm);
+            padding: var(--spacing-lg);
+        }
+
+        .week-item {
+            background: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-base);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .week-item:hover {
+            transform: translateX(4px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+
+        .week-number {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: var(--font-size-base);
+        }
+
+        .week-dates {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        /* KEY DATES BANNER */
+        .key-dates-banner {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+            border: 2px solid rgba(255, 193, 7, 0.3);
+            border-left: 6px solid #ffc107;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-2xl);
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.25s;
+        }
+
+        .key-dates-banner h3 {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: #f59e0b;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .deadline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .deadline-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm);
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-sm);
+            transition: transform var(--transition-base);
+        }
+
+        .deadline-item:hover {
+            transform: translateX(4px);
+        }
+
+        .deadline-emoji {
+            font-size: 1.5rem;
+        }
+
+        .deadline-info {
+            flex: 1;
+        }
+
+        .deadline-label {
+            font-weight: 600;
+            color: var(--text);
+            font-size: var(--font-size-sm);
+        }
+
+        .deadline-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* TIMELINE CONTROLS */
+        .timeline-controls {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.35s;
+        }
+
+        .control-btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .control-btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .control-btn.active {
+            background: var(--gradient-accent);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* GANTT CHART CONTAINER */
+        .gantt-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-lg);
+            overflow-x: auto;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.45s;
+        }
+
+        /* TIMELINE HEADER */
+        .timeline-header {
+            display: grid;
+            grid-template-columns: 300px repeat(8, minmax(120px, 1fr));
+            gap: 0;
+            margin-bottom: var(--spacing-md);
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+            padding: var(--spacing-md) 0;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .timeline-month {
+            text-align: center;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: var(--font-size-sm);
+            padding: var(--spacing-sm);
+            position: relative;
+        }
+
+        .timeline-month::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        .timeline-month-name {
+            display: block;
+            font-size: var(--font-size-lg);
+            margin-bottom: 2px;
+        }
+
+        .timeline-weeks {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .task-label-header {
+            font-weight: 700;
+            color: var(--text);
+            padding: var(--spacing-sm);
+            font-size: var(--font-size-base);
+        }
+
+        /* PHASE SECTIONS */
+        .phase-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .phase-header {
+            display: grid;
+            grid-template-columns: 300px repeat(8, minmax(120px, 1fr));
+            gap: 0;
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 700;
+            align-items: center;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phase-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .phase-header:hover::before {
+            left: 100%;
+        }
+
+        .phase-header:hover {
+            transform: translateX(4px);
+        }
+
+        .phase-title {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: var(--font-size-lg);
+        }
+
+        .phase-icon {
+            font-size: 1.5rem;
+        }
+
+        .phase-dates {
+            grid-column: 2 / -1;
+            text-align: right;
+            font-size: var(--font-size-sm);
+            opacity: 0.9;
+        }
+
+        /* TASK ROWS */
+        .task-row {
+            display: grid;
+            grid-template-columns: 300px repeat(8, minmax(120px, 1fr));
+            gap: 0;
+            min-height: 50px;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: background var(--transition-fast);
+        }
+
+        .task-row:hover {
+            background: rgba(59, 130, 246, 0.03);
+        }
+
+        .task-name {
+            padding: var(--spacing-sm);
+            font-size: var(--font-size-sm);
+            color: var(--text);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .task-name.milestone {
+            font-weight: 700;
+            color: var(--danger);
+        }
+
+        .task-emoji {
+            font-size: 1.1rem;
+        }
+
+        .timeline-cell {
+            padding: var(--spacing-xs);
+            position: relative;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* TASK BARS */
+        .task-bar {
+            height: 28px;
+            border-radius: var(--radius-sm);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: white;
+            font-weight: 600;
+            transition: all var(--transition-base);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .task-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .task-bar:hover::before {
+            left: 100%;
+        }
+
+        .task-bar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+        }
+
+        /* PHASE COLORS */
+        .phase-1 { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+        }
+        .phase-2 { 
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
+        }
+        .phase-3 { 
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); 
+        }
+        .phase-4 { 
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); 
+        }
+        .phase-5 { 
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); 
+        }
+        .phase-6 { 
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); 
+        }
+        .phase-7 { 
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); 
+            color: var(--text) !important;
+        }
+        .phase-8 { 
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); 
+        }
+        .phase-9 { 
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); 
+            color: var(--text) !important;
+        }
+
+        /* MILESTONE MARKER */
+        .milestone-marker {
+            width: 16px;
+            height: 16px;
+            background: var(--danger);
+            border-radius: 50%;
+            margin: 0 auto;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+            animation: progressPulse 2s ease-in-out infinite;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .milestone-marker:hover {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.3);
+        }
+
+        /* LEGEND */
+        .legend {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.55s;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+
+        .legend-item:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+        }
+
+        .legend-color {
+            width: 32px;
+            height: 16px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* STATS CARDS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-2xl);
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.3s;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: all var(--transition-base);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-value {
+            font-size: var(--font-size-4xl);
+            font-weight: 800;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        /* TOOLTIP */
+        .tooltip {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+            max-width: 300px;
+            line-height: 1.5;
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 1024px) {
+            .gantt-container {
+                overflow-x: scroll;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .timeline-header,
+            .phase-header,
+            .task-row {
+                min-width: 1200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --font-size-hero: 2.5rem;
+                --font-size-4xl: 1.8rem;
+                --font-size-3xl: 1.5rem;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: stretch;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-links.active {
+                max-height: 500px;
+            }
+
+            .nav-links a {
+                padding: var(--spacing-md) var(--spacing-lg);
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+            }
+
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+
+            .main-content {
+                padding: var(--spacing-lg) 0 var(--spacing-2xl) 0;
+            }
+
+            .deadline-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .week-reference-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .particle:nth-child(n+8) {
+                display: none;
+            }
+        }
+
+        /* ACCESSIBILITY */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Background effects -->
+    <div class="gradient-bg"></div>
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="index.html" class="back-link">Back to Hub</a>
+            <h1 class="site-title gradient-text">You Agreed.</h1>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="site-nav">
+        <div class="container">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="overview.html">Overview</a></li>
+                <li><a href="context.html">Critical Context</a></li>
+                <li><a href="ethics.html">Ethics & Risk</a></li>
+                <li><a href="costs.html">Budget Analysis</a></li>
+                <li><a href="timeline.html" class="active">Timeline</a></li>
+                <li><a href="skills.html">Skills & Training</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h2 class="page-title gradient-text">Project Timeline</h2>
+            <p class="page-subtitle">31 weeks from concept to exhibition • October 2025 - May 2026</p>
+
+            <!-- Week Reference Guide (Collapsible) -->
+            <div class="week-reference">
+                <div class="week-reference-header" id="weekToggle">
+                    <span>📅 Week Reference Guide - Click to View Date Mappings</span>
+                    <span class="week-reference-toggle">▼</span>
+                </div>
+                <div class="week-reference-content" id="weekContent">
+                    <div class="week-reference-grid">
+                        <div class="week-item">
+                            <span class="week-number">Week 1</span>
+                            <span class="week-dates">06-12 Oct 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 2</span>
+                            <span class="week-dates">13-19 Oct 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 3</span>
+                            <span class="week-dates">20-26 Oct 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 4</span>
+                            <span class="week-dates">27 Oct - 02 Nov</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 5</span>
+                            <span class="week-dates">03-09 Nov 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 6</span>
+                            <span class="week-dates">10-16 Nov 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 7</span>
+                            <span class="week-dates">17-23 Nov 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 8</span>
+                            <span class="week-dates">24-30 Nov 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 9</span>
+                            <span class="week-dates">01-07 Dec 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 10</span>
+                            <span class="week-dates">08-14 Dec 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 11</span>
+                            <span class="week-dates">15-21 Dec 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 12</span>
+                            <span class="week-dates">22-28 Dec 2025</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 13</span>
+                            <span class="week-dates">29 Dec - 04 Jan</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 14</span>
+                            <span class="week-dates">05-11 Jan 2026</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 15</span>
+                            <span class="week-dates">12-18 Jan 2026</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 16</span>
+                            <span class="week-dates">19-25 Jan 2026</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 17</span>
+                            <span class="week-dates">26 Jan - 01 Feb</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 18</span>
+                            <span class="week-dates">02-08 Feb 2026</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 19</span>
+                            <span class="week-dates">09-15 Feb 2026</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 20</span>
+                            <span class="week-dates">16-22 Feb 2026</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 21</span>
+                            <span class="week-dates">23 Feb - 01 Mar</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 22</span>
+                            <span class="week-dates">02-08 Mar 2026</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 23</span>
+                            <span class="week-dates">21-27 Apr 2026</span>
+                        </div>
+                        <div class="week-item">
+                            <span class="week-number">Week 24</span>
+                            <span class="week-dates">05-11 May 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Dates Banner -->
+            <div class="key-dates-banner">
+                <h3>🎯 Critical Deadlines</h3>
+                <div class="deadline-grid">
+                    <div class="deadline-item">
+                        <span class="deadline-emoji">📝</span>
+                        <div class="deadline-info">
+                            <div class="deadline-label">Project Outline</div>
+                            <div class="deadline-date">20th October 2025 (Week 3)</div>
+                        </div>
+                    </div>
+                    <div class="deadline-item">
+                        <span class="deadline-emoji">🎯</span>
+                        <div class="deadline-info">
+                            <div class="deadline-label">Pitch Document</div>
+                            <div class="deadline-date">26th November 2025 @ 2pm (Week 9)</div>
+                        </div>
+                    </div>
+                    <div class="deadline-item">
+                        <span class="deadline-emoji">📦</span>
+                        <div class="deadline-info">
+                            <div class="deadline-label">Final Submission</div>
+                            <div class="deadline-date">5th May 2026 @ 2pm (Week 23)</div>
+                        </div>
+                    </div>
+                    <div class="deadline-item">
+                        <span class="deadline-emoji">🎨</span>
+                        <div class="deadline-info">
+                            <div class="deadline-label">Demonstration Day</div>
+                            <div class="deadline-date">7th May 2026 (Week 24)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">31</div>
+                    <div class="stat-label">Total Weeks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">9</div>
+                    <div class="stat-label">Major Phases</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label">Supervisor Meetings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Key Milestones</div>
+                </div>
+            </div>
+
+            <!-- Timeline Controls -->
+            <div class="timeline-controls">
+                <button class="control-btn active" data-filter="all">
+                    <span>📊</span> Show All
+                </button>
+                <button class="control-btn" data-filter="milestones">
+                    <span>🎯</span> Milestones Only
+                </button>
+                <button class="control-btn" data-filter="development">
+                    <span>💻</span> Development
+                </button>
+                <button class="control-btn" data-filter="design">
+                    <span>🎨</span> Design & Visual
+                </button>
+            </div>
+
+            <!-- Gantt Chart -->
+            <div class="gantt-container">
+                <!-- Timeline Header -->
+                <div class="timeline-header">
+                    <div class="task-label-header">Task</div>
+                    <div class="timeline-month">
+                        <span class="timeline-month-name">Oct</span>
+                        <span class="timeline-weeks">Weeks 1-3</span>
+                    </div>
+                    <div class="timeline-month">
+                        <span class="timeline-month-name">Nov</span>
+                        <span class="timeline-weeks">Weeks 4-9</span>
+                    </div>
+                    <div class="timeline-month">
+                        <span class="timeline-month-name">Dec</span>
+                        <span class="timeline-weeks">Weeks 10-13</span>
+                    </div>
+                    <div class="timeline-month">
+                        <span class="timeline-month-name">Jan</span>
+                        <span class="timeline-weeks">Weeks 14-16</span>
+                    </div>
+                    <div class="timeline-month">
+                        <span class="timeline-month-name">Feb</span>
+                        <span class="timeline-weeks">Weeks 17-19</span>
+                    </div>
+                    <div class="timeline-month">
+                        <span class="timeline-month-name">Mar</span>
+                        <span class="timeline-weeks">Weeks 20-22</span>
+                    </div>
+                    <div class="timeline-month">
+                        <span class="timeline-month-name">Apr</span>
+                        <span class="timeline-weeks">Week 23</span>
+                    </div>
+                    <div class="timeline-month">
+                        <span class="timeline-month-name">May</span>
+                        <span class="timeline-weeks">Week 24</span>
+                    </div>
+                </div>
+
+                <!-- Phase 1: Concept Development -->
+                <div class="phase-section" data-phase="planning">
+                    <div class="phase-header" style="--gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="phase-title">
+                            <span class="phase-icon">🧠</span>
+                            <span>Phase 1: Concept Development</span>
+                        </div>
+                        <div class="phase-dates">06/10 - 20/10 (Weeks 1-3)</div>
+                    </div>
+                    
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">📚</span>
+                            Research surveillance capitalism
+                        </div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-1" style="width: 90%;" data-tooltip="Research Shoshana Zuboff's framework and analyse the three stages of data exploitation">Week 1-2</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">💡</span>
+                            Define core concept & consent theater
+                        </div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-1" style="width: 70%;" data-tooltip="Establish the critical intervention approach and define the simulated threat mechanism">Week 2</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">📄</span>
+                            Analyse ChatGPT's actual ToS
+                        </div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-1" style="width: 85%; margin-left: 10%;" data-tooltip="Deep dive into OpenAI's terms of service to understand real consent mechanisms">Week 2-3</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name milestone">
+                            <span class="task-emoji">📝</span>
+                            PROJECT OUTLINE SUBMISSION
+                        </div>
+                        <div class="timeline-cell">
+                            <div class="milestone-marker" data-tooltip="Deadline: 20th October 2025"></div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 2: Planning & Pitch -->
+                <div class="phase-section" data-phase="planning">
+                    <div class="phase-header" style="--gradient-primary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="phase-title">
+                            <span class="phase-icon">📋</span>
+                            <span>Phase 2: Planning & Pitch Development</span>
+                        </div>
+                        <div class="phase-dates">21/10 - 26/11 (Weeks 3-9)</div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🏗️</span>
+                            Technical architecture planning
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-2" style="width: 40%;" data-tooltip="Define tech stack: Next.js, TypeScript, Three.js, Framer Motion">Week 4</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🎨</span>
+                            UI/UX wireframes & user flow
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-2" style="width: 60%; margin-left: 20%;" data-tooltip="Complete user journey mapping from landing to reveal">Week 5-6</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">✨</span>
+                            Visual design system
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-2" style="width: 70%; margin-left: 30%;" data-tooltip="Color palette, typography, particle system design">Week 6-7</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">⚖️</span>
+                            Draft deceptive terms of service
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-2" style="width: 50%; margin-left: 50%;" data-tooltip="Write realistic ToS with buried Section 11 clause">Week 7</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🎤</span>
+                            Create pitch presentation
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-2" style="width: 40%; margin-left: 60%;" data-tooltip="Prepare comprehensive pitch deck with visuals and mockups">W 8-9</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name milestone">
+                            <span class="task-emoji">🎯</span>
+                            PITCH DOCUMENT SUBMISSION
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="milestone-marker" style="margin-left: 90%;" data-tooltip="Deadline: 26th November 2025 @ 2pm"></div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 3: Core Development -->
+                <div class="phase-section" data-phase="development">
+                    <div class="phase-header" style="--gradient-primary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="phase-title">
+                            <span class="phase-icon">💻</span>
+                            <span>Phase 3: Core Technical Development</span>
+                        </div>
+                        <div class="phase-dates">27/11 - 19/01 (Weeks 9-14)</div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">⚙️</span>
+                            Set up Next.js project & dependencies
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-3" style="width: 30%;" data-tooltip="Initialize project, install Tailwind CSS, Framer Motion, Three.js">Week 9-10</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🏠</span>
+                            Landing page with animations
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-3" style="width: 60%; margin-left: 20%;" data-tooltip="Build atmospheric landing page with particle system and smooth transitions">Week 10-11</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">📜</span>
+                            Terms of service page & scrolling
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-3" style="width: 70%; margin-left: 30%;" data-tooltip="Implement realistic ToS with Section 11 buried at 40% scroll depth">Week 11-12</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">📤</span>
+                            Upload interface & file validation
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-3" style="width: 60%; margin-left: 40%;" data-tooltip="Build drag-and-drop upload with ChatGPT export format validation">Week 12-13</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🔧</span>
+                            ChatGPT export parser development
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-3" style="width: 100%;" data-tooltip="Build robust JSON parser with error handling - Winter Break work">Winter</div>
+                        </div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-3" style="width: 30%;">Wk 14</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 4: Analysis Engine -->
+                <div class="phase-section" data-phase="development">
+                    <div class="phase-header" style="--gradient-primary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <div class="phase-title">
+                            <span class="phase-icon">🔍</span>
+                            <span>Phase 4: Analysis Engine & Features</span>
+                        </div>
+                        <div class="phase-dates">19/01 - 16/02 (Weeks 14-18)</div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🔐</span>
+                            Privacy analysis algorithms
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-4" style="width: 80%;" data-tooltip="Regex patterns for detecting names, locations, health info, professional details">Week 14-15</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🌍</span>
+                            Carbon footprint calculation
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-4" style="width: 70%; margin-left: 30%;" data-tooltip="Calculate AI usage environmental impact based on conversation count and tokens">Week 15-16</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">📊</span>
+                            Results page & data visualization
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-4" style="width: 70%;" data-tooltip="Beautiful charts showing privacy score, detected info, usage patterns">Week 16-17</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">⏱️</span>
+                            10-second countdown sequence
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-4" style="width: 60%; margin-left: 40%;" data-tooltip="Build dramatic countdown with threat messaging and anxiety-inducing visuals">Week 17-18</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">💡</span>
+                            Reveal mechanism: "Just Kidding"
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-4" style="width: 40%; margin-left: 60%;" data-tooltip="Create educational reveal showing Section 11 and explaining the lesson">Week 18</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 5: Consent & Gallery -->
+                <div class="phase-section" data-phase="development">
+                    <div class="phase-header" style="--gradient-primary: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div class="phase-title">
+                            <span class="phase-icon">✅</span>
+                            <span>Phase 5: Genuine Consent & Gallery</span>
+                        </div>
+                        <div class="phase-dates">16/02 - 02/03 (Weeks 18-20)</div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">📝</span>
+                            Genuine consent interface
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-5" style="width: 80%; margin-left: 20%;" data-tooltip="Build post-reveal consent form with clear explanation of gallery participation">Week 18-19</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🖼️</span>
+                            Gallery component & anonymization
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-5" style="width: 70%;" data-tooltip="Create rotating gallery display with robust anonymization algorithms">Week 19-20</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 6: Visual Effects -->
+                <div class="phase-section" data-phase="design">
+                    <div class="phase-header" style="--gradient-primary: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                        <div class="phase-title">
+                            <span class="phase-icon">✨</span>
+                            <span>Phase 6: Advanced Visual Effects</span>
+                        </div>
+                        <div class="phase-dates">02/03 - 16/03 (Weeks 20-21)</div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🎆</span>
+                            Three.js particle systems
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-6" style="width: 100%;" data-tooltip="GPU-accelerated particle systems with atmospheric fog effects">Week 20-21</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🎨</span>
+                            WebGL shaders & post-processing
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-6" style="width: 100%;" data-tooltip="Custom GLSL shaders for ethereal, museum-quality visuals">Week 21</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">⚡</span>
+                            Performance optimization (60fps)
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-6" style="width: 50%; margin-left: 50%;" data-tooltip="Optimize for smooth 60fps on 150-inch display">Week 21</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 7: Installation -->
+                <div class="phase-section" data-phase="planning">
+                    <div class="phase-header" style="--gradient-primary: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: var(--text);">
+                        <div class="phase-title">
+                            <span class="phase-icon">🎬</span>
+                            <span>Phase 7: Installation Setup & Testing</span>
+                        </div>
+                        <div class="phase-dates">16/03 - 06/04 (Weeks 21-23)</div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">📚</span>
+                            Create pre-loaded example conversations
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-7" style="width: 100%;" data-tooltip="Diverse example ChatGPT conversations for demonstration">Week 21-22</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🏢</span>
+                            Physical installation planning
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-7" style="width: 60%;" data-tooltip="Book TV studio, plan 150-inch display setup, LED lighting">Week 22</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🎮</span>
+                            Input method testing (Leap/Xbox)
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-7" style="width: 100%;" data-tooltip="Test Leap Motion hand tracking vs Xbox Adaptive Controller">Week 22-23</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">👥</span>
+                            User testing sessions
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-7" style="width: 100%;" data-tooltip="Small group testing, gather feedback, iterate - Easter Break">Easter</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 8: Documentation -->
+                <div class="phase-section" data-phase="planning">
+                    <div class="phase-header" style="--gradient-primary: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                        <div class="phase-title">
+                            <span class="phase-icon">📹</span>
+                            <span>Phase 8: Final Documentation</span>
+                        </div>
+                        <div class="phase-dates">21/04 - 05/05 (Week 23)</div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🎥</span>
+                            Video documentation (plan/film/edit)
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-8" style="width: 80%;" data-tooltip="Capture installation walkthrough, user reactions, concept explanation">Week 23</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🧹</span>
+                            Final code cleanup & comments
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-8" style="width: 60%;" data-tooltip="Polish code, add documentation, final QA testing">Week 23</div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name milestone">
+                            <span class="task-emoji">📦</span>
+                            PRACTICE PROJECT SUBMISSION
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="milestone-marker" style="margin-left: 90%;" data-tooltip="Deadline: 5th May 2026 @ 2pm"></div>
+                        </div>
+                        <div class="timeline-cell"></div>
+                    </div>
+                </div>
+
+                <!-- Phase 9: Exhibition -->
+                <div class="phase-section" data-phase="milestones">
+                    <div class="phase-header" style="--gradient-primary: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: var(--text);">
+                        <div class="phase-title">
+                            <span class="phase-icon">🎨</span>
+                            <span>Phase 9: Exhibition</span>
+                        </div>
+                        <div class="phase-dates">05/05 - 09/05 (Week 24)</div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name">
+                            <span class="task-emoji">🛠️</span>
+                            Physical setup in TV studio
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="task-bar phase-9" style="width: 50%;" data-tooltip="Install 150-inch display, LED lighting, black cloth environment">Week 24</div>
+                        </div>
+                    </div>
+
+                    <div class="task-row">
+                        <div class="task-name milestone">
+                            <span class="task-emoji">🎨</span>
+                            DEMONSTRATION DAY
+                        </div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell"></div>
+                        <div class="timeline-cell">
+                            <div class="milestone-marker" style="margin-left: 50%;" data-tooltip="Thursday 7th May 2026 - Public Exhibition"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color phase-1"></div>
+                    <span>Concept & Research</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color phase-2"></div>
+                    <span>Planning & Pitch</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color phase-3"></div>
+                    <span>Core Development</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color phase-4"></div>
+                    <span>Analysis Features</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color phase-5"></div>
+                    <span>Consent & Gallery</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color phase-6"></div>
+                    <span>Visual Effects</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color phase-7"></div>
+                    <span>Installation Setup</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color phase-8"></div>
+                    <span>Documentation</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color phase-9"></div>
+                    <span>Exhibition</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>You Agreed. | COMM3705 Digital Media Project | October 2025 - May 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // MOBILE NAVIGATION
+        // ============================================
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const isActive = navLinks.classList.contains('active');
+            navToggle.setAttribute('aria-expanded', isActive);
+            navToggle.textContent = isActive ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.site-nav')) {
+                navLinks.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.textContent = '☰';
+            }
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navToggle.textContent = '☰';
+                }
+            });
+        });
+
+        // ============================================
+        // WEEK REFERENCE GUIDE TOGGLE
+        // ============================================
+        const weekToggle = document.getElementById('weekToggle');
+        const weekContent = document.getElementById('weekContent');
+        const weekToggleIcon = weekToggle.querySelector('.week-reference-toggle');
+
+        weekToggle.addEventListener('click', () => {
+            weekContent.classList.toggle('open');
+            weekToggleIcon.classList.toggle('open');
+        });
+
+        // ============================================
+        // PARTICLE SYSTEM
+        // ============================================
+        const particlesContainer = document.getElementById('particlesContainer');
+        const particleCount = window.innerWidth <= 768 ? 7 : 15;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 25 + 's';
+            particle.style.animationDuration = (20 + Math.random() * 15) + 's';
+            
+            particlesContainer.appendChild(particle);
+        }
+
+        // ============================================
+        // SCROLL INDICATOR
+        // ============================================
+        let ticking = false;
+        function updateScrollIndicator() {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateScrollIndicator);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // ============================================
+        // TOOLTIP SYSTEM
+        // ============================================
+        const tooltip = document.getElementById('tooltip');
+        const taskBars = document.querySelectorAll('[data-tooltip]');
+
+        taskBars.forEach(bar => {
+            bar.addEventListener('mouseenter', (e) => {
+                tooltip.textContent = bar.getAttribute('data-tooltip');
+                tooltip.classList.add('visible');
+                updateTooltipPosition(e);
+            });
+
+            bar.addEventListener('mousemove', updateTooltipPosition);
+
+            bar.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('visible');
+            });
+        });
+
+        function updateTooltipPosition(e) {
+            const x = e.clientX;
+            const y = e.clientY;
+            tooltip.style.left = (x + 15) + 'px';
+            tooltip.style.top = (y + 15) + 'px';
+        }
+
+        // ============================================
+        // FILTER CONTROLS
+        // ============================================
+        const controlBtns = document.querySelectorAll('.control-btn');
+        const phaseSections = document.querySelectorAll('.phase-section');
+
+        controlBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                controlBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                if (filter === 'all') {
+                    phaseSections.forEach(section => section.style.display = 'block');
+                } else if (filter === 'milestones') {
+                    phaseSections.forEach(section => {
+                        const hasMilestone = section.querySelector('.task-name.milestone');
+                        section.style.display = hasMilestone ? 'block' : 'none';
+                    });
+                } else if (filter === 'development') {
+                    phaseSections.forEach(section => {
+                        const isDev = section.getAttribute('data-phase') === 'development';
+                        section.style.display = isDev ? 'block' : 'none';
+                    });
+                } else if (filter === 'design') {
+                    phaseSections.forEach(section => {
+                        const isDesign = section.getAttribute('data-phase') === 'design';
+                        section.style.display = isDesign ? 'block' : 'none';
+                    });
+                }
+            });
+        });
+
+        // ============================================
+        // PHASE HEADER CLICK (COLLAPSE/EXPAND)
+        // ============================================
+        document.querySelectorAll('.phase-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                const taskRows = section.querySelectorAll('.task-row');
+                
+                taskRows.forEach(row => {
+                    if (row.style.display === 'none') {
+                        row.style.display = 'grid';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

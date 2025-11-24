@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Foundation - YOU AGREED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary: #000;
+            --accent: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+            --accent-orange: #f97316;
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --text-secondary: #a1a1aa;
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ANIMATED BACKGROUND */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            animation: cosmicShift 20s ease-in-out infinite;
+        }
+
+        @keyframes cosmicShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        /* FLOATING ORBS */
+        .orbs-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            will-change: transform;
+            animation: float-orb 25s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.6), transparent);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.5), transparent);
+            top: 50%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.4), transparent);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float-orb {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(50px, -30px) scale(1.1);
+            }
+            50% {
+                transform: translate(-30px, 50px) scale(0.9);
+            }
+            75% {
+                transform: translate(40px, 30px) scale(1.05);
+            }
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            z-index: 200;
+            transition: width 0.1s ease;
+        }
+
+        /* HEADER */
+        .site-header {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .nav-link.active {
+            color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 6rem var(--spacing-lg) 4rem;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* MAIN CONTAINER */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg) 4rem;
+        }
+
+        /* RESEARCH QUESTION CARD */
+        .research-question-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(139, 92, 246, 0.4);
+            border-radius: 24px;
+            padding: var(--spacing-2xl);
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .research-question-card::before {
+            content: '?';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 12rem;
+            font-weight: 900;
+            color: rgba(139, 92, 246, 0.1);
+            line-height: 1;
+        }
+
+        .research-question-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-purple);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .research-question-text {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* CONTENT SECTIONS */
+        .content-section {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease both;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--section-color-1), var(--section-color-2));
+        }
+
+        .section-header-inline {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            padding-left: var(--spacing-md);
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+            filter: grayscale(0.3);
+        }
+
+        .section-title-inline {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--section-color-1), var(--section-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-section p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+            padding-left: var(--spacing-md);
+        }
+
+        .content-section strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .content-section em {
+            color: var(--accent-purple);
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        /* PULL QUOTE */
+        .pull-quote {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+            position: relative;
+        }
+
+        .pull-quote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-size: 4rem;
+            color: rgba(139, 92, 246, 0.3);
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .pull-quote-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1.7;
+            color: var(--text);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pull-quote-author {
+            margin-top: var(--spacing-sm);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: normal;
+        }
+
+        /* COMPARISON TABLE */
+        .comparison-container {
+            margin: var(--spacing-xl) 0;
+            padding-left: var(--spacing-md);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .comparison-column {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .comparison-column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .comparison-column.stage-1 {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .comparison-column.stage-2 {
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .comparison-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .comparison-column.stage-1 .comparison-title {
+            color: var(--accent-green);
+        }
+
+        .comparison-column.stage-2 .comparison-title {
+            color: var(--accent-pink);
+        }
+
+        .comparison-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .comparison-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+        }
+
+        /* METHODOLOGY GRID */
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-xl) 0;
+            padding-left: var(--spacing-md);
+        }
+
+        .methodology-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            transition: all 0.3s ease;
+        }
+
+        .methodology-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .methodology-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .methodology-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .methodology-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* CRITICAL INTERVENTION BOX */
+        .critical-intervention {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(249, 115, 22, 0.15));
+            border: 3px solid rgba(236, 72, 153, 0.4);
+            border-radius: 20px;
+            padding: var(--spacing-2xl);
+            margin: var(--spacing-2xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .critical-intervention::before {
+            content: '⚠';
+            position: absolute;
+            bottom: -30px;
+            right: 20px;
+            font-size: 10rem;
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .critical-intervention-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-pink);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .critical-intervention h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .critical-intervention p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            padding-left: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem var(--spacing-md) 2rem;
+            }
+
+            .nav-links {
+                gap: var(--spacing-xs);
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section,
+            .research-question-card,
+            .critical-intervention {
+                padding: var(--spacing-lg);
+            }
+
+            .orb {
+                display: none;
+            }
+        }
+
+        /* ACCESSIBILITY */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    <div class="cosmic-bg"></div>
+    
+    <div class="orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <header class="site-header">
+        <div class="header-content">
+            <h1 class="site-title">You Agreed.</h1>
+            <nav class="nav-links">
+                <a href="#" class="nav-link active">Research Foundation</a>
+                <a href="exhibition-layout.html" class="nav-link">Exhibition Layout</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <h2 class="hero-title">Why This Exists</h2>
+        <p class="hero-subtitle">Interrogating Consent in the Age of Cognitive Extraction</p>
+    </section>
+
+    <main class="main-container">
+        <!-- PRIMARY RESEARCH QUESTION -->
+        <div class="research-question-card">
+            <div class="research-question-label">Primary Research Question</div>
+            <div class="research-question-text">
+                Can informed consent mechanisms designed for reversible data collection (cookies, tracking) function ethically when applied to irreversible cognitive extraction through AI systems?
+            </div>
+        </div>
+
+        <!-- THE PROBLEM -->
+        <div class="content-section" style="--section-color-1: #ec4899; --section-color-2: #f97316; animation-delay: 0.6s;">
+            <div class="section-header-inline">
+                <span class="section-icon">🚨</span>
+                <h3 class="section-title-inline">The Problem</h3>
+            </div>
+            <p>We're experiencing a catastrophic mismatch between consent frameworks and technological capabilities. The legal and design patterns developed for Stage 1 surveillance capitalism — cookie tracking, behavioural advertising, data brokerage — are being applied wholesale to Stage 2 operations: cognitive data extraction through conversational AI.</p>
+            <p>This isn't merely an incremental change. <strong>Stage 1 surveillance extracted behavioural data that was fundamentally reversible</strong> — you could delete cookies, use private browsing, opt out of tracking. The data concerned what you did, not who you fundamentally are. Stage 2 extracts cognitive patterns, communication styles, emotional vulnerabilities, reasoning processes — the infrastructure of selfhood itself. This data cannot be un-extracted once it's been processed by AI systems.</p>
+            <p>Yet we apply the exact same consent theatre: <em>dense legal documents, pre-ticked boxes, the assumption that scrolling equals comprehension, that clicking "I Agree" constitutes informed decision-making.</em></p>
+
+            <div class="pull-quote">
+                <p class="pull-quote-text">
+                    Surveillance capitalism unilaterally claims human experience as free raw material for translation into behavioural data... This new market form declares that serving the genuine needs of people is less lucrative, and therefore less important, than selling predictions of their behaviour.
+                </p>
+                <p class="pull-quote-author">— Shoshana Zuboff, <em>The Age of Surveillance Capitalism</em></p>
+            </div>
+        </div>
+
+        <!-- THE THEORETICAL FRAMEWORK -->
+        <div class="content-section" style="--section-color-1: #3b82f6; --section-color-2: #8b5cf6; animation-delay: 0.8s;">
+            <div class="section-header-inline">
+                <span class="section-icon">📚</span>
+                <h3 class="section-title-inline">Theoretical Framework</h3>
+            </div>
+            <p>This project builds directly on Shoshana Zuboff's surveillance capitalism framework, extending it to address what I'm identifying as <strong>Stage 2 evolution</strong> — the transition from behavioural extraction to cognitive extraction.</p>
+            
+            <div class="comparison-container">
+                <div class="comparison-grid">
+                    <div class="comparison-column stage-1">
+                        <div class="comparison-title">Stage 1: Behavioural</div>
+                        <div class="comparison-subtitle">Cookie-era surveillance (2000-2020)</div>
+                        <ul class="comparison-list">
+                            <li>Tracks what you do (clicks, purchases, browsing)</li>
+                            <li>Reversible: can be deleted, blocked, opted-out</li>
+                            <li>Concerned with prediction of behaviour</li>
+                            <li>Invisible but technically comprehensible</li>
+                            <li>Commodity: your actions and patterns</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-column stage-2">
+                        <div class="comparison-title">Stage 2: Cognitive</div>
+                        <div class="comparison-subtitle">AI-era surveillance (2022-present)</div>
+                        <ul class="comparison-list">
+                            <li>Extracts how you think (reasoning, emotions, vulnerabilities)</li>
+                            <li>Irreversible: cannot be un-learned by AI systems</li>
+                            <li>Concerned with modelling cognition itself</li>
+                            <li>Invisible AND technically incomprehensible</li>
+                            <li>Commodity: your cognitive architecture</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <p>Zuboff documented how surveillance capitalism transformed human experience into behavioural data for prediction markets. <strong>We're now witnessing the transformation of human cognition into training data for intelligence markets.</strong> The scale of extraction has moved from "what you do" to "who you are" — yet the consent mechanisms remain unchanged.</p>
+        </div>
+
+        <!-- THE CONSENT THEATRE -->
+        <div class="content-section" style="--section-color-1: #8b5cf6; --section-color-2: #ec4899; animation-delay: 1s;">
+            <div class="section-header-inline">
+                <span class="section-icon">🎭</span>
+                <h3 class="section-title-inline">The Consent Theatre</h3>
+            </div>
+            <p>Every major AI platform employs the same performance of consent that failed with cookies. OpenAI's ChatGPT terms run to thousands of words. Anthropic's privacy policy demands substantial legal literacy. Google's AI services are buried in the existing surveillance architecture developed for advertising.</p>
+            <p>These documents share a consistent pattern: they are <strong>written to be legally defensible, not humanly comprehensible.</strong> They deploy language designed to pass regulatory scrutiny whilst ensuring that genuine understanding remains structurally impossible for typical users.</p>
+            <p>The interface design reinforces this dynamic. Terms are presented during moments of anticipation — you want to access the service, not read documentation. The "I Agree" button is prominent, scrolling is frictionless, and there's no mechanism to verify comprehension beyond the click itself.</p>
+            <p>This isn't accidental. It's inherited wholesale from Stage 1 consent design, where the goal was never informed decision-making but rather <em>the legal appearance of consent whilst maintaining maximum extraction.</em></p>
+        </div>
+
+        <!-- WHY THIS MATTERS NOW -->
+        <div class="content-section" style="--section-color-1: #10b981; --section-color-2: #3b82f6; animation-delay: 1.2s;">
+            <div class="section-header-inline">
+                <span class="section-icon">⏰</span>
+                <h3 class="section-title-inline">Why This Matters Now</h3>
+            </div>
+            <p>We're in a critical window. AI systems are being adopted at unprecedented speed, but the consent frameworks governing them remain in draft. ChatGPT reached 100 million users faster than any consumer technology in history. Millions of people are having extended, intimate conversations with AI systems daily, generating cognitive data at scale.</p>
+            <p><strong>The precedents being established now will determine the architecture of AI governance for decades.</strong> If we normalise cookie-era consent for cognitive-era extraction, we're encoding the assumption that people don't need — or deserve — genuine understanding of what happens to their cognitive data.</p>
+            <p>This matters because cognitive data is fundamentally different from behavioural data. Your browsing history might predict your purchasing patterns. Your extended AI conversations reveal how you reason, what you fear, where you're vulnerable, how you think when you believe you're alone. <em>This data cannot be deleted from the models trained on it. It cannot be opted out of retroactively. It exists as a permanent cognitive imprint.</em></p>
+        </div>
+
+        <!-- THE RESEARCH METHODOLOGY -->
+        <div class="content-section" style="--section-color-1: #f97316; --section-color-2: #ec4899; animation-delay: 1.4s;">
+            <div class="section-header-inline">
+                <span class="section-icon">🔬</span>
+                <h3 class="section-title-inline">The Research Methodology</h3>
+            </div>
+            <p>Rather than producing a traditional academic critique, this project operates as <strong>critical demonstration</strong> — creating the conditions for visitors to experience the consent gap viscerally rather than intellectually understanding it abstractly.</p>
+
+            <div class="methodology-grid">
+                <div class="methodology-card">
+                    <div class="methodology-number">1</div>
+                    <div class="methodology-title">Replication</div>
+                    <div class="methodology-description">Build a functioning consent system that mirrors actual AI platform patterns — dense terms, immediate gratification, buried consequences</div>
+                </div>
+                <div class="methodology-card">
+                    <div class="methodology-number">2</div>
+                    <div class="methodology-title">Engagement</div>
+                    <div class="methodology-description">Create genuine value (data analysis, 3D exploration) that makes visitors want to click through consent barriers</div>
+                </div>
+                <div class="methodology-card">
+                    <div class="methodology-number">3</div>
+                    <div class="methodology-title">Revelation</div>
+                    <div class="methodology-description">Reveal the consequences only after consent is given, creating the exact sequence of comprehension-after-commitment</div>
+                </div>
+                <div class="methodology-card">
+                    <div class="methodology-number">4</div>
+                    <div class="methodology-title">Recognition</div>
+                    <div class="methodology-description">Enable visitors to recognise their own behaviour patterns in the installation's mechanisms</div>
+                </div>
+            </div>
+
+            <p>This approach draws from critical design practice and tactical media — art that functions as social intervention rather than representation. The goal isn't to tell visitors about consent failures; it's to make them accomplices in the system, then reveal that complicity.</p>
+        </div>
+
+        <!-- THE CRITICAL INTERVENTION -->
+        <div class="critical-intervention">
+            <div class="critical-intervention-label">The Critical Intervention</div>
+            <h3>What Makes This Work Effective</h3>
+            <p>The installation doesn't rely on shocking imagery or heavy-handed messaging. Instead, it creates a moment of self-recognition: <strong>visitors realise they've just performed, in miniature, the exact behaviour pattern that enables large-scale cognitive surveillance.</strong></p>
+            <p>They scrolled past terms they didn't read. They clicked "I Agree" to access something they wanted. They enjoyed the experience. And then they discovered they'd consented to consequences they didn't anticipate — specifically, that their analysed data might be displayed publicly as part of the exhibition itself.</p>
+            <p>This creates what I'm calling <em>"consent retrospection"</em> — the uncomfortable recognition that legal consent and informed understanding aren't synonymous, that clicking "I Agree" doesn't mean you knew what you were agreeing to, and that current frameworks don't protect you from this gap.</p>
+            <p>The work succeeds not by explaining this problem but by making visitors feel it. The discomfort of recognising your own unread consent, your own click-through behaviour, your own assumption that terms don't contain genuinely consequential provisions — this is the educational mechanism.</p>
+        </div>
+
+        <!-- CONTRIBUTION TO KNOWLEDGE -->
+        <div class="content-section" style="--section-color-1: #667eea; --section-color-2: #764ba2; animation-delay: 1.6s;">
+            <div class="section-header-inline">
+                <span class="section-icon">💡</span>
+                <h3 class="section-title-inline">Contribution to Knowledge</h3>
+            </div>
+            <p>This project advances surveillance capitalism theory by:</p>
+            <p><strong>1. Identifying the Stage 2 transition</strong> — demonstrating that we've moved from behavioural to cognitive extraction, requiring fundamentally different consent frameworks.</p>
+            <p><strong>2. Documenting the consent gap empirically</strong> — creating measurable proof that people click through terms without comprehension, even when they believe they're attentive.</p>
+            <p><strong>3. Proposing experiential critique as methodology</strong> — showing that visceral demonstration can be more effective than intellectual argument for revealing systemic issues.</p>
+            <p><strong>4. Challenging the "people don't care about privacy" narrative</strong> — demonstrating that people care intensely when extraction is visible and consequences are tangible, suggesting the problem isn't apathy but opacity.</p>
+            <p>The work operates as both art installation and research instrument, generating data about consent behaviour whilst critiquing the systems that produce that behaviour. This dual function makes it a contribution to both critical media practice and surveillance studies.</p>
+        </div>
+
+        <!-- ANSWERING THE RESEARCH QUESTION -->
+        <div class="content-section" style="--section-color-1: #f093fb; --section-color-2: #667eea; animation-delay: 1.8s;">
+            <div class="section-header-inline">
+                <span class="section-icon">✓</span>
+                <h3 class="section-title-inline">Answering the Research Question</h3>
+            </div>
+            <p>Can informed consent mechanisms designed for reversible data collection function ethically when applied to irreversible cognitive extraction?</p>
+            <p><strong>The answer this project demonstrates is: No.</strong></p>
+            <p>Not because people are stupid or careless, but because the frameworks themselves are designed for a fundamentally different kind of data with fundamentally different properties. Cookie consent assumes reversibility — you can delete, block, opt out. Cognitive extraction has no reversibility mechanism. Once your cognitive patterns are learned by an AI model, they cannot be unlearned.</p>
+            <p>The installation reveals this mismatch by creating a miniature version of the real problem: visitors consent to something irreversible (public exhibition of their data) using mechanisms designed for reversible actions (scrolling past terms, clicking to accept). <em>The discomfort they feel is the evidence that these mechanisms fail at the scale of consequence they're being applied to.</em></p>
+            <p>This isn't a technological problem requiring better interfaces. It's a structural problem requiring different frameworks entirely — frameworks that acknowledge the qualitative difference between behavioural and cognitive data, that treat irreversible extraction as requiring substantially higher standards of consent, that don't allow legal compliance to substitute for genuine understanding.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>You Agreed. | COMM3705 Digital Media Project | University of Leeds | May 2026</p>
+    </footer>
+
+    <script>
+        // SCROLL INDICATOR
+        function updateScrollIndicator() {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        }
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateScrollIndicator();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // INTERSECTION OBSERVER FOR ANIMATIONS
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.content-section, .methodology-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

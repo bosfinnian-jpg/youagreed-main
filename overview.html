@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Agreed. - Project Overview</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        /* ============================================
+           1. CSS VARIABLES - Centralized Design Tokens
+           ============================================ */
+        :root {
+            /* Colors */
+            --primary: #000;
+            --accent: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --danger: #ef4444;
+            --danger-light: #fca5a5;
+            --success: #10b981;
+            --success-dark: #059669;
+            --success-alt: #06b6d4;
+            --bg: #ffffff;
+            --surface: #f8f9fa;
+            --text: #1a1a1a;
+            --text-secondary: #6b7280;
+            --text-light: #e5e7eb;
+            --text-lighter: #f3f4f6;
+            
+            /* Gradients - Reusable */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-accent: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            --gradient-danger: linear-gradient(135deg, #fff 0%, #fca5a5 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.2s ease;
+            --transition-slow: 0.3s ease;
+            
+            /* Shadows */
+            --shadow-sm: 0 10px 40px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 20px 50px rgba(102, 126, 234, 0.12);
+            --shadow-lg: 0 30px 80px rgba(102, 126, 234, 0.15);
+            --shadow-danger: 0 30px 80px rgba(239, 68, 68, 0.3);
+            --shadow-success: 0 30px 80px rgba(16, 185, 129, 0.15);
+            
+            /* Typography */
+            --font-size-sm: 0.95rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.1rem;
+            --font-size-xl: 1.15rem;
+            --font-size-2xl: 1.8rem;
+            --font-size-3xl: 2rem;
+            --font-size-4xl: 2.2rem;
+            --font-size-hero: 4rem;
+        }
+
+        /* ============================================
+           2. RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: rgba(102, 126, 234, 0.3);
+            color: var(--primary);
+        }
+
+        /* ============================================
+           3. REUSABLE ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-40px);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes dangerStripe {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes warningBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes countdownFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes reliefPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shieldFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ============================================
+           4. UTILITY CLASSES
+           ============================================ */
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        /* ============================================
+           5. BACKGROUND EFFECTS (Simplified)
+           ============================================ */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            opacity: 0.03;
+            animation: gradientShift 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        /* Reduced particle system - only 15 particles with simpler animation */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s infinite;
+        }
+
+        /* ============================================
+           6. SCROLL INDICATOR
+           ============================================ */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+            z-index: 200;
+            transition: width var(--transition-fast);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        /* ============================================
+           7. HEADER COMPONENT
+           ============================================ */
+        .site-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: var(--text);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: all var(--transition-base);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+        }
+
+        .back-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .back-link::before {
+            content: "← ";
+        }
+
+        .site-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        /* ============================================
+           8. NAVIGATION COMPONENT (Mobile-Optimized)
+           ============================================ */
+        .site-nav {
+            background: rgba(248, 249, 250, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: var(--spacing-sm);
+            color: var(--text);
+            position: absolute;
+            right: var(--spacing-lg);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 60px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: all var(--transition-base);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            display: block;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 60%;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: transform var(--transition-base);
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::before {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+            background: rgba(59, 130, 246, 0.12);
+        }
+
+        /* ============================================
+           9. MAIN CONTENT STRUCTURE
+           ============================================ */
+        .main-content {
+            padding: var(--spacing-2xl) 0 6rem 0;
+        }
+
+        .page-title {
+            font-size: var(--font-size-hero);
+            font-weight: 800;
+            margin-bottom: var(--spacing-2xl);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .content-paragraph {
+            margin-bottom: var(--spacing-lg);
+            color: var(--text);
+            font-size: var(--font-size-lg);
+            line-height: 1.9;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .content-paragraph:nth-of-type(1) { animation-delay: 0.15s; }
+        .content-paragraph:nth-of-type(2) { animation-delay: 0.25s; }
+        .content-paragraph:nth-of-type(3) { animation-delay: 0.35s; }
+
+        /* ============================================
+           10. KEYWORD COMPONENT
+           ============================================ */
+        .keyword {
+            position: relative;
+            font-weight: 600;
+            cursor: help;
+        }
+
+        .keyword::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-base);
+            border-radius: 2px;
+        }
+
+        .keyword:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* ============================================
+           11. HIGHLIGHT BOX COMPONENT
+           ============================================ */
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-left: 4px solid #667eea;
+            padding: var(--spacing-xl);
+            margin: var(--spacing-2xl) 0;
+            border-radius: var(--radius-lg);
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.45s;
+            box-shadow: var(--shadow-md);
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: var(--font-size-xl);
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        /* ============================================
+           12. CRITICAL MECHANISM SECTION (Simplified Effects)
+           ============================================ */
+        .twist-section {
+            margin-top: var(--spacing-2xl);
+            background: #000;
+            border-radius: var(--radius-xl);
+            color: #fff;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.55s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-danger);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Simplified danger stripe - only one animation */
+        .twist-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 4px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--danger),
+                var(--danger) 20px,
+                #fbbf24 20px,
+                #fbbf24 40px
+            );
+            animation: dangerStripe 20s linear infinite;
+        }
+
+        .twist-content {
+            position: relative;
+            z-index: 2;
+            padding: var(--spacing-xl);
+            text-align: center;
+        }
+
+        .twist-heading {
+            font-size: var(--font-size-4xl);
+            font-weight: 800;
+            margin-bottom: var(--spacing-lg);
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .twist-icon {
+            font-size: 3.5rem;
+            display: block;
+            margin-bottom: var(--spacing-md);
+            animation: warningBounce 2s ease-in-out infinite;
+        }
+
+        .twist-text {
+            font-size: var(--font-size-xl);
+            margin: var(--spacing-sm) 0;
+            line-height: 1.9;
+            color: var(--text-light);
+        }
+
+        .countdown-display {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            background: rgba(0, 0, 0, 0.5);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-md) 0;
+            border: 2px solid rgba(239, 68, 68, 0.5);
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 0.05em;
+            color: var(--text-lighter);
+        }
+
+        .countdown-number {
+            display: inline-block;
+            min-width: 2ch;
+            text-align: center;
+            color: var(--danger);
+            animation: countdownFlicker 1s infinite;
+        }
+
+        .just-kidding {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
+            color: var(--success);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            animation: reliefPulse 2s ease-in-out infinite;
+        }
+
+        /* ============================================
+           13. FEATURES SECTION (Simplified Hover)
+           ============================================ */
+        .features-section {
+            margin-top: var(--spacing-2xl);
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.65s;
+        }
+
+        .features-heading {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            transition: transform var(--transition-base), border-color var(--transition-base);
+        }
+
+        .feature-card:hover {
+            border-color: rgba(102, 126, 234, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .feature-emoji {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            transition: transform var(--transition-base);
+        }
+
+        .feature-card:hover .feature-emoji {
+            transform: scale(1.1);
+        }
+
+        .feature-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--primary);
+        }
+
+        .feature-description {
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           14. ETHICAL FOUNDATION (Reduced Effects)
+           ============================================ */
+        .ethics-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            margin: var(--spacing-2xl) 0;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.75s;
+            box-shadow: var(--shadow-success);
+        }
+
+        .ethics-header {
+            background: var(--gradient-success);
+            padding: var(--spacing-lg) var(--spacing-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .ethics-icon {
+            font-size: 2.5rem;
+            animation: shieldFloat 3s ease-in-out infinite;
+        }
+
+        .ethics-header-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .ethics-content {
+            padding: var(--spacing-xl);
+        }
+
+        .ethics-content p {
+            margin: 0;
+            font-size: var(--font-size-xl);
+            line-height: 1.9;
+            color: var(--text);
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            color: var(--success-dark);
+            font-weight: 600;
+            transition: background var(--transition-base);
+        }
+
+        .trust-badge:hover {
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        .trust-badge-icon {
+            font-size: 1.2rem;
+        }
+
+        /* ============================================
+           15. FOOTER
+           ============================================ */
+        .site-footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        /* ============================================
+           16. MOBILE RESPONSIVE (Mobile-First Improvements)
+           ============================================ */
+        @media (max-width: 768px) {
+            :root {
+                --font-size-hero: 2.5rem;
+                --font-size-4xl: 1.8rem;
+                --font-size-3xl: 1.5rem;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: stretch;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-links.active {
+                max-height: 500px;
+            }
+
+            .nav-links a {
+                padding: var(--spacing-md) var(--spacing-lg);
+                /* Larger touch targets for mobile */
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+
+            .main-content {
+                padding: var(--spacing-lg) 0 var(--spacing-2xl) 0;
+            }
+
+            .twist-content,
+            .ethics-content,
+            .highlight-box {
+                padding: var(--spacing-lg);
+            }
+
+            .ethics-header {
+                padding: var(--spacing-md) var(--spacing-lg);
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .countdown-display {
+                font-size: var(--font-size-base);
+                padding: var(--spacing-sm);
+            }
+
+            .just-kidding {
+                font-size: 1.8rem;
+            }
+
+            /* Reduce particle count on mobile */
+            .particle:nth-child(n+8) {
+                display: none;
+            }
+        }
+
+        /* ============================================
+           17. ACCESSIBILITY IMPROVEMENTS
+           ============================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for keyboard navigation */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Background effects -->
+    <div class="gradient-bg"></div>
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="index.html" class="back-link">Back to Hub</a>
+            <h1 class="site-title gradient-text">You Agreed.</h1>
+        </div>
+    </header>
+
+    <!-- Navigation with mobile hamburger -->
+    <nav class="site-nav">
+        <div class="container">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                ☰
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="overview.html" class="active">Overview</a></li>
+                <li><a href="context.html">Critical Context</a></li>
+                <li><a href="ethics.html">Ethics & Risk</a></li>
+                <li><a href="costs.html">Budget Analysis</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="skills.html">Skills & Training</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content with Semantic HTML -->
+    <main class="main-content">
+        <div class="container">
+            <h2 class="page-title gradient-text">Project Overview</h2>
+            
+            <!-- Introduction Section -->
+            <section aria-labelledby="introduction">
+                <p class="content-paragraph">
+                    <span class="keyword gradient-text">You Agreed.</span> is a critical intervention project which aims to expose the illusion of <span class="keyword gradient-text">informed consent</span> in the age of AI and surveillance capitalism. This exposure will come in the form of an <span class="keyword gradient-text">interactive web installation</span>, enabling users to upload their ChatGPT conversation history and receive a detailed privacy analysis—including a privacy score, personal information detected, and environmental impact. The critical mechanism: users experience a simulated threat of public exhibition through a 10-second countdown, only to discover they technically consented to it buried in terms and conditions they didn't read.
+                </p>
+
+                <p class="content-paragraph">
+                    This project emerges from observing the evolution of data exploitation in surveillance capitalism. First came cookies, tracking where we clicked. Then social media platforms like Meta began capturing everything we do—our relationships, our locations, our behaviours. Now, we're witnessing a third and fundamentally more invasive iteration: <span class="keyword gradient-text">AI systems that extract data about the way we think</span>. ChatGPT doesn't just track what we do—it captures our problem-solving methods, our creative processes, our vulnerabilities. This cognitive extraction represents a qualitative shift in what's being taken from us.
+                </p>
+
+                <p class="content-paragraph">
+                    Nevertheless, users continue clicking "I agree" to terms they haven't read, consenting to extraction they don't understand. Unlike cookies that can be cleared or social media accounts that can be deleted, <span class="keyword gradient-text">AI model training is irreversible</span>. Once your cognitive patterns have trained a model, there's no "right to be forgotten"—the model has learned from you permanently. You Agreed. makes this invisible extraction visible by creating a controlled experience where users feel the violation of having their data publicly exhibited, revealing that this harm is already happening with every ChatGPT conversation—they just couldn't see it before.
+                </p>
+            </section>
+
+            <!-- Core Concept -->
+            <aside class="highlight-box">
+                <p><strong class="gradient-text">The Core Concept:</strong> By making people experience the simulated threat of public data exhibition through a 10-second countdown, the project reveals the gap between legal consent (clicking "I agree") and genuine informed consent (understanding what you're agreeing to). This visceral experience demonstrates that the violation is already happening with ChatGPT and other AI systems—users just can't see it.</p>
+            </aside>
+
+            <!-- Critical Mechanism -->
+            <article class="twist-section">
+                <div class="twist-content">
+                    <span class="twist-icon" aria-hidden="true">⚠️</span>
+                    <h3 class="twist-heading gradient-text" style="--gradient-primary: linear-gradient(135deg, #fff 0%, #fca5a5 100%);">The Critical Mechanism</h3>
+                    
+                    <p class="twist-text">After analysis, a countdown begins:</p>
+                    
+                    <figure class="countdown-display">
+                        <span>"YOUR DATA WILL BE UPLOADED IN...</span>
+                        <span class="countdown-number">10</span>
+                        <span>...</span>
+                        <span class="countdown-number">9</span>
+                        <span>...</span>
+                        <span class="countdown-number">8</span>
+                        <span>..."</span>
+                    </figure>
+                    
+                    <p class="twist-text">At zero:</p>
+                    <span class="just-kidding">"JUST KIDDING."</span>
+                    
+                    <p class="twist-text">But you DID agree to this in Section 11. You didn't read the terms. This is what AI companies do—except with them, it's irreversible.</p>
+                </div>
+            </article>
+
+            <!-- Features Section -->
+            <section class="features-section" aria-labelledby="features-heading">
+                <h3 id="features-heading" class="features-heading gradient-text">What the Installation Does</h3>
+                
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <span class="feature-emoji" aria-hidden="true">🔍</span>
+                        <h4 class="feature-title">Privacy Analysis</h4>
+                        <p class="feature-description">Processes ChatGPT conversation histories locally, detecting personal information, professional details, and health data shared.</p>
+                    </article>
+                    
+                    <article class="feature-card">
+                        <span class="feature-emoji" aria-hidden="true">📊</span>
+                        <h4 class="feature-title">Risk Scoring</h4>
+                        <p class="feature-description">Generates a privacy rating out of 10 based on the sensitivity and quantity of personal information detected in conversations.</p>
+                    </article>
+                    
+                    <article class="feature-card">
+                        <span class="feature-emoji" aria-hidden="true">🌍</span>
+                        <h4 class="feature-title">Carbon Footprint</h4>
+                        <p class="feature-description">Calculates the environmental impact of AI usage, making the hidden costs of cognitive extraction tangible and measurable.</p>
+                    </article>
+                    
+                    <article class="feature-card">
+                        <span class="feature-emoji" aria-hidden="true">⏱️</span>
+                        <h4 class="feature-title">The Countdown</h4>
+                        <p class="feature-description">Creates a 10-second simulated threat of public data upload, generating genuine anxiety before the educational reveal.</p>
+                    </article>
+                    
+                    <article class="feature-card">
+                        <span class="feature-emoji" aria-hidden="true">✅</span>
+                        <h4 class="feature-title">Genuine Consent</h4>
+                        <p class="feature-description">After the reveal, users can choose to ACTUALLY consent to anonymized gallery display—now that they understand what they're agreeing to.</p>
+                    </article>
+                    
+                    <article class="feature-card">
+                        <span class="feature-emoji" aria-hidden="true">🖼️</span>
+                        <h4 class="feature-title">Gallery Exhibition</h4>
+                        <p class="feature-description">Displays only anonymized excerpts from users who provided informed consent after experiencing the full installation.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Ethical Foundation -->
+            <section class="ethics-section" aria-labelledby="ethics-heading">
+                <header class="ethics-header">
+                    <span class="ethics-icon" aria-hidden="true">🛡️</span>
+                    <h4 id="ethics-heading" class="ethics-header-title">The Ethical Foundation</h4>
+                </header>
+                
+                <div class="ethics-content">
+                    <p><strong class="gradient-text" style="--gradient-primary: linear-gradient(135deg, #10b981, #06b6d4);">All data processing happens locally in the browser</strong>—nothing is uploaded during the demonstration. The simulated threat creates the emotional experience of violation without causing actual harm, like a fire drill teaches safety without real danger. Only users who genuinely consent after the reveal contribute anonymized excerpts to the gallery exhibition.</p>
+                    
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <span class="trust-badge-icon" aria-hidden="true">🔒</span>
+                            <span>Local Processing Only</span>
+                        </div>
+                        <div class="trust-badge">
+                            <span class="trust-badge-icon" aria-hidden="true">✅</span>
+                            <span>Genuine Consent Required</span>
+                        </div>
+                        <div class="trust-badge">
+                            <span class="trust-badge-icon" aria-hidden="true">🎭</span>
+                            <span>Educational Simulation</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>You Agreed. | Digital Media Project | 2024-2025</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // 1. MOBILE NAVIGATION TOGGLE
+        // ============================================
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const isActive = navLinks.classList.contains('active');
+            navToggle.setAttribute('aria-expanded', isActive);
+            navToggle.textContent = isActive ? '✕' : '☰';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.site-nav')) {
+                navLinks.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.textContent = '☰';
+            }
+        });
+
+        // Close menu on link click (mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navToggle.textContent = '☰';
+                }
+            });
+        });
+
+        // ============================================
+        // 2. REDUCED PARTICLE SYSTEM (15 particles)
+        // ============================================
+        const particlesContainer = document.getElementById('particlesContainer');
+        const particleCount = window.innerWidth <= 768 ? 7 : 15;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 25 + 's';
+            particle.style.animationDuration = (20 + Math.random() * 15) + 's';
+            
+            particlesContainer.appendChild(particle);
+        }
+
+        // ============================================
+        // 3. OPTIMIZED SCROLL INDICATOR
+        // ============================================
+        let ticking = false;
+        function updateScrollIndicator() {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateScrollIndicator);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // ============================================
+        // 4. SMOOTH SCROLL FOR ANCHOR LINKS
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

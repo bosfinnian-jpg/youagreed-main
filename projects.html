@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Related Projects - You Agreed.</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary: #000;
+            --accent: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+            --accent-orange: #f97316;
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --text-secondary: #a1a1aa;
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ANIMATED BACKGROUND */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            animation: cosmicShift 20s ease-in-out infinite;
+        }
+
+        @keyframes cosmicShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        /* FLOATING ORBS */
+        .orbs-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            will-change: transform;
+            animation: float-orb 25s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.6), transparent);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.5), transparent);
+            top: 50%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.4), transparent);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float-orb {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(50px, -30px) scale(1.1);
+            }
+            50% {
+                transform: translate(-30px, 50px) scale(0.9);
+            }
+            75% {
+                transform: translate(40px, 30px) scale(1.05);
+            }
+        }
+
+        /* HEADER */
+        .site-header {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .back-link::before {
+            content: "← ";
+        }
+
+        .site-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem var(--spacing-lg) 4rem;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* PROJECTS CONSTELLATION */
+        .projects-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg) 4rem;
+            position: relative;
+        }
+
+        /* CONNECTION LINES SVG */
+        .connections-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .connection-line {
+            stroke: rgba(139, 92, 246, 0.2);
+            stroke-width: 2;
+            stroke-dasharray: 5, 5;
+            fill: none;
+            animation: dash 20s linear infinite;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -100;
+            }
+        }
+
+        /* PROJECT CARD */
+        .project-card {
+            position: relative;
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            z-index: 1;
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-wrapper {
+            position: relative;
+            perspective: 2000px;
+        }
+
+        .project-content {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .project-card:hover .project-content {
+            transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+        }
+
+        /* PROJECT GLOW */
+        .project-glow {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--glow-color-1), var(--glow-color-2));
+            border-radius: 24px;
+            opacity: 0;
+            filter: blur(20px);
+            z-index: -1;
+            transition: opacity 0.6s ease;
+        }
+
+        .project-card:hover .project-glow {
+            opacity: 0.6;
+        }
+
+        /* PROJECT HEADER */
+        .project-header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .project-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--icon-color-1), var(--icon-color-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .project-title-section {
+            flex: 1;
+        }
+
+        .project-number {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--title-color-1), var(--title-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .project-meta {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* PROJECT BODY */
+        .project-body {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .project-section {
+            position: relative;
+            padding: var(--spacing-lg);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .project-section:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, var(--accent), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        .section-content {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .section-content strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* CONNECTION TAGS */
+        .connection-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tag-positive {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .tag-negative {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* KEY TAKEAWAY BOX */
+        .key-takeaway {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .key-takeaway::before {
+            content: '💡';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .key-takeaway-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-purple);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .key-takeaway-content {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        /* SYNTHESIS SECTION */
+        .synthesis-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .synthesis-card {
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: var(--spacing-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .synthesis-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .synthesis-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .synthesis-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .synthesis-content p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .synthesis-content strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .synthesis-list {
+            list-style: none;
+            padding-left: 0;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .synthesis-list li {
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .synthesis-list li:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(10px);
+        }
+
+        /* FLOATING PARTICLES */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(139, 92, 246, 0.6);
+            border-radius: 50%;
+            animation: float-particle 15s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem var(--spacing-md) 2rem;
+            }
+
+            .project-card {
+                margin-bottom: 3rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+            }
+
+            .project-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+
+            .project-title {
+                font-size: 1.8rem;
+            }
+
+            .project-content {
+                padding: var(--spacing-lg);
+            }
+
+            .synthesis-card {
+                padding: var(--spacing-lg);
+            }
+
+            .orb {
+                display: none;
+            }
+        }
+
+        /* ACCESSIBILITY */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            z-index: 200;
+            transition: width 0.1s ease;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    <div class="cosmic-bg"></div>
+    
+    <div class="orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="back-link">Back to Hub</a>
+            <h1 class="site-title">You Agreed.</h1>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <h2 class="hero-title">Related Projects</h2>
+        <p class="hero-subtitle">Five Critical Interventions That Paved The Way</p>
+    </section>
+
+    <main class="projects-container">
+        <svg class="connections-svg" id="connectionsSvg"></svg>
+
+        <!-- PROJECT 1: DATA SELFIE -->
+        <article class="project-card" data-project="1" style="
+            --glow-color-1: rgba(59, 130, 246, 0.6);
+            --glow-color-2: rgba(139, 92, 246, 0.6);
+            --icon-color-1: #3b82f6;
+            --icon-color-2: #8b5cf6;
+            --title-color-1: #3b82f6;
+            --title-color-2: #8b5cf6;
+        ">
+            <div class="project-wrapper">
+                <div class="project-glow"></div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-icon">👁️</div>
+                        <div class="project-title-section">
+                            <div class="project-number">Project 01</div>
+                            <h3 class="project-title">Data Selfie</h3>
+                            <div class="project-meta">Browser Extension | DATA X | 2017</div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <div class="project-section">
+                            <h4 class="section-title">What It Does</h4>
+                            <div class="section-content">
+                                A Chrome/Firefox extension that <strong>tracks users while they browse Facebook</strong> to show them their own data traces. Collects the same information Facebook tracks—clicks, scroll times, post durations, typing activity—and uses <strong>personality prediction APIs</strong> (IBM Watson, Apply Magic Sauce) to show users what Facebook "sees." All data stored locally on user's computer.
+                            </div>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="section-title">Connection to YOU AGREED.</h4>
+                            <div class="section-content">
+                                <strong>Makes invisible extraction visible</strong> – Both projects reveal hidden data collection processes by transforming abstract tracking into concrete visualization. Creates visceral understanding through showing users their actual analysed data.
+                                <br><br>
+                                <strong>Privacy awareness through experience</strong> – Users don't just read about data collection—they see their actual data analysed with predicted personality traits, political orientation, and psychological profiles.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="connection-tags">
+                        <div class="tag tag-positive">✓ Visibility as Critique</div>
+                        <div class="tag tag-positive">✓ Local Processing Ethics</div>
+                        <div class="tag tag-negative">✗ No Consent Challenge</div>
+                        <div class="tag tag-negative">✗ Educational Not Provocative</div>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <div class="key-takeaway-title">Key Takeaway</div>
+                        <div class="key-takeaway-content">
+                            Data Selfie proves that when surveillance is made visible and personal, people DO care about privacy—contradicting the "privacy is dead" narrative. However, it's purely informational rather than provocative, missing the critical tension that makes YOU AGREED. more impactful.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- PROJECT 2: TERMS OF SERVICE; DIDN'T READ -->
+        <article class="project-card" data-project="2" style="
+            --glow-color-1: rgba(249, 115, 22, 0.6);
+            --glow-color-2: rgba(236, 72, 153, 0.6);
+            --icon-color-1: #f97316;
+            --icon-color-2: #ec4899;
+            --title-color-1: #f97316;
+            --title-color-2: #ec4899;
+        ">
+            <div class="project-wrapper">
+                <div class="project-glow"></div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-icon">📄</div>
+                        <div class="project-title-section">
+                            <div class="project-number">Project 02</div>
+                            <h3 class="project-title">ToS;DR</h3>
+                            <div class="project-meta">Community Project | Hugo Roy et al. | 2012</div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <div class="project-section">
+                            <h4 class="section-title">What It Does</h4>
+                            <div class="section-content">
+                                Community-driven project that <strong>analyses and grades Terms of Service</strong> from Grade A (best) to Grade E (worst). The project name plays on "Too Long; Didn't Read" and aims to fix <strong>"the biggest lie on the web"</strong>—that people actually read terms before agreeing. Browser extension shows grade for current website with plain-language summaries.
+                            </div>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="section-title">Connection to YOU AGREED.</h4>
+                            <div class="section-content">
+                                <strong>Directly addresses "I agree" problem</strong> – Both projects acknowledge nobody reads terms and expose consent theater at the heart of digital services. Carnegie Mellon study: average user encounters <strong>1,500 privacy policies/year, 2,500 words each</strong>—proving reading all terms is literally impossible.
+                                <br><br>
+                                <strong>Reveals buried clauses</strong> – ToS;DR highlights problematic terms users unknowingly accept. YOU AGREED. buries Section 11 to prove this point experientially.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="connection-tags">
+                        <div class="tag tag-positive">✓ Validates Core Premise</div>
+                        <div class="tag tag-positive">✓ Scale of Problem</div>
+                        <div class="tag tag-negative">✗ Solution Not Critique</div>
+                        <div class="tag tag-negative">✗ No Emotional Impact</div>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <div class="key-takeaway-title">Key Takeaway</div>
+                        <div class="key-takeaway-content">
+                            ToS;DR validates YOU AGREED.'s core premise but attempts to solve the problem within existing frameworks rather than challenging whether "informed consent" is even possible for irreversible AI data extraction. YOU AGREED. goes further by demonstrating that even when violation is explained, most people still don't read carefully enough to avoid it.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- PROJECT 3: PIG 05049 -->
+        <article class="project-card" data-project="3" style="
+            --glow-color-1: rgba(16, 185, 129, 0.6);
+            --glow-color-2: rgba(59, 130, 246, 0.6);
+            --icon-color-1: #10b981;
+            --icon-color-2: #3b82f6;
+            --title-color-1: #10b981;
+            --title-color-2: #3b82f6;
+        ">
+            <div class="project-wrapper">
+                <div class="project-glow"></div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-icon">🐷</div>
+                        <div class="project-title-section">
+                            <div class="project-number">Project 03</div>
+                            <h3 class="project-title">PIG 05049</h3>
+                            <div class="project-meta">Book/Installation | Christien Meindertsma | 2007</div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <div class="project-section">
+                            <h4 class="section-title">What It Does</h4>
+                            <div class="section-content">
+                                Three years of research documenting <strong>all 185 products made from a single pig</strong> (number 05049) raised and slaughtered on a commercial farm in the Netherlands. Visual catalog shows everything from expected food items to surprising non-food products like ammunition, train brakes, cigarettes, bone china, and paint. <strong>Makes no moral judgment</strong>—presents facts for reflection.
+                            </div>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="section-title">Connection to YOU AGREED.</h4>
+                            <div class="section-content">
+                                <strong>Makes invisible processes visible</strong> – PIG 05049 reveals industrial supply chains; YOU AGREED. reveals AI data extraction. Both use specificity for impact—tracking ONE thing completely to make abstract concrete.
+                                <br><br>
+                                <strong>Reveals disconnection</strong> – Meindertsma proves "there are very many steps between the raw material and the end product... the knowledge gets lost." Same applies to gap between clicking "I agree" and AI model training.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="connection-tags">
+                        <div class="tag tag-positive">✓ Visibility Methodology</div>
+                        <div class="tag tag-positive">✓ Specificity Creates Impact</div>
+                        <div class="tag tag-negative">✗ Documentary Not Experiential</div>
+                        <div class="tag tag-negative">✗ Observed Not Participated</div>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <div class="key-takeaway-title">Key Takeaway</div>
+                        <div class="key-takeaway-content">
+                            Both projects share methodology: trace invisible processes to reveal how things work. YOU AGREED. applies this principle to cognitive data extraction—the steps between clicking "I agree" and AI model training are so numerous and opaque that understanding is lost.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- PROJECT 4: UNINVITED GUESTS -->
+        <article class="project-card" data-project="4" style="
+            --glow-color-1: rgba(139, 92, 246, 0.6);
+            --glow-color-2: rgba(236, 72, 153, 0.6);
+            --icon-color-1: #8b5cf6;
+            --icon-color-2: #ec4899;
+            --title-color-1: #8b5cf6;
+            --title-color-2: #ec4899;
+        ">
+            <div class="project-wrapper">
+                <div class="project-glow"></div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-icon">🏠</div>
+                        <div class="project-title-section">
+                            <div class="project-number">Project 04</div>
+                            <h3 class="project-title">Uninvited Guests</h3>
+                            <div class="project-meta">Short Film | Superflux | 2015</div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <div class="project-section">
+                            <h4 class="section-title">What It Does</h4>
+                            <div class="section-content">
+                                4-minute speculative design film exploring frictions between elderly man Thomas and his smart home. Thomas receives <strong>smart devices from his children</strong> to monitor his diet, health, and sleep remotely. Film shows his escalating frustration as these "helpful" devices invade his autonomy, and his clever workarounds to deceive them. Uses comedy to make serious points about surveillance.
+                            </div>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="section-title">Connection to YOU AGREED.</h4>
+                            <div class="section-content">
+                                <strong>Reveals surveillance disguised as care</strong> – Uninvited Guests shows health monitoring = parental surveillance. YOU AGREED. shows AI assistance = cognitive extraction. Both explore how good intentions create problematic outcomes.
+                                <br><br>
+                                <strong>Makes invisible monitoring visible</strong> – Bright colored objects symbolize "ghosts of the future"—physical manifestations of invisible data streams.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="connection-tags">
+                        <div class="tag tag-positive">✓ Critical Design Approach</div>
+                        <div class="tag tag-positive">✓ Tension Visualization</div>
+                        <div class="tag tag-negative">✗ Fiction vs Actual Experience</div>
+                        <div class="tag tag-negative">✗ Different Consent Context</div>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <div class="key-takeaway-title">Key Takeaway</div>
+                        <div class="key-takeaway-content">
+                            Uninvited Guests shares YOU AGREED.'s critical design approach: creating speculative scenarios that reveal tensions in emerging technologies. However, Uninvited Guests focuses on IoT friction, while YOU AGREED. specifically targets the consent framework problem—not whether we can resist surveillance, but whether we ever truly consented to it.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- PROJECT 5: OPEN INFORMANT -->
+        <article class="project-card" data-project="5" style="
+            --glow-color-1: rgba(236, 72, 153, 0.6);
+            --glow-color-2: rgba(249, 115, 22, 0.6);
+            --icon-color-1: #ec4899;
+            --icon-color-2: #f97316;
+            --title-color-1: #ec4899;
+            --title-color-2: #f97316;
+        ">
+            <div class="project-wrapper">
+                <div class="project-glow"></div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-icon">📛</div>
+                        <div class="project-title-section">
+                            <div class="project-number">Project 05</div>
+                            <h3 class="project-title">Open Informant</h3>
+                            <div class="project-meta">Wearable Badge | Superflux | 2013</div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+                        <div class="project-section">
+                            <h4 class="section-title">What It Does</h4>
+                            <div class="section-content">
+                                Wearable e-ink badge connected to smartphone app that <strong>searches communications for NSA surveillance trigger words</strong> (like "bomb," "assassination," but also "pork," "dock," "storm") and displays text fragments containing these words publicly on the badge worn on your body. Created in 2 weeks in response to NSA revelations. <strong>Open source</strong>—all designs and code available on GitHub.
+                            </div>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="section-title">Connection to YOU AGREED.</h4>
+                            <div class="section-content">
+                                <strong>Reverses surveillance visibility</strong> – Makes private data public to protest forced secrecy. "By openly displaying what is currently taken by forceful stealth, we question intrusive mass surveillance."
+                                <br><br>
+                                <strong>Protest through provocation</strong> – Both use actual user data (not hypothetical) and let processing architecture reflect ethical position. Body as medium for making invisible visible.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="connection-tags">
+                        <div class="tag tag-positive">✓ Visibility as Critique</div>
+                        <div class="tag tag-positive">✓ Uses Actual Data</div>
+                        <div class="tag tag-negative">✗ Opt-in Protest Tool</div>
+                        <div class="tag tag-negative">✗ State vs Corporate Surveillance</div>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <div class="key-takeaway-title">Key Takeaway</div>
+                        <div class="key-takeaway-content">
+                            Open Informant and YOU AGREED. share methodology of "visibility as critique"—making hidden surveillance visible as protest. But Open Informant assumes users understand surveillance and provides tools for resistance. YOU AGREED. assumes users DON'T understand and proves this by replicating the exact consent-without-understanding pattern they fall for with ChatGPT.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- SYNTHESIS SECTION -->
+    <section class="synthesis-section">
+        <div class="synthesis-card">
+            <h3 class="synthesis-title">What These Projects Reveal About YOU AGREED.</h3>
+            <div class="synthesis-content">
+                <p>
+                    All five projects occupy the space where <strong>design meets activism</strong>, using experiential or visual methods to reveal hidden extraction mechanisms. They establish that surveillance capitalism exists, terms of service are unreadable, privacy visualization can raise awareness, and critical design can provoke reflection.
+                </p>
+
+                <p><strong>What they don't establish:</strong></p>
+                <ul class="synthesis-list">
+                    <li>That consent frameworks themselves are broken for AI</li>
+                    <li>That cognitive extraction is qualitatively different from behavioral tracking</li>
+                    <li>That people need to FEEL the violation to understand it</li>
+                </ul>
+
+                <p><strong>This is YOU AGREED.'s contribution.</strong></p>
+
+                <p>
+                    Not another project explaining surveillance or making tracking visible, but an intervention that <strong>demonstrates the fundamental inadequacy of current consent models</strong> when applied to irreversible cognitive data extraction—by replicating the exact violation in a way users can finally see and feel.
+                </p>
+
+                <p>
+                    The difference between reading about surveillance and experiencing <strong>"YOUR DATA IS NOW UPLOADING... 10... 9... 8..."</strong>
+                </p>
+
+                <p>That's the gap YOU AGREED. fills.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>You Agreed. | COMM3705 Digital Media Project | Analysis of Related Projects</p>
+        </div>
+    </footer>
+
+    <script>
+        // SCROLL INDICATOR
+        function updateScrollIndicator() {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        }
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateScrollIndicator();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // INTERSECTION OBSERVER FOR CARDS
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // FLOATING PARTICLES
+        const particlesContainer = document.getElementById('particlesContainer');
+        const particleCount = window.innerWidth <= 768 ? 10 : 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // DRAW CONNECTION LINES
+        function drawConnections() {
+            const svg = document.getElementById('connectionsSvg');
+            const cards = document.querySelectorAll('.project-card');
+            
+            if (window.innerWidth <= 768 || cards.length < 2) return;
+
+            svg.innerHTML = '';
+            
+            for (let i = 0; i < cards.length - 1; i++) {
+                const card1 = cards[i].querySelector('.project-icon');
+                const card2 = cards[i + 1].querySelector('.project-icon');
+                
+                if (!card1 || !card2) continue;
+                
+                const rect1 = card1.getBoundingClientRect();
+                const rect2 = card2.getBoundingClientRect();
+                const svgRect = svg.getBoundingClientRect();
+                
+                const x1 = rect1.left + rect1.width / 2 - svgRect.left;
+                const y1 = rect1.top + rect1.height / 2 - svgRect.top;
+                const x2 = rect2.left + rect2.width / 2 - svgRect.left;
+                const y2 = rect2.top + rect2.height / 2 - svgRect.top;
+                
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const midY = (y1 + y2) / 2;
+                const d = `M ${x1} ${y1} Q ${x1} ${midY}, ${(x1 + x2) / 2} ${midY} T ${x2} ${y2}`;
+                line.setAttribute('d', d);
+                line.setAttribute('class', 'connection-line');
+                svg.appendChild(line);
+            }
+        }
+
+        // Draw connections on load and resize
+        window.addEventListener('load', drawConnections);
+        window.addEventListener('resize', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    drawConnections();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Redraw on scroll for dynamic effect
+        let scrollTicking = false;
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                window.requestAnimationFrame(() => {
+                    if (window.innerWidth > 768) {
+                        drawConnections();
+                    }
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>

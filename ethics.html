@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Assessment - You Agreed.</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        /* ============================================
+           CSS VARIABLES
+           ============================================ */
+        :root {
+            --primary: #000;
+            --accent: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --success: #10b981;
+            --info: #06b6d4;
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --text-secondary: #6b7280;
+            --text-light: #e5e7eb;
+            
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-accent: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.2s ease;
+            --transition-slow: 0.3s ease;
+            
+            --shadow-sm: 0 10px 40px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 20px 50px rgba(102, 126, 234, 0.12);
+            --shadow-lg: 0 30px 80px rgba(102, 126, 234, 0.15);
+            --shadow-xl: 0 40px 100px rgba(102, 126, 234, 0.2);
+            
+            --font-size-sm: 0.95rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.1rem;
+            --font-size-xl: 1.15rem;
+            --font-size-2xl: 1.8rem;
+            --font-size-3xl: 2rem;
+            --font-size-4xl: 2.2rem;
+            --font-size-hero: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: rgba(102, 126, 234, 0.3);
+            color: var(--primary);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-40px);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(102, 126, 234, 0.6);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -150%;
+            }
+            100% {
+                left: 150%;
+            }
+        }
+
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        /* BACKGROUND */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            opacity: 0.03;
+            animation: gradientShift 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s infinite;
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+            z-index: 200;
+            transition: width var(--transition-fast);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        /* HEADER */
+        .site-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: var(--text);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: all var(--transition-base);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+        }
+
+        .back-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .back-link::before {
+            content: "← ";
+        }
+
+        .site-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        /* NAVIGATION */
+        .site-nav {
+            background: rgba(248, 249, 250, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: var(--spacing-sm);
+            color: var(--text);
+            position: absolute;
+            right: var(--spacing-lg);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 60px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: all var(--transition-base);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            display: block;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 60%;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: transform var(--transition-base);
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::before {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+            background: rgba(59, 130, 246, 0.12);
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            padding: var(--spacing-2xl) 0 6rem 0;
+        }
+
+        .page-title {
+            font-size: var(--font-size-hero);
+            font-weight: 800;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .page-subtitle {
+            font-size: var(--font-size-xl);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-2xl);
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.15s;
+        }
+
+        /* STATS OVERVIEW */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-2xl);
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.2s;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-value {
+            font-size: var(--font-size-4xl);
+            font-weight: 800;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .stat-card.critical .stat-value {
+            background: var(--gradient-danger);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card.high .stat-value {
+            background: var(--gradient-warning);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card.medium .stat-value {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card.low .stat-value {
+            background: var(--gradient-success);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* FILTER CONTROLS */
+        .filter-controls {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.3s;
+        }
+
+        .filter-btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: left 0.5s;
+        }
+
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+
+        .filter-btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--gradient-accent);
+            color: white;
+            border-color: transparent;
+        }
+
+        .filter-badge {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .filter-btn.active .filter-badge {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* RISK CATEGORY SECTIONS */
+        .risk-category {
+            margin-bottom: var(--spacing-2xl);
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .risk-category:nth-child(1) { animation-delay: 0.4s; }
+        .risk-category:nth-child(2) { animation-delay: 0.45s; }
+        .risk-category:nth-child(3) { animation-delay: 0.5s; }
+        .risk-category:nth-child(4) { animation-delay: 0.55s; }
+        .risk-category:nth-child(5) { animation-delay: 0.6s; }
+        .risk-category:nth-child(6) { animation-delay: 0.65s; }
+        .risk-category:nth-child(7) { animation-delay: 0.7s; }
+
+        .category-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-md);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .category-header:hover::before {
+            left: 100%;
+        }
+
+        .category-header:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+        }
+
+        .category-icon {
+            font-size: 2rem;
+        }
+
+        .category-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: 20px;
+            font-size: var(--font-size-base);
+            font-weight: 600;
+        }
+
+        /* RISK CARDS */
+        .risks-grid {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+
+        .risk-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-base);
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .risk-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+            transition: all var(--transition-slow);
+        }
+
+        .risk-card:hover::after {
+            transform: translate(30%, -30%) scale(1.5);
+        }
+
+        .risk-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .risk-card.severity-critical {
+            border-left-color: #ef4444;
+        }
+
+        .risk-card.severity-high {
+            border-left-color: #f59e0b;
+        }
+
+        .risk-card.severity-medium {
+            border-left-color: #fbbf24;
+        }
+
+        .risk-card.severity-low {
+            border-left-color: #10b981;
+        }
+
+        .risk-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-md);
+            gap: var(--spacing-md);
+        }
+
+        .risk-name {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--text);
+            flex: 1;
+        }
+
+        .severity-badge {
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .severity-badge.critical {
+            background: var(--gradient-danger);
+            color: white;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        .severity-badge.high {
+            background: var(--gradient-warning);
+            color: white;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .severity-badge.medium {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.4);
+        }
+
+        .severity-badge.low {
+            background: var(--gradient-success);
+            color: white;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .problem-section {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .problem-text {
+            color: var(--text);
+            line-height: 1.7;
+            font-size: var(--font-size-base);
+        }
+
+        .solution-section {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--accent);
+            margin-top: var(--spacing-md);
+        }
+
+        .solution-text {
+            color: var(--text);
+            line-height: 1.7;
+            font-size: var(--font-size-base);
+        }
+
+        .expand-btn {
+            background: rgba(59, 130, 246, 0.1);
+            border: none;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            margin-top: var(--spacing-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .expand-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateX(4px);
+        }
+
+        .solution-expanded {
+            display: none;
+            margin-top: var(--spacing-sm);
+        }
+
+        .solution-expanded.visible {
+            display: block;
+            animation: fadeInScale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* KEY REMINDERS */
+        .key-reminders {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-left: 6px solid #ef4444;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-top: var(--spacing-2xl);
+            margin-bottom: var(--spacing-2xl);
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.75s;
+        }
+
+        .key-reminders h3 {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .reminders-list {
+            display: grid;
+            gap: var(--spacing-sm);
+        }
+
+        .reminder-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-base);
+            border-left: 3px solid transparent;
+        }
+
+        .reminder-item:hover {
+            transform: translateX(4px);
+            border-left-color: #ef4444;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .reminder-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .reminder-text {
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --font-size-hero: 2.5rem;
+                --font-size-4xl: 1.8rem;
+                --font-size-3xl: 1.5rem;
+                --font-size-2xl: 1.3rem;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: stretch;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-links.active {
+                max-height: 500px;
+            }
+
+            .nav-links a {
+                padding: var(--spacing-md) var(--spacing-lg);
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+            }
+
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+
+            .main-content {
+                padding: var(--spacing-lg) 0 var(--spacing-2xl) 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-controls {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .category-title {
+                font-size: var(--font-size-xl);
+            }
+
+            .risk-header {
+                flex-direction: column;
+            }
+
+            .particle:nth-child(n+8) {
+                display: none;
+            }
+        }
+
+        /* ACCESSIBILITY */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Background effects -->
+    <div class="gradient-bg"></div>
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="index.html" class="back-link">Back to Hub</a>
+            <h1 class="site-title gradient-text">You Agreed.</h1>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="site-nav">
+        <div class="container">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="overview.html">Overview</a></li>
+                <li><a href="context.html">Critical Context</a></li>
+                <li><a href="ethics.html" class="active">Ethics & Risk</a></li>
+                <li><a href="costs.html">Budget Analysis</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="skills.html">Skills & Training</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h2 class="page-title gradient-text">Risk Assessment</h2>
+            <p class="page-subtitle">Comprehensive analysis of project risks across 7 categories • 50+ identified risks</p>
+
+            <!-- Statistics Overview -->
+            <div class="stats-grid">
+                <div class="stat-card critical">
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Critical Risks</div>
+                </div>
+                <div class="stat-card high">
+                    <div class="stat-value">22</div>
+                    <div class="stat-label">High Risks</div>
+                </div>
+                <div class="stat-card medium">
+                    <div class="stat-value">14</div>
+                    <div class="stat-label">Medium Risks</div>
+                </div>
+                <div class="stat-card low">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label">Low Risks</div>
+                </div>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">
+                    <span>📊</span> Show All <span class="filter-badge">50</span>
+                </button>
+                <button class="filter-btn" data-filter="critical">
+                    <span>🔴</span> Critical <span class="filter-badge">8</span>
+                </button>
+                <button class="filter-btn" data-filter="high">
+                    <span>🟠</span> High <span class="filter-badge">22</span>
+                </button>
+                <button class="filter-btn" data-filter="medium">
+                    <span>🟡</span> Medium <span class="filter-badge">14</span>
+                </button>
+                <button class="filter-btn" data-filter="low">
+                    <span>🟢</span> Low <span class="filter-badge">6</span>
+                </button>
+            </div>
+
+            <!-- CATEGORY 1: ETHICAL & PSYCHOLOGICAL RISKS -->
+            <div class="risk-category">
+                <div class="category-header">
+                    <div class="category-title">
+                        <span class="category-icon">🧠</span>
+                        <span>Ethical & Psychological Risks</span>
+                    </div>
+                    <div class="category-count">7 Risks</div>
+                </div>
+
+                <div class="risks-grid">
+                    <!-- Risk 1 -->
+                    <div class="risk-card severity-critical" data-severity="critical">
+                        <div class="risk-header">
+                            <div class="risk-name">Countdown sequence triggers genuine panic/anxiety attacks</div>
+                            <div class="severity-badge critical">Critical</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Participants with anxiety disorders may experience severe distress; could cause psychological harm; potential trauma triggers</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Include explicit content warning before participation; provide emergency stop button; have supervisor present during exhibition</div>
+                            <button class="expand-btn" onclick="toggleSolution(this)">View Full Solution →</button>
+                            <div class="solution-expanded">
+                                <p><strong>Detailed mitigation strategy:</strong></p>
+                                <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                                    <li>Display clear content warnings at entry point</li>
+                                    <li>Require participants to acknowledge anxiety/PTSD status</li>
+                                    <li>Install prominent emergency stop button</li>
+                                    <li>Supervisor must be present at all times</li>
+                                    <li>Prepare immediate debrief protocol</li>
+                                    <li>Have counseling resources ready</li>
+                                    <li>Allow opt-out at any stage</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 2 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Participants feel genuinely violated despite "just kidding" reveal</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Even simulated violation can cause real emotional harm; blurred line between educational discomfort and actual distress</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Include detailed pre-participation briefing explaining the educational purpose; require signed informed consent BEFORE they start; provide immediate debriefing explaining the pedagogical intent</div>
+                            <button class="expand-btn" onclick="toggleSolution(this)">View Full Solution →</button>
+                            <div class="solution-expanded">
+                                <p><strong>Informed consent protocol:</strong></p>
+                                <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                                    <li>Pre-participation briefing document</li>
+                                    <li>Signed consent form with full disclosure</li>
+                                    <li>Clear explanation of simulated threat</li>
+                                    <li>Immediate post-experience debrief</li>
+                                    <li>Written take-away materials</li>
+                                    <li>Follow-up contact method for concerns</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 3 -->
+                    <div class="risk-card severity-critical" data-severity="critical">
+                        <div class="risk-header">
+                            <div class="risk-name">Ethics committee rejects project entirely</div>
+                            <div class="severity-badge critical">Critical</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Cannot proceed with exhibition or data collection; entire project becomes theoretical only; 40-credit module at risk</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Submit ethics application EARLY (October latest); prepare extensive justification with academic precedents; emphasize educational purpose and harm mitigation</div>
+                            <button class="expand-btn" onclick="toggleSolution(this)">View Full Solution →</button>
+                            <div class="solution-expanded">
+                                <p><strong>Ethics approval strategy:</strong></p>
+                                <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                                    <li>Submit application by October 2025</li>
+                                    <li>Cite critical design methodology precedents</li>
+                                    <li>Document harm mitigation measures</li>
+                                    <li>Prepare alternative "low-stakes" version</li>
+                                    <li>Develop purely theoretical fallback</li>
+                                    <li>Regular supervisor consultation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 4 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Minors access installation without appropriate safeguards</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Higher vulnerability to distress; different consent requirements; potential safeguarding issues</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Implement age verification (18+); require student ID for university exhibition; have supervisor screen participants; include parental consent requirements if under 18s allowed</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 5 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Participants misunderstand project intent and feel exploited</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Damage to project reputation; complaints to university; perception of unethical practice contradicting the project's message</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Clear framing as educational art installation; detailed artist statement visible throughout; immediate post-experience explanation; provide project documentation to take away</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 6 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Data handling appears hypocritical (claiming privacy while processing data)</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Undermines project credibility; participants may not trust "local processing" claims</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Make code open-source and visible; show network monitoring tools demonstrating no uploads; provide technical documentation; have computer science validation of local-only processing</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 7 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Genuine consent process after reveal is confusing or coercive</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Defeats entire point of project if second consent is unclear; legal issues if consent not properly documented</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Design separate, clear consent form; provide cooling-off period before deciding; make "no" option equally prominent; explain consequences of both choices equally</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 2: TECHNICAL/DEVELOPMENT RISKS -->
+            <div class="risk-category">
+                <div class="category-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <div class="category-title">
+                        <span class="category-icon">💻</span>
+                        <span>Technical/Development Risks</span>
+                    </div>
+                    <div class="category-count">11 Risks</div>
+                </div>
+
+                <div class="risks-grid">
+                    <!-- Risk 1 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">ChatGPT export format changes, breaking parser</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">OpenAI frequently updates export formats; current parser may not work at exhibition time; pre-loaded examples may not work</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Build flexible parser for multiple format versions; test with various export formats; maintain fallback parsing methods; create synthetic example data in controlled format</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 2 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Heavy animations cause performance issues/crashes</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Three.js particle systems, WebGL shaders can overwhelm browsers; 150" TV may have different performance characteristics; ruins user experience</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Extensive performance testing on target hardware; implement adaptive quality settings; create lightweight fallback animations; optimize particle count; use GPU instancing</div>
+                            <button class="expand-btn" onclick="toggleSolution(this)">View Full Solution →</button>
+                            <div class="solution-expanded">
+                                <p><strong>Performance optimization checklist:</strong></p>
+                                <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                                    <li>Test on actual exhibition TV early</li>
+                                    <li>Profile and optimize render loops</li>
+                                    <li>Implement adaptive quality based on FPS</li>
+                                    <li>Use GPU instancing for particles</li>
+                                    <li>Create low/medium/high quality presets</li>
+                                    <li>Monitor memory usage continuously</li>
+                                    <li>Prepare static image fallback</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 3 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Browser compatibility issues prevent installation from working</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Safari handles WebGL differently; older browsers may not support modern APIs; university computers may have restrictions</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Build for Chrome/Firefox primarily; test on multiple browsers; implement feature detection and fallbacks; prepare standalone Electron app as backup</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 4 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">File upload security vulnerabilities</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Malicious files could exploit parser; XSS attacks through uploaded content; zip bomb attacks</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Validate file types strictly (JSON only); implement file size limits; sanitize all parsed content before display; use Content Security Policy headers</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 5 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Local storage/memory limitations with large conversation histories</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Users with years of ChatGPT data may exceed browser limits; memory leaks from processing large files</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Implement file size warnings; process data in chunks; clear memory aggressively; show loading progress; allow selective date range processing</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 6 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Privacy analysis produces false positives/negatives</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Inaccurate analysis undermines credibility; users may not trust results; educational message weakened</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Extensive testing with diverse conversation samples; calibrate detection thresholds; be transparent about limitations; label as "estimated" not "definitive"</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 7 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Animations don't work on 150" TV</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Different aspect ratio; potential lag; color/brightness differences; may not support WebGL</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Book studio time early for testing; develop specifically for target display size; test animations at scale; prepare static fallback version</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 8 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Xbox Adaptive Controller integration fails</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">May not map properly to web interactions; accessibility requirement not met; backup plan needed</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Test extensively with actual controller; implement gamepad API carefully; prepare keyboard navigation fallback; ensure tab order is logical</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 9 -->
+                    <div class="risk-card severity-low" data-severity="low">
+                        <div class="risk-header">
+                            <div class="risk-name">Leap Motion hand tracking is unreliable</div>
+                            <div class="severity-badge low">Low</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Experimental feature may frustrate users; cool factor vs usability trade-off</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Position as optional "experimental mode"; maintain controller as primary; extensive calibration; easy switch to reliable method</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 10 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Network connectivity required for unexpected features</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Should be fully offline but may discover dependencies during exhibition</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Test completely offline; remove any CDN dependencies; bundle all assets locally; ensure no external API calls</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 11 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Code becomes unmaintainable/difficult to debug</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Complex Three.js/React code can become tangled; debugging animations is time-consuming; documentation requirements for submission</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Use TypeScript for type safety; write clear comments throughout; modular component structure; maintain README documentation; regular code reviews with peers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 3: ACADEMIC/PROJECT MANAGEMENT RISKS -->
+            <div class="risk-category">
+                <div class="category-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div class="category-title">
+                        <span class="category-icon">📚</span>
+                        <span>Academic/Project Management Risks</span>
+                    </div>
+                    <div class="category-count">6 Risks</div>
+                </div>
+
+                <div class="risks-grid">
+                    <!-- Risk 1 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Project scope too ambitious for timeframe (Sept-June)</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">40-credit module requires completion; risk of incomplete work; burnout; rushed final product</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Create detailed Gantt chart with milestones; identify minimum viable product (MVP) vs. stretch goals; prioritize core functionality over polish</div>
+                            <button class="expand-btn" onclick="toggleSolution(this)">View Full Solution →</button>
+                            <div class="solution-expanded">
+                                <p><strong>Scope management strategy:</strong></p>
+                                <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                                    <li>Define MVP: landing, terms, upload, analysis, countdown, reveal</li>
+                                    <li>Stretch goals: advanced visuals, Leap Motion, tapestry</li>
+                                    <li>Build 2-week buffer before deadline</li>
+                                    <li>Bi-weekly supervisor check-ins</li>
+                                    <li>Weekly progress reviews</li>
+                                    <li>Can ship without perfect polish</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 2 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Technical skills insufficient for advanced WebGL/Three.js work</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Steep learning curve; may need to simplify visual ambitions; time lost on tutorials</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Start learning Three.js immediately (October); build simple prototypes first; use libraries/frameworks (React Three Fiber); seek help from computer science students</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 3 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Critical framework not academically rigorous enough</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Practice-based research requires strong theoretical grounding; surveillance capitalism critique must be sophisticated</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Deep reading of Zuboff; connect to specific academic debates; document theoretical framework in parallel with building; regular supervisor feedback on essay component</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 4 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Supervisor disagrees with simulated threat approach</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">May require significant redesign; relationship with supervisor impacts marks; philosophical disagreement about methods</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Present full ethical justification early; show precedents from critical design; emphasize educational outcomes; prepare alternative approaches; document reasoning thoroughly</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 5 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Documentation and essay insufficient</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">40-credit module requires substantial written work; practice must be accompanied by critical reflection</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Keep detailed process journal throughout; photograph all stages; document user testing; write essay sections in parallel with building; aim for 8,000+ words</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 6 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Module requirements not met (learning outcomes, assessment criteria)</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Risk of failing if project doesn't align with module specs; requirements may be misunderstood</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Review COMM3705 handbook thoroughly; map project to learning outcomes explicitly; ensure both practice and theory components strong; check with supervisor about alignment</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 4: HARDWARE/SOFTWARE/INFRASTRUCTURE RISKS -->
+            <div class="risk-category">
+                <div class="category-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <div class="category-title">
+                        <span class="category-icon">🖥️</span>
+                        <span>Hardware/Software/Infrastructure Risks</span>
+                    </div>
+                    <div class="category-count">7 Risks</div>
+                </div>
+
+                <div class="risks-grid">
+                    <!-- Risk 1 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Studio booking conflicts or cancellations</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Cannot exhibit without physical space; alternative venues may not have equipment; exhibition dates may conflict with assessment deadlines</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Book studio EARLY (October); have backup dates; identify alternative spaces (library, media building); build portable version that works in standard classroom</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 2 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">150" TV malfunctions during exhibition</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Centerpiece of installation; no exhibition without it; may fail during guided sessions</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Test thoroughly before exhibition; have technician on-call; prepare backup projector setup; ensure university technical support available; test day before exhibition</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 3 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">LED lighting system fails</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Atmospheric lighting important for experience; darkened environment needs controlled lighting; safety issue if too dark</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Test lighting setup in advance; have backup LED strips; ensure emergency lighting available; maintain ambient light for safety; can work without if necessary</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 4 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Power failures or electrical issues</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Cuts exhibition mid-session; could lose unsaved work; safety hazard in darkened space</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">UPS backup power for computer; multiple power sources; emergency lighting; save progress frequently; have flashlights available</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 5 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Computer/laptop crashes during guided sessions</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Embarrassing; disrupts flow; participants lose immersion; wastes booking time</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Use reliable hardware; have backup laptop ready; save exhibition state; test stability extensively; prepare for quick restart</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 6 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Black cloth environment creates trip hazards</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Safety risk in darkened space; university liability; injury to participants</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Clear cable management; mark pathways with subtle lighting; remove unnecessary obstacles; have supervisor monitor safety; conduct risk assessment with university health & safety</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 7 -->
+                    <div class="risk-card severity-low" data-severity="low">
+                        <div class="risk-header">
+                            <div class="risk-name">Internet connectivity required unexpectedly</div>
+                            <div class="severity-badge low">Low</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Should be fully offline but may discover dependencies</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Test completely offline; remove any CDN dependencies; bundle all assets; no external API calls</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 5: CONTENT & DESIGN RISKS -->
+            <div class="risk-category">
+                <div class="category-header" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <div class="category-title">
+                        <span class="category-icon">🎨</span>
+                        <span>Content & Design Risks</span>
+                    </div>
+                    <div class="category-count">7 Risks</div>
+                </div>
+
+                <div class="risks-grid">
+                    <!-- Risk 1 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Terms of Service Section 11 not believable/realistic</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Users may spot it as fake; undermines realism of consent trap; pedagogical impact lost</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Model on real T&Cs; use appropriate legal language; get feedback from law students; make long enough to require scrolling; bury among boring clauses</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 2 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Privacy analysis appears inaccurate or unsophisticated</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Users dismiss tool as unrealistic; undermines credibility; educational message weakened</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Test with diverse conversation samples; be transparent about limitations; focus on demonstrative rather than definitive analysis; explain methodology</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 3 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Pre-loaded example conversations not compelling</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">For demonstration, examples must resonate; boring examples reduce impact; need diversity</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Curate diverse, realistic examples; include range of sensitivity levels; test with focus groups; create fictional but plausible conversations; include common ChatGPT use cases</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 4 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Carbon footprint calculation methodology questioned</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Technical users may challenge math; inaccuracy undermines credibility</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Research actual AI energy consumption data; cite sources; present as estimate; link to methodology; acknowledge uncertainty</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 5 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Visual design not polished enough for gallery context</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Competes with professional media art; university expects portfolio-quality work; first impressions matter</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Allocate significant time for polish; seek feedback from design students; study reference sites; iterate on aesthetics; hire designer for specific elements if budget allows</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 6 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">User flow confusing or unclear</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Participants don't understand what to do; miss key moments; pedagogical impact lost</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Extensive user testing; clear instructions at each stage; visual guides; test with non-technical users; observe behavior during trials</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 7 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Gallery excerpts accidentally reveal identifiable information</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Privacy breach; contradicts entire project; legal issues; ethical violation</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Aggressive anonymization; manual review of all excerpts; automated PII detection; size limits on excerpts; prefer generic topics; allow withdrawal anytime</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 6: EXTERNAL/CONTEXTUAL RISKS -->
+            <div class="risk-category">
+                <div class="category-header" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                    <div class="category-title">
+                        <span class="category-icon">🌍</span>
+                        <span>External/Contextual Risks</span>
+                    </div>
+                    <div class="category-count">6 Risks</div>
+                </div>
+
+                <div class="risks-grid">
+                    <!-- Risk 1 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">COVID-19 or other pandemic disrupts physical exhibition</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Cannot do in-person exhibition; physical installation is core to project; may need pivot to online</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Develop hybrid version that works remotely; prepare web-based exhibition; document process thoroughly so practice element remains; alternative assessment possible</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 2 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">OpenAI changes ChatGPT terms or export features</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Project premise may become obsolete; export feature may be removed; terms may address cognitive extraction</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Monitor OpenAI policy changes; adapt critique to new terms; export feature removal strengthens critique; document current state thoroughly</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 3 -->
+                    <div class="risk-card severity-low" data-severity="low">
+                        <div class="risk-header">
+                            <div class="risk-name">University publicity restrictions for critical projects</div>
+                            <div class="severity-badge low">Low</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">University may not want negative PR about AI/surveillance; may restrict external exhibition</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Keep project primarily academic; frame as educational critical inquiry; get approval for any press; focus on university venues first</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 4 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Low attendance/engagement at exhibition</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Lack of data for evaluation; reduced impact; fewer observations for analysis</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Promote widely in media school; schedule during high-traffic times; offer credit for participation; make guided sessions compelling; gather feedback even with low turnout</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 5 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Technical difficulties prevent smooth guided sessions</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Wastes participant time; appears unprofessional; reduces impact; compromises observations</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Rehearse extensively; run multiple test sessions; have troubleshooting guide; prepare to continue if specific features fail; have supervisor assist</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 6 -->
+                    <div class="risk-card severity-low" data-severity="low">
+                        <div class="risk-header">
+                            <div class="risk-name">Venue access restrictions (limited hours, security)</div>
+                            <div class="severity-badge low">Low</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">May limit exhibition scheduling; harder for participants to attend; reduces reach</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Confirm access hours early; schedule around restrictions; get necessary permissions; plan for supervised access only</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 7: OPERATIONAL & LOGISTICAL RISKS -->
+            <div class="risk-category">
+                <div class="category-header" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: var(--text);">
+                    <div class="category-title">
+                        <span class="category-icon">⚙️</span>
+                        <span>Operational & Logistical Risks</span>
+                    </div>
+                    <div class="category-count">6 Risks</div>
+                </div>
+
+                <div class="risks-grid">
+                    <!-- Risk 1 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Funding insufficient for hardware/software needs</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">May need Xbox controller, Leap Motion, additional displays, hosting; student budget limitations</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Apply for university project funding; seek department support; prioritize essential equipment; borrow where possible; crowdfund if allowed</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 2 -->
+                    <div class="risk-card severity-high" data-severity="high">
+                        <div class="risk-header">
+                            <div class="risk-name">Consent documentation not legally sound</div>
+                            <div class="severity-badge high">High</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Ethics issues; cannot use any data; may not be able to exhibit; legal liability</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Consult with university legal/ethics teams; use standard university consent forms; have supervisor review; document everything; store securely</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 3 -->
+                    <div class="risk-card severity-low" data-severity="low">
+                        <div class="risk-header">
+                            <div class="risk-name">Gallery submission management system required</div>
+                            <div class="severity-badge low">Low</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">If taking genuine consents, need backend to store excerpts; adds technical complexity</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Build simple backend only if needed; use university servers; Firebase as easy option; can avoid entirely by using only demonstration data</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 4 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Backup systems not in place</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Single point of failure; no recovery if things go wrong</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Version control (Git); cloud backups; multiple devices; export builds regularly; document setup process; can rebuild quickly</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 5 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Time management during exhibition (sessions run over)</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Guided sessions may take longer than 15-20min; scheduling conflicts; participant frustration</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Time sessions during rehearsal; build in buffers; have timer; be firm about schedule; prepare shortened version</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk 6 -->
+                    <div class="risk-card severity-medium" data-severity="medium">
+                        <div class="risk-header">
+                            <div class="risk-name">Communication gaps with supervisor</div>
+                            <div class="severity-badge medium">Medium</div>
+                        </div>
+                        <div class="problem-section">
+                            <div class="section-label">⚠️ Problem</div>
+                            <div class="problem-text">Assumptions about direction; surprise feedback late in process; misaligned expectations</div>
+                        </div>
+                        <div class="solution-section">
+                            <div class="section-label">✅ Solution</div>
+                            <div class="solution-text">Regular meetings (bi-weekly minimum); email updates; share progress; ask specific questions; document agreements</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CRITICAL REMINDERS -->
+            <div class="key-reminders">
+                <h3>🚨 Critical Considerations</h3>
+                <div class="reminders-list">
+                    <div class="reminder-item">
+                        <div class="reminder-icon">🩺</div>
+                        <div class="reminder-text">Psychological First Aid: Have resources ready for participants who have unexpected reactions to the countdown sequence</div>
+                    </div>
+                    <div class="reminder-item">
+                        <div class="reminder-icon">♿</div>
+                        <div class="reminder-text">Accessibility Compliance: Ensure project meets university accessibility standards - Xbox Adaptive Controller provides good foundation</div>
+                    </div>
+                    <div class="reminder-item">
+                        <div class="reminder-icon">🛡️</div>
+                        <div class="reminder-text">Insurance: Confirm university insurance covers art installation activities, particularly in darkened environments</div>
+                    </div>
+                    <div class="reminder-item">
+                        <div class="reminder-icon">🔥</div>
+                        <div class="reminder-text">Fire Safety: Black cloth setup must not violate fire codes - coordinate with health & safety team</div>
+                    </div>
+                    <div class="reminder-item">
+                        <div class="reminder-icon">🔒</div>
+                        <div class="reminder-text">Data Protection: Even with local processing, must comply with GDPR principles for any data handling</div>
+                    </div>
+                    <div class="reminder-item">
+                        <div class="reminder-icon">©️</div>
+                        <div class="reminder-text">Intellectual Property: Ensure any code/assets used are properly licensed - Three.js, React Three Fiber, libraries</div>
+                    </div>
+                    <div class="reminder-item">
+                        <div class="reminder-icon">📞</div>
+                        <div class="reminder-text">Emergency Procedures: Know who to contact if things go wrong during exhibition - supervisor, technical support, health & safety</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>You Agreed. | COMM3705 Digital Media Project | Risk Assessment v1.0</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // MOBILE NAVIGATION
+        // ============================================
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const isActive = navLinks.classList.contains('active');
+            navToggle.setAttribute('aria-expanded', isActive);
+            navToggle.textContent = isActive ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.site-nav')) {
+                navLinks.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.textContent = '☰';
+            }
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navToggle.textContent = '☰';
+                }
+            });
+        });
+
+        // ============================================
+        // PARTICLE SYSTEM
+        // ============================================
+        const particlesContainer = document.getElementById('particlesContainer');
+        const particleCount = window.innerWidth <= 768 ? 7 : 15;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 25 + 's';
+            particle.style.animationDuration = (20 + Math.random() * 15) + 's';
+            
+            particlesContainer.appendChild(particle);
+        }
+
+        // ============================================
+        // SCROLL INDICATOR
+        // ============================================
+        let ticking = false;
+        function updateScrollIndicator() {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateScrollIndicator);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // ============================================
+        // FILTER CONTROLS
+        // ============================================
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const riskCards = document.querySelectorAll('.risk-card');
+        const riskCategories = document.querySelectorAll('.risk-category');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                if (filter === 'all') {
+                    riskCategories.forEach(cat => cat.style.display = 'block');
+                    riskCards.forEach(card => card.style.display = 'block');
+                } else {
+                    riskCategories.forEach(cat => {
+                        const categoryCards = cat.querySelectorAll('.risk-card');
+                        const visibleCards = Array.from(categoryCards).filter(card => {
+                            if (filter === 'critical') return card.dataset.severity === 'critical';
+                            if (filter === 'high') return card.dataset.severity === 'high';
+                            if (filter === 'medium') return card.dataset.severity === 'medium';
+                            if (filter === 'low') return card.dataset.severity === 'low';
+                            return false;
+                        });
+
+                        if (visibleCards.length > 0) {
+                            cat.style.display = 'block';
+                            categoryCards.forEach(card => {
+                                if (filter === 'critical') card.style.display = card.dataset.severity === 'critical' ? 'block' : 'none';
+                                else if (filter === 'high') card.style.display = card.dataset.severity === 'high' ? 'block' : 'none';
+                                else if (filter === 'medium') card.style.display = card.dataset.severity === 'medium' ? 'block' : 'none';
+                                else if (filter === 'low') card.style.display = card.dataset.severity === 'low' ? 'block' : 'none';
+                            });
+                        } else {
+                            cat.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // ============================================
+        // EXPAND SOLUTION
+        // ============================================
+        function toggleSolution(button) {
+            const expanded = button.nextElementSibling;
+            if (expanded.classList.contains('visible')) {
+                expanded.classList.remove('visible');
+                button.textContent = 'View Full Solution →';
+            } else {
+                expanded.classList.add('visible');
+                button.textContent = 'Hide Full Solution ←';
+            }
+        }
+
+        // ============================================
+        // CATEGORY HEADER COLLAPSE
+        // ============================================
+        document.querySelectorAll('.category-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const category = header.parentElement;
+                const risksGrid = category.querySelector('.risks-grid');
+                
+                if (risksGrid.style.display === 'none') {
+                    risksGrid.style.display = 'grid';
+                } else {
+                    risksGrid.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
