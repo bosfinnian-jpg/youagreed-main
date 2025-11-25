@@ -283,8 +283,36 @@
             z-index: 1;
         }
 
-        /* CONTENT SECTIONS */
-        .content-section {
+        /* INTRO SECTION */
+        .intro-section {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 24px;
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .intro-section p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .intro-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-section strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* ARTICLE SECTION */
+        .article-section {
             background: rgba(20, 20, 30, 0.6);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -296,7 +324,7 @@
             animation: fadeInUp 1s ease both;
         }
 
-        .content-section::before {
+        .article-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -306,253 +334,74 @@
             background: linear-gradient(180deg, var(--section-color-1), var(--section-color-2));
         }
 
-        .section-header-inline {
+        .article-header {
             display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
+            align-items: flex-start;
+            gap: var(--spacing-md);
             margin-bottom: var(--spacing-lg);
             padding-left: var(--spacing-md);
         }
 
-        .section-icon {
-            font-size: 2.5rem;
-            filter: grayscale(0.3);
-        }
-
-        .section-title-inline {
-            font-size: 2rem;
-            font-weight: 800;
+        .article-number {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, var(--section-color-1), var(--section-color-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .content-section p {
-            font-size: 1.05rem;
-            line-height: 1.9;
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-md);
-            padding-left: var(--spacing-md);
-        }
-
-        .content-section strong {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        .content-section em {
-            color: var(--accent-purple);
-            font-style: normal;
-            font-weight: 500;
-        }
-
-        /* PULL QUOTE */
-        .pull-quote {
-            background: rgba(0, 0, 0, 0.4);
-            border-left: 4px solid var(--accent-purple);
-            border-radius: 12px;
-            padding: var(--spacing-lg);
-            margin: var(--spacing-xl) 0;
-            position: relative;
-        }
-
-        .pull-quote::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: 15px;
-            font-size: 4rem;
-            color: rgba(139, 92, 246, 0.3);
-            font-weight: 900;
-            line-height: 1;
-        }
-
-        .pull-quote-text {
-            font-size: 1.2rem;
-            font-weight: 500;
-            line-height: 1.7;
-            color: var(--text);
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-        }
-
-        .pull-quote-author {
-            margin-top: var(--spacing-sm);
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            font-style: normal;
-        }
-
-        /* COMPARISON TABLE */
-        .comparison-container {
-            margin: var(--spacing-xl) 0;
-            padding-left: var(--spacing-md);
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-md);
-        }
-
-        .comparison-column {
-            background: rgba(0, 0, 0, 0.4);
             border-radius: 16px;
-            padding: var(--spacing-lg);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .comparison-column:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .comparison-column.stage-1 {
-            border-color: rgba(16, 185, 129, 0.3);
-        }
-
-        .comparison-column.stage-2 {
-            border-color: rgba(236, 72, 153, 0.3);
-        }
-
-        .comparison-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .comparison-column.stage-1 .comparison-title {
-            color: var(--accent-green);
-        }
-
-        .comparison-column.stage-2 .comparison-title {
-            color: var(--accent-pink);
-        }
-
-        .comparison-subtitle {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .comparison-list {
-            list-style: none;
-        }
-
-        .comparison-list li {
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-            position: relative;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .comparison-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-purple);
-        }
-
-        /* METHODOLOGY GRID */
-        .methodology-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-md);
-            margin: var(--spacing-xl) 0;
-            padding-left: var(--spacing-md);
-        }
-
-        .methodology-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: var(--spacing-lg);
-            transition: all 0.3s ease;
-        }
-
-        .methodology-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .methodology-number {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 1.5rem;
-            margin-bottom: var(--spacing-md);
+            font-size: 1.8rem;
             box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
         }
 
-        .methodology-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: var(--spacing-sm);
+        .article-meta {
+            flex: 1;
         }
 
-        .methodology-description {
-            font-size: 0.95rem;
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .article-details {
+            font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.6;
         }
 
-        /* CRITICAL INTERVENTION BOX */
-        .critical-intervention {
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(249, 115, 22, 0.15));
-            border: 3px solid rgba(236, 72, 153, 0.4);
-            border-radius: 20px;
-            padding: var(--spacing-2xl);
-            margin: var(--spacing-2xl) 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .critical-intervention::before {
-            content: '⚠';
-            position: absolute;
-            bottom: -30px;
-            right: 20px;
-            font-size: 10rem;
-            opacity: 0.1;
-            line-height: 1;
-        }
-
-        .critical-intervention-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent-pink);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .critical-intervention h3 {
-            font-size: 2rem;
-            font-weight: 800;
+        .article-details strong {
             color: var(--text);
-            margin-bottom: var(--spacing-md);
         }
 
-        .critical-intervention p {
-            font-size: 1.1rem;
-            line-height: 1.8;
+        .article-content {
+            padding-left: var(--spacing-md);
+        }
+
+        .article-content p {
+            font-size: 1.05rem;
+            line-height: 1.9;
             color: var(--text-secondary);
-            padding-left: 0;
-            position: relative;
-            z-index: 1;
+            margin-bottom: var(--spacing-md);
+            text-align: justify;
+        }
+
+        .article-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .article-content strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .article-content em {
+            color: var(--accent-purple);
+            font-style: italic;
         }
 
         /* FOOTER */
@@ -579,17 +428,13 @@
                 padding: 0.4rem 0.8rem;
             }
 
-            .comparison-grid {
-                grid-template-columns: 1fr;
+            .article-header {
+                flex-direction: column;
             }
 
-            .methodology-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .content-section,
+            .article-section,
             .research-question-card,
-            .critical-intervention {
+            .intro-section {
                 padding: var(--spacing-lg);
             }
 
@@ -635,8 +480,8 @@
     </header>
 
     <section class="hero-section">
-        <h2 class="hero-title">Why This Exists</h2>
-        <p class="hero-subtitle">Interrogating Consent in the Age of Cognitive Extraction</p>
+        <h2 class="hero-title">Research Foundation</h2>
+        <p class="hero-subtitle">Theoretical Framework & Critical Literature Review</p>
     </section>
 
     <main class="main-container">
@@ -648,154 +493,99 @@
             </div>
         </div>
 
-        <!-- THE PROBLEM -->
-        <div class="content-section" style="--section-color-1: #ec4899; --section-color-2: #f97316; animation-delay: 0.6s;">
-            <div class="section-header-inline">
-                <span class="section-icon">🚨</span>
-                <h3 class="section-title-inline">The Problem</h3>
-            </div>
-            <p>We're experiencing a catastrophic mismatch between consent frameworks and technological capabilities. The legal and design patterns developed for Stage 1 surveillance capitalism — cookie tracking, behavioural advertising, data brokerage — are being applied wholesale to Stage 2 operations: cognitive data extraction through conversational AI.</p>
-            <p>This isn't merely an incremental change. <strong>Stage 1 surveillance extracted behavioural data that was fundamentally reversible</strong> — you could delete cookies, use private browsing, opt out of tracking. The data concerned what you did, not who you fundamentally are. Stage 2 extracts cognitive patterns, communication styles, emotional vulnerabilities, reasoning processes — the infrastructure of selfhood itself. This data cannot be un-extracted once it's been processed by AI systems.</p>
-            <p>Yet we apply the exact same consent theatre: <em>dense legal documents, pre-ticked boxes, the assumption that scrolling equals comprehension, that clicking "I Agree" constitutes informed decision-making.</em></p>
-
-            <div class="pull-quote">
-                <p class="pull-quote-text">
-                    Surveillance capitalism unilaterally claims human experience as free raw material for translation into behavioural data... This new market form declares that serving the genuine needs of people is less lucrative, and therefore less important, than selling predictions of their behaviour.
-                </p>
-                <p class="pull-quote-author">— Shoshana Zuboff, <em>The Age of Surveillance Capitalism</em></p>
-            </div>
+        <!-- INTRODUCTION -->
+        <div class="intro-section">
+            <p>This project interrogates the catastrophic mismatch between consent frameworks designed for <strong>Stage 1 surveillance capitalism</strong> (reversible behavioral tracking) and their application to <strong>Stage 2 cognitive extraction</strong> through conversational AI systems.</p>
+            <p>Where Stage 1 extracted behavioral data that could be deleted, blocked, or opted out of, Stage 2 extracts cognitive patterns—reasoning processes, emotional vulnerabilities, communication styles—that become permanently embedded in AI model training. Yet we continue applying the same consent theater: dense legal documents, pre-ticked boxes, the assumption that clicking "I Agree" constitutes informed decision-making.</p>
+            <p>The following literature review establishes the theoretical framework for understanding why cookie-era consent mechanisms fundamentally fail when applied to irreversible cognitive data extraction.</p>
         </div>
 
-        <!-- THE THEORETICAL FRAMEWORK -->
-        <div class="content-section" style="--section-color-1: #3b82f6; --section-color-2: #8b5cf6; animation-delay: 0.8s;">
-            <div class="section-header-inline">
-                <span class="section-icon">📚</span>
-                <h3 class="section-title-inline">Theoretical Framework</h3>
-            </div>
-            <p>This project builds directly on Shoshana Zuboff's surveillance capitalism framework, extending it to address what I'm identifying as <strong>Stage 2 evolution</strong> — the transition from behavioural extraction to cognitive extraction.</p>
-            
-            <div class="comparison-container">
-                <div class="comparison-grid">
-                    <div class="comparison-column stage-1">
-                        <div class="comparison-title">Stage 1: Behavioural</div>
-                        <div class="comparison-subtitle">Cookie-era surveillance (2000-2020)</div>
-                        <ul class="comparison-list">
-                            <li>Tracks what you do (clicks, purchases, browsing)</li>
-                            <li>Reversible: can be deleted, blocked, opted-out</li>
-                            <li>Concerned with prediction of behaviour</li>
-                            <li>Invisible but technically comprehensible</li>
-                            <li>Commodity: your actions and patterns</li>
-                        </ul>
-                    </div>
-                    <div class="comparison-column stage-2">
-                        <div class="comparison-title">Stage 2: Cognitive</div>
-                        <div class="comparison-subtitle">AI-era surveillance (2022-present)</div>
-                        <ul class="comparison-list">
-                            <li>Extracts how you think (reasoning, emotions, vulnerabilities)</li>
-                            <li>Irreversible: cannot be un-learned by AI systems</li>
-                            <li>Concerned with modelling cognition itself</li>
-                            <li>Invisible AND technically incomprehensible</li>
-                            <li>Commodity: your cognitive architecture</li>
-                        </ul>
+        <!-- ARTICLE 1: ZUBOFF -->
+        <div class="article-section" style="--section-color-1: #ec4899; --section-color-2: #f97316; animation-delay: 0.8s;">
+            <div class="article-header">
+                <div class="article-number">1</div>
+                <div class="article-meta">
+                    <h3 class="article-title">"Surveillance Capitalism or Democracy? The Death Match of Institutional Orders and the Politics of Knowledge in Our Information Civilization"</h3>
+                    <div class="article-details">
+                        <strong>Author:</strong> Shoshana Zuboff<br>
+                        <strong>Year:</strong> 2022<br>
+                        <strong>Published:</strong> Organization Theory, Vol 3(3)
                     </div>
                 </div>
             </div>
+            <div class="article-content">
+                <p>The first article which critically contextualised my project was Zuboff's 2022 extension of her surveillance capitalism theory, mapping the institutional development of what she terms "the commodification of human behavior operationalized in the secret massive-scale extraction of human-generated data." Zuboff argues that surveillance capitalism has evolved through four distinct stages, each building scaffolding for the next through "novel economic operations, governance carve-outs, and fresh social harms." Of particular significance to my project is her analysis of Stage Two: "The Concentration of Computational Knowledge Production and Consumption," where she documents how massive-scale behavioral data becomes transformed into computational knowledge through AI and machine learning systems. She observes that these systems "cannot perform without an ever-expanding diet of massive-scale human generated data," establishing what she calls "economies of learning" where "scale begets learning through the accumulation of data and increases competitive advantage." This creates a self-reinforcing cycle: more data enables better AI, which enables more sophisticated extraction, which generates more data. Crucially, Zuboff identifies epistemic inequality as the defining social harm of Stage Two—"the growing gap between the many and the few now defined by the difference between what I can know and what can be known about me." Knowledge is "scraped from human lives but accrues to the improvement of the few, not the many," fundamentally altering what she calls the division of learning in society.</p>
 
-            <p>Zuboff documented how surveillance capitalism transformed human experience into behavioural data for prediction markets. <strong>We're now witnessing the transformation of human cognition into training data for intelligence markets.</strong> The scale of extraction has moved from "what you do" to "who you are" — yet the consent mechanisms remain unchanged.</p>
+                <p>Zuboff's staged framework provides the theoretical foundation for my core argument about consent inadequacy across technological evolution. Her Stage One—behavioral data extraction through cookies and tracking—represents the context for which current consent frameworks like GDPR were designed, frameworks built around assumptions of reversibility and behavioral data. However, my project identifies and critiques what I term the cognitive extraction phase, an evolution that builds directly on Zuboff's Stage Two logic. Where Stage Two focuses on the production of AI knowledge from aggregated behavioral data, my work examines the extraction of cognitive data directly from individual interactions with AI systems themselves. When users engage in extended conversations with ChatGPT, they're not merely generating behavioral data like clicks or timestamps; they're disclosing reasoning processes, emotional vulnerabilities, problem-solving methods, and communication styles—what I describe as "the infrastructure of selfhood itself." This represents a qualitative shift from tracking what people do to extracting how people think, yet we continue applying the same consent theater that failed at Stage One. Zuboff's observation that "each stage creates the conditions and constructs the scaffolding for the next" validates my argument that the concentration of computational knowledge she documents has enabled this next evolution: AI systems sophisticated enough to extract cognitive data through natural language interaction, creating an irreversible form of extraction that cookie-era consent frameworks cannot ethically govern.</p>
+
+                <p>The article helped frame my understanding that epistemic inequality intensifies when extraction becomes cognitive rather than merely behavioral. Zuboff's concept of the gap between "what I can know and what can be known about me" takes on new urgency in conversational AI contexts, where the asymmetry isn't just about aggregated population-level insights but about permanent cognitive patterns extracted from individual conversations and embedded into AI models. Her warning that "it is possible to have surveillance capitalism, and it is possible to have a democracy. It is not possible to have both" underscores why my installation exists—to make this abstract theoretical critique viscerally felt. By creating the conditions where users experience the exact moment when legal consent diverges from genuine understanding, <em>You Agreed</em> operationalizes Zuboff's analysis as experiential education, revealing that the "secret massive-scale extraction" she identifies has evolved to encompass not just behavioral surplus but cognitive architecture itself, extracted through the same broken consent mechanisms designed for an earlier, less invasive stage of surveillance capitalism.</p>
+            </div>
         </div>
 
-        <!-- THE CONSENT THEATRE -->
-        <div class="content-section" style="--section-color-1: #8b5cf6; --section-color-2: #ec4899; animation-delay: 1s;">
-            <div class="section-header-inline">
-                <span class="section-icon">🎭</span>
-                <h3 class="section-title-inline">The Consent Theatre</h3>
-            </div>
-            <p>Every major AI platform employs the same performance of consent that failed with cookies. OpenAI's ChatGPT terms run to thousands of words. Anthropic's privacy policy demands substantial legal literacy. Google's AI services are buried in the existing surveillance architecture developed for advertising.</p>
-            <p>These documents share a consistent pattern: they are <strong>written to be legally defensible, not humanly comprehensible.</strong> They deploy language designed to pass regulatory scrutiny whilst ensuring that genuine understanding remains structurally impossible for typical users.</p>
-            <p>The interface design reinforces this dynamic. Terms are presented during moments of anticipation — you want to access the service, not read documentation. The "I Agree" button is prominent, scrolling is frictionless, and there's no mechanism to verify comprehension beyond the click itself.</p>
-            <p>This isn't accidental. It's inherited wholesale from Stage 1 consent design, where the goal was never informed decision-making but rather <em>the legal appearance of consent whilst maintaining maximum extraction.</em></p>
-        </div>
-
-        <!-- WHY THIS MATTERS NOW -->
-        <div class="content-section" style="--section-color-1: #10b981; --section-color-2: #3b82f6; animation-delay: 1.2s;">
-            <div class="section-header-inline">
-                <span class="section-icon">⏰</span>
-                <h3 class="section-title-inline">Why This Matters Now</h3>
-            </div>
-            <p>We're in a critical window. AI systems are being adopted at unprecedented speed, but the consent frameworks governing them remain in draft. ChatGPT reached 100 million users faster than any consumer technology in history. Millions of people are having extended, intimate conversations with AI systems daily, generating cognitive data at scale.</p>
-            <p><strong>The precedents being established now will determine the architecture of AI governance for decades.</strong> If we normalise cookie-era consent for cognitive-era extraction, we're encoding the assumption that people don't need — or deserve — genuine understanding of what happens to their cognitive data.</p>
-            <p>This matters because cognitive data is fundamentally different from behavioural data. Your browsing history might predict your purchasing patterns. Your extended AI conversations reveal how you reason, what you fear, where you're vulnerable, how you think when you believe you're alone. <em>This data cannot be deleted from the models trained on it. It cannot be opted out of retroactively. It exists as a permanent cognitive imprint.</em></p>
-        </div>
-
-        <!-- THE RESEARCH METHODOLOGY -->
-        <div class="content-section" style="--section-color-1: #f97316; --section-color-2: #ec4899; animation-delay: 1.4s;">
-            <div class="section-header-inline">
-                <span class="section-icon">🔬</span>
-                <h3 class="section-title-inline">The Research Methodology</h3>
-            </div>
-            <p>Rather than producing a traditional academic critique, this project operates as <strong>critical demonstration</strong> — creating the conditions for visitors to experience the consent gap viscerally rather than intellectually understanding it abstractly.</p>
-
-            <div class="methodology-grid">
-                <div class="methodology-card">
-                    <div class="methodology-number">1</div>
-                    <div class="methodology-title">Replication</div>
-                    <div class="methodology-description">Build a functioning consent system that mirrors actual AI platform patterns — dense terms, immediate gratification, buried consequences</div>
-                </div>
-                <div class="methodology-card">
-                    <div class="methodology-number">2</div>
-                    <div class="methodology-title">Engagement</div>
-                    <div class="methodology-description">Create genuine value (data analysis, 3D exploration) that makes visitors want to click through consent barriers</div>
-                </div>
-                <div class="methodology-card">
-                    <div class="methodology-number">3</div>
-                    <div class="methodology-title">Revelation</div>
-                    <div class="methodology-description">Reveal the consequences only after consent is given, creating the exact sequence of comprehension-after-commitment</div>
-                </div>
-                <div class="methodology-card">
-                    <div class="methodology-number">4</div>
-                    <div class="methodology-title">Recognition</div>
-                    <div class="methodology-description">Enable visitors to recognise their own behaviour patterns in the installation's mechanisms</div>
+        <!-- ARTICLE 2: NISSENBAUM -->
+        <div class="article-section" style="--section-color-1: #3b82f6; --section-color-2: #8b5cf6; animation-delay: 1s;">
+            <div class="article-header">
+                <div class="article-number">2</div>
+                <div class="article-meta">
+                    <h3 class="article-title">"A Contextual Approach to Privacy Online"</h3>
+                    <div class="article-details">
+                        <strong>Author:</strong> Helen Nissenbaum<br>
+                        <strong>Year:</strong> 2011<br>
+                        <strong>Published:</strong> Daedalus, Vol 140(4): 32-48
+                    </div>
                 </div>
             </div>
+            <div class="article-content">
+                <p>The second article which critically contextualised my project was Nissenbaum's 2011 critique of the notice-and-consent model that underpins contemporary privacy policy, particularly online. Nissenbaum argues that "proposals to improve and fortify notice-and-consent, such as clearer privacy policies and fairer information practices, will not overcome a fundamental flaw in the model, namely, its assumption that individuals can understand all facts relevant to true choice at the moment of pair-wise contracting between individuals and data gatherers." Her analysis reveals that the transparency-and-choice approach—where users are informed of data collection practices and given the option to engage or disengage—has demonstrably failed, not due to poor implementation but due to structural inadequacy. She documents how privacy policies are "long, abstruse, and legalistic," adding to the "unrealistic burden of checking the respective policies of the websites we visit." Evidence shows that "people do not read privacy policies, do not understand them when they do, and realistically could not read them even if they wanted to." Crucially, Nissenbaum positions this not as "weakness of the will" but as a fundamental design failure: the consent model operates as "a procedural mechanism divorced from the particularities of relevant online activity." Her alternative framework of contextual integrity proposes that privacy protection should be grounded in context-specific norms that govern what information can be collected, with whom it can be shared, and under what conditions, rather than relying on individual comprehension and choice at the moment of transaction.</p>
 
-            <p>This approach draws from critical design practice and tactical media — art that functions as social intervention rather than representation. The goal isn't to tell visitors about consent failures; it's to make them accomplices in the system, then reveal that complicity.</p>
-        </div>
+                <p>Nissenbaum's demolition of notice-and-consent provides the theoretical justification for my project's core critique. If the consent model was already structurally inadequate for Stage 1 surveillance capitalism—behavioral tracking through cookies and online activity—then its application to conversational AI represents a catastrophic category error. The "fundamental flaw" she identifies—that individuals cannot "understand all facts relevant to true choice at the moment of contracting"—intensifies exponentially when the data being extracted is cognitive rather than behavioral. Her observation that even experts struggle to piece together "what information is captured, where it is sent, and how it is used" in online behavioral advertising takes on new dimensions with AI training data, where the mechanisms of model training, the permanence of cognitive pattern extraction, and the impossibility of data removal remain opaque even to many AI researchers. The consent theater I critique in <em>You Agreed</em>—dense terms of service with buried consequences, the assumption that scrolling equals comprehension, the fiction that clicking "I Agree" constitutes informed decision-making—represents exactly the procedural mechanism Nissenbaum warns against, now applied to an even more consequential form of extraction. When OpenAI's ChatGPT terms run to thousands of words and Anthropic's privacy policies demand substantial legal literacy, we're witnessing the same broken framework Nissenbaum documented in 2011, now governing data that cannot be reversed, deleted, or opted out of retroactively.</p>
 
-        <!-- THE CRITICAL INTERVENTION -->
-        <div class="critical-intervention">
-            <div class="critical-intervention-label">The Critical Intervention</div>
-            <h3>What Makes This Work Effective</h3>
-            <p>The installation doesn't rely on shocking imagery or heavy-handed messaging. Instead, it creates a moment of self-recognition: <strong>visitors realise they've just performed, in miniature, the exact behaviour pattern that enables large-scale cognitive surveillance.</strong></p>
-            <p>They scrolled past terms they didn't read. They clicked "I Agree" to access something they wanted. They enjoyed the experience. And then they discovered they'd consented to consequences they didn't anticipate — specifically, that their analysed data might be displayed publicly as part of the exhibition itself.</p>
-            <p>This creates what I'm calling <em>"consent retrospection"</em> — the uncomfortable recognition that legal consent and informed understanding aren't synonymous, that clicking "I Agree" doesn't mean you knew what you were agreeing to, and that current frameworks don't protect you from this gap.</p>
-            <p>The work succeeds not by explaining this problem but by making visitors feel it. The discomfort of recognising your own unread consent, your own click-through behaviour, your own assumption that terms don't contain genuinely consequential provisions — this is the educational mechanism.</p>
-        </div>
-
-        <!-- CONTRIBUTION TO KNOWLEDGE -->
-        <div class="content-section" style="--section-color-1: #667eea; --section-color-2: #764ba2; animation-delay: 1.6s;">
-            <div class="section-header-inline">
-                <span class="section-icon">💡</span>
-                <h3 class="section-title-inline">Contribution to Knowledge</h3>
+                <p>The article helped frame my understanding that improving consent mechanisms through better interface design or clearer language—what Nissenbaum calls "correctives" from "critical adherents"—cannot solve the underlying structural problem. Her argument that notice-and-consent fails because it's "divorced from the particularities of relevant online activity" validates my installation's methodology: rather than trying to perfect consent interfaces, <em>You Agreed</em> demonstrates why the entire framework is inadequate by making users experience the gap between legal consent and genuine understanding. Nissenbaum's contextual integrity framework suggests that privacy norms should reflect the specific context of information flow—but current AI platforms apply cookie-era consent to cognitive extraction contexts, ignoring the qualitative difference between reversible behavioral tracking and irreversible cognitive data incorporation into model training. By creating the conditions where visitors encounter authentic terms of service, scroll past buried clauses they don't read, click "I Agree" to access desired functionality, and only later discover what they've actually consented to, my project operationalizes Nissenbaum's critique: it proves that the procedural mechanism itself—regardless of implementation quality—cannot function ethically when the stakes involve permanent extraction of cognitive data rather than temporary collection of behavioral information.</p>
             </div>
-            <p>This project advances surveillance capitalism theory by:</p>
-            <p><strong>1. Identifying the Stage 2 transition</strong> — demonstrating that we've moved from behavioural to cognitive extraction, requiring fundamentally different consent frameworks.</p>
-            <p><strong>2. Documenting the consent gap empirically</strong> — creating measurable proof that people click through terms without comprehension, even when they believe they're attentive.</p>
-            <p><strong>3. Proposing experiential critique as methodology</strong> — showing that visceral demonstration can be more effective than intellectual argument for revealing systemic issues.</p>
-            <p><strong>4. Challenging the "people don't care about privacy" narrative</strong> — demonstrating that people care intensely when extraction is visible and consequences are tangible, suggesting the problem isn't apathy but opacity.</p>
-            <p>The work operates as both art installation and research instrument, generating data about consent behaviour whilst critiquing the systems that produce that behaviour. This dual function makes it a contribution to both critical media practice and surveillance studies.</p>
         </div>
 
-        <!-- ANSWERING THE RESEARCH QUESTION -->
-        <div class="content-section" style="--section-color-1: #f093fb; --section-color-2: #667eea; animation-delay: 1.8s;">
-            <div class="section-header-inline">
-                <span class="section-icon">✓</span>
-                <h3 class="section-title-inline">Answering the Research Question</h3>
+        <!-- ARTICLE 3: CONVERSATIONAL AI PRIVACY -->
+        <div class="article-section" style="--section-color-1: #8b5cf6; --section-color-2: #ec4899; animation-delay: 1.2s;">
+            <div class="article-header">
+                <div class="article-number">3</div>
+                <div class="article-meta">
+                    <h3 class="article-title">"User Privacy Harms and Risks in Conversational AI: A Proposed Framework"</h3>
+                    <div class="article-details">
+                        <strong>Authors:</strong> Multiple researchers<br>
+                        <strong>Year:</strong> 2024 (February)<br>
+                        <strong>Published:</strong> arXiv:2402.09716v1
+                    </div>
+                </div>
             </div>
-            <p>Can informed consent mechanisms designed for reversible data collection function ethically when applied to irreversible cognitive extraction?</p>
-            <p><strong>The answer this project demonstrates is: No.</strong></p>
-            <p>Not because people are stupid or careless, but because the frameworks themselves are designed for a fundamentally different kind of data with fundamentally different properties. Cookie consent assumes reversibility — you can delete, block, opt out. Cognitive extraction has no reversibility mechanism. Once your cognitive patterns are learned by an AI model, they cannot be unlearned.</p>
-            <p>The installation reveals this mismatch by creating a miniature version of the real problem: visitors consent to something irreversible (public exhibition of their data) using mechanisms designed for reversible actions (scrolling past terms, clicking to accept). <em>The discomfort they feel is the evidence that these mechanisms fail at the scale of consequence they're being applied to.</em></p>
-            <p>This isn't a technological problem requiring better interfaces. It's a structural problem requiring different frameworks entirely — frameworks that acknowledge the qualitative difference between behavioural and cognitive data, that treat irreversible extraction as requiring substantially higher standards of consent, that don't allow legal compliance to substitute for genuine understanding.</p>
+            <div class="article-content">
+                <p>The third article which critically contextualised my project was a 2024 empirical study that developed a comprehensive framework for understanding privacy harms and risks specifically in text-based AI chatbot interactions. Through semi-structured interviews with 13 participants interacting with two AI chatbots, the researchers identified 9 distinct privacy harms and 9 privacy risks, applying and extending Solove's taxonomy to the conversational AI context. The study revealed that "user manipulation through the chatbots' algorithm raises privacy concerns" and documented how design elements such as "high empathy, emotional engagement, trust, human-likeness, personalization, and self-disclosure can potentially compromise user privacy." Critically, the research found that these conversational systems "have increasingly gathered substantial amounts of personal information without transparent user consent," creating conditions where users "voluntarily disclose personal information to AI chatbots" due to the manipulative potential of conversational design. The framework categorizes self-disclosure as a distinct privacy harm, documenting how the conversational interface itself—through its human-like qualities and emotional engagement mechanisms—prompts users to reveal information they might not disclose through traditional interfaces. The study emphasizes that "there is a significant gap in comprehensive laws and regulations governing these interfaces in both the United States and the EU," underscoring that current privacy frameworks remain inadequate for addressing the unique risks posed by conversational AI systems that continuously collect data through natural language interaction.</p>
+
+                <p>This empirical framework provides crucial evidence for my project's central argument that people are actively disclosing cognitive and intimate data to conversational AI systems without comprehending the privacy implications. The researchers' documentation of self-disclosure as a privacy harm validates my focus on ChatGPT conversations as a site of cognitive extraction—users aren't merely generating behavioral data through clicks and usage patterns, they're actively revealing "personal information," "emotional attributes," and the reasoning processes that characterize how they think. The study's identification of manipulation as a privacy concern directly supports my critique of consent theater: when "chatbots' algorithm raises privacy concerns" and design features like emotional engagement and human-likeness "potentially compromise user privacy," we're witnessing exactly the kind of structural deception that makes notice-and-consent frameworks inadequate. The finding that users "exhibit hesitation in AI chatbot decision-making, possibly due to uncertainty about data usage" demonstrates the gap between clicking "I Agree" and genuinely understanding consequences—the exact gap my installation makes visceral through the countdown experience. Moreover, the researchers' emphasis on trust as "a bridge between technology and the user, making users more vulnerable to revealing personal information" explains why conversational AI represents a qualitatively different privacy threat: the conversational interface itself, designed to feel empathetic and human-like, manipulates users into disclosure in ways that traditional web forms do not.</p>
+
+                <p>The article helped frame my understanding that the privacy crisis in conversational AI isn't hypothetical or future-facing—it's empirically observable right now through user behavior and documented harms. The researchers' finding that "chatbots have increasingly gathered substantial amounts of personal information without transparent user consent" provides concrete evidence that Stage 2.5 cognitive extraction is already operational, not merely theoretical. Their identification of secondary use as a privacy harm—where data collected for one purpose (improving chatbot responses) gets used for another (training AI models)—maps directly onto my critique of how ChatGPT conversations become permanent training data despite users believing they're simply having helpful interactions. The framework's emphasis on exclusion as a privacy harm, occurring when "a person is excluded from receiving notices about their personal data" due to "lack of transparency and accountability," validates my installation's method of revealing buried consent clauses: current systems exclude users from genuine understanding while maintaining the legal fiction of informed consent. By demonstrating that conversational design features systematically compromise privacy through manipulation and prompted self-disclosure, this empirical framework provides the evidence base for my argument that applying cookie-era consent to conversational AI isn't merely inadequate—it's actively enabling a new form of extraction that exploits the human tendency to trust and disclose to entities that present as empathetic conversational partners.</p>
+            </div>
+        </div>
+
+        <!-- ARTICLE 4: MACHINE UNLEARNING -->
+        <div class="article-section" style="--section-color-1: #10b981; --section-color-2: #3b82f6; animation-delay: 1.4s;">
+            <div class="article-header">
+                <div class="article-number">4</div>
+                <div class="article-meta">
+                    <h3 class="article-title">"Machine Unlearning Doesn't Do What You Think: Lessons for Generative AI Policy, Research, and Practice"</h3>
+                    <div class="article-details">
+                        <strong>Authors:</strong> A. Feder Cooper et al. (29 authors)<br>
+                        <strong>Year:</strong> 2024 (December)<br>
+                        <strong>Published:</strong> arXiv preprint, presented at ICML '24
+                    </div>
+                </div>
+            </div>
+            <div class="article-content">
+                <p>The fourth article which critically contextualised my project was a comprehensive 2024 analysis examining the technical and legal realities of machine unlearning—the purported mechanism by which AI systems could delete or remove data from trained models. Cooper et al. argue that "machine unlearning is not a general-purpose solution for circumscribing generative-AI model behavior in service of broader positive impact," fundamentally challenging the assumption that AI extraction could ever be made reversible through technical means. Their central finding is that "information cannot be deleted from an ML model in the same way that it can from a database" because "during training, data are transformed into patterns that get encoded in the model's parameters—patterns that are not directly or easily interpretable." The researchers demonstrate that "there is no way to cleanly identify, target, and delete specific, contained pieces of information from these parameters," and crucially, that "removing information from a model's parameters does not guarantee that this model could never produce related information at generation time." Even when targeted data is removed from training sets, the model may still generate similar outputs because "generative-AI models are impressive in part because they are able to generate novel outputs that transcend the information that is exactly contained in their training data." The paper warns that technical solutions for unlearning "will never wholly achieve desired law and policy objectives," particularly regarding compliance with regulations like GDPR's right to be forgotten, because the fundamental architecture of how AI models learn makes true deletion technically impossible.</p>
+
+                <p>Cooper et al.'s technical analysis provides the definitive evidence for my project's core argument about irreversibility distinguishing Stage 2 extraction from Stage 1 tracking. Where cookies could be deleted and behavioral data could be removed from databases—making Stage 1 surveillance capitalism theoretically reversible even if rarely exercised—their research proves that AI training creates permanent cognitive imprints that cannot be undone. This validates my distinction between the consent frameworks designed for reversible behavioral tracking and their catastrophic misapplication to irreversible cognitive extraction. The researchers' observation that "it is hard to imagine that, even with time, technical solutions for unlearning will ever wholly achieve desired law and policy objectives" demolishes any argument that current consent inadequacies could be resolved through future technical improvements. When I argue that "once your cognitive patterns have trained a model, there's no 'right to be forgotten'—the model has learned from you permanently," Cooper et al. provide the technical proof: the transformation of conversation data into model parameters creates patterns that are "not directly or easily interpretable" and cannot be surgically removed without fundamentally compromising the model's functionality. Their finding that removal is "often neither necessary nor sufficient to constrain model outputs" exposes the deeper problem—even if data could be removed from parameters, the model's learned patterns and generalization capabilities mean it could still produce similar outputs, making the entire premise of reversible consent structurally impossible for AI systems.</p>
+
+                <p>The article helped frame my understanding that the irreversibility problem isn't a temporary technical limitation awaiting solution but a fundamental characteristic of how machine learning operates. Cooper et al.'s comparison to biological memory—"people who have forgotten a fact will often remember that same fact later when prompted differently"—illuminates why AI unlearning parallels the impossibility of selectively erasing human cognitive patterns rather than database deletion. Their warning that "policymakers should resist the tendency to think that unlearning methods can lead to generative-AI models that can do 'everything but X'" directly addresses the false promise implicit in current AI consent frameworks: that users could somehow retain control over their cognitive data after disclosure, requesting its removal if they later object. By demonstrating that "the same power to abstract and generalize that makes these models so useful also means that, with small targeted changes, they are often still capable of exhibiting similar behavior," the researchers validate my installation's critique that Stage 1 consent mechanisms catastrophically fail when applied to Stage 2 extraction. <em>You Agreed</em> makes this abstract technical impossibility viscerally felt—the countdown creates anxiety about permanent public exhibition precisely because it mirrors the actual permanence of cognitive data incorporation into AI models, a permanence that Cooper et al. prove cannot be reversed through technical means, legal mandates, or user requests, fundamentally distinguishing it from the cookie-era extraction for which current consent frameworks were designed.</p>
+            </div>
         </div>
     </main>
 
@@ -838,7 +628,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.content-section, .methodology-card').forEach(el => {
+        document.querySelectorAll('.article-section').forEach(el => {
             observer.observe(el);
         });
     </script>
