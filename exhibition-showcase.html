@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptual Showcase - YOU AGREED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary: #000;
+            --accent: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+            --accent-orange: #f97316;
+            --accent-red: #ef4444;
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --text-secondary: #a1a1aa;
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ANIMATED BACKGROUND */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            animation: cosmicShift 20s ease-in-out infinite;
+        }
+
+        @keyframes cosmicShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        /* FLOATING ORBS */
+        .orbs-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            will-change: transform;
+            animation: float-orb 25s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.6), transparent);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.5), transparent);
+            top: 50%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.4), transparent);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -30px) scale(1.1); }
+            50% { transform: translate(-30px, 50px) scale(0.9); }
+            75% { transform: translate(40px, 30px) scale(1.05); }
+        }
+
+        /* HEADER */
+        .site-header {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .nav-link.active {
+            color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 5rem var(--spacing-lg) 3rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-purple);
+            margin-bottom: var(--spacing-lg);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.1s both;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto var(--spacing-xl);
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* MAIN CONTAINER */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg) 4rem;
+        }
+
+        /* CONCEPTUAL NOTICE */
+        .conceptual-notice {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(236, 72, 153, 0.1));
+            border: 2px solid rgba(249, 115, 22, 0.3);
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .notice-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .notice-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .notice-content p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* SLIDESHOW CONTAINER */
+        .slideshow-section {
+            margin-bottom: var(--spacing-2xl);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .slideshow-container {
+            position: relative;
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slide-image-container {
+            position: relative;
+            width: 100%;
+            background: #0d0d12;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .slide-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 500px;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: var(--spacing-md);
+            left: var(--spacing-md);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .slide-content {
+            padding: var(--spacing-xl);
+        }
+
+        .slide-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.15);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .slide-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .slide-description-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .description-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            transition: all 0.3s ease;
+        }
+
+        .description-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .description-card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .description-card-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .description-card.what .description-card-title { color: var(--accent); }
+        .description-card.why .description-card-title { color: var(--accent-purple); }
+        .description-card.future .description-card-title { color: var(--accent-green); }
+
+        .description-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* NAVIGATION */
+        .slideshow-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: var(--text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .nav-btn:hover {
+            background: rgba(139, 92, 246, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot:hover {
+            background: rgba(139, 92, 246, 0.5);
+        }
+
+        .dot.active {
+            background: var(--accent-purple);
+            transform: scale(1.2);
+        }
+
+        /* NOTES SECTION */
+        .notes-section {
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .note-card {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: var(--spacing-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .note-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--card-color-1), var(--card-color-2));
+        }
+
+        .note-card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            padding-left: var(--spacing-md);
+        }
+
+        .note-card-icon {
+            font-size: 1.75rem;
+        }
+
+        .note-card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--card-color-1), var(--card-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .note-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            padding-left: var(--spacing-md);
+        }
+
+        .note-card ul {
+            list-style: none;
+            padding-left: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .note-card li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .note-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+        }
+
+        /* JOURNEY MAP */
+        .journey-section {
+            margin-top: var(--spacing-2xl);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-purple);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .journey-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding: var(--spacing-lg) 0;
+        }
+
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-purple), var(--accent-pink), var(--accent-green));
+            border-radius: 2px;
+            transform: translateY(-50%);
+        }
+
+        .journey-step {
+            position: relative;
+            text-align: center;
+            flex: 1;
+        }
+
+        .journey-dot {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto var(--spacing-sm);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .journey-step:nth-child(1) .journey-dot { background: linear-gradient(135deg, var(--accent), #1e40af); }
+        .journey-step:nth-child(2) .journey-dot { background: linear-gradient(135deg, var(--accent-purple), #5b21b6); }
+        .journey-step:nth-child(3) .journey-dot { background: linear-gradient(135deg, var(--accent-pink), #9d174d); }
+        .journey-step:nth-child(4) .journey-dot { background: linear-gradient(135deg, var(--accent-green), #047857); }
+
+        .journey-dot:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .journey-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .journey-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* FOOTER */
+        .site-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(139, 92, 246, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.8rem;
+            color: var(--accent-purple);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .slide-description-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .journey-timeline {
+                flex-direction: column;
+                gap: var(--spacing-lg);
+            }
+
+            .journey-timeline::before {
+                width: 4px;
+                height: 100%;
+                left: 30px;
+                top: 0;
+                transform: none;
+            }
+
+            .journey-step {
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-md);
+                text-align: left;
+            }
+
+            .journey-dot {
+                margin: 0;
+                flex-shrink: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-section {
+                padding: 3rem var(--spacing-md) 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .slideshow-nav {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+
+            .slide-content {
+                padding: var(--spacing-lg);
+            }
+
+            .orb {
+                display: none;
+            }
+        }
+
+        /* ACCESSIBILITY */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-bg"></div>
+    
+    <div class="orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <header class="site-header">
+        <div class="header-content">
+            <h1 class="site-title">You Agreed.</h1>
+            <nav class="nav-links">
+                <a href="research-foundation.html" class="nav-link">Research Foundation</a>
+                <a href="#" class="nav-link active">Conceptual Showcase</a>
+                <a href="exhibition-layout.html" class="nav-link">Exhibition Layout</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-badge">Conceptual Prototype</div>
+        <h2 class="hero-title">Interface Showcase</h2>
+        <p class="hero-subtitle">A visual exploration of the You Agreed. installation interface—demonstrating how consent theatre, data analysis, and critical revelation might manifest in the final experience.</p>
+    </section>
+
+    <main class="main-container">
+        <!-- CONCEPTUAL NOTICE -->
+        <div class="conceptual-notice">
+            <span class="notice-icon">⚠️</span>
+            <div class="notice-content">
+                <h3>This Is Conceptual Work</h3>
+                <p>The screens shown here represent a prototype exploration of how the installation could function. The analyser is in development—these visualisations demonstrate intent and direction rather than final implementation. Some elements may feel gimmicky in isolation; they're designed to work as part of a cohesive experiential journey that reveals consent mechanisms through visceral demonstration.</p>
+            </div>
+        </div>
+
+        <!-- SLIDESHOW -->
+        <section class="slideshow-section">
+            <div class="slideshow-container">
+                <!-- SLIDE 1: Landing -->
+                <div class="slide active" data-slide="1">
+                    <div class="slide-image-container">
+                        <img src="Screenshot_2025-11-25_at_11_12_57.png" alt="You Agreed landing page" class="slide-image">
+                        <span class="slide-number">01 / 04</span>
+                    </div>
+                    <div class="slide-content">
+                        <span class="slide-label">Entry Point</span>
+                        <h3 class="slide-title">The Landing Page</h3>
+                        <div class="slide-description-grid">
+                            <div class="description-card what">
+                                <div class="description-card-icon">🔍</div>
+                                <div class="description-card-title">What's Happening</div>
+                                <p>The entry point presents a clean, inviting interface with the provocative title "You Agreed." Large typography on a moody blue-purple gradient background, with a subtle tagline: "Discover what you've shared with AI."</p>
+                            </div>
+                            <div class="description-card why">
+                                <div class="description-card-icon">💭</div>
+                                <div class="description-card-title">Design Intent</div>
+                                <p>The aesthetic deliberately mirrors trusted tech platforms—soft blues, clean sans-serif, ample whitespace. This visual language creates familiarity and trust, the same design vocabulary that facilitates unthinking consent in real systems.</p>
+                            </div>
+                            <div class="description-card future">
+                                <div class="description-card-icon">🔮</div>
+                                <div class="description-card-title">Future Iterations</div>
+                                <p>Add subtle particle animations suggesting data flow. The title could have a gentle shimmer effect. Consider ambient audio that mimics notification sounds—creating the full sensory environment of digital services.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 2: Terms of Service -->
+                <div class="slide" data-slide="2">
+                    <div class="slide-image-container">
+                        <img src="Screenshot_2025-11-25_at_11_13_32.png" alt="Terms of Service page" class="slide-image">
+                        <span class="slide-number">02 / 04</span>
+                    </div>
+                    <div class="slide-content">
+                        <span class="slide-label">Consent Theatre</span>
+                        <h3 class="slide-title">The Terms of Service</h3>
+                        <div class="slide-description-grid">
+                            <div class="description-card what">
+                                <div class="description-card-icon">🔍</div>
+                                <div class="description-card-title">What's Happening</div>
+                                <p>A dense legal document mimicking real platform terms. "~15 min read" signals length. Section 1 defines terms in deliberately impenetrable legal language. Buried deep: consent to public exhibition of analysed data.</p>
+                            </div>
+                            <div class="description-card why">
+                                <div class="description-card-icon">💭</div>
+                                <div class="description-card-title">Design Intent</div>
+                                <p>This page is designed to be skipped. The familiar format triggers automatic scrolling behaviour—users know what this looks like, so they don't need to read it. The critical clause is placed where no one looks.</p>
+                            </div>
+                            <div class="description-card future">
+                                <div class="description-card-icon">🔮</div>
+                                <div class="description-card-title">Future Iterations</div>
+                                <p>Track scroll behaviour and time-on-page for the exhibition analytics. Add eye-tracking data if hardware permits. The terms could expand to match ChatGPT's actual length—thousands of words of legal protection.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3: Countdown -->
+                <div class="slide" data-slide="3">
+                    <div class="slide-image-container">
+                        <img src="Screenshot_2025-11-25_at_11_14_21.png" alt="Countdown timer page" class="slide-image">
+                        <span class="slide-number">03 / 04</span>
+                    </div>
+                    <div class="slide-content">
+                        <span class="slide-label">The Moment</span>
+                        <h3 class="slide-title">The Countdown</h3>
+                        <div class="slide-description-grid">
+                            <div class="description-card what">
+                                <div class="description-card-icon">🔍</div>
+                                <div class="description-card-title">What's Happening</div>
+                                <p>After analysis, a dramatic countdown appears: "YOUR DATA WILL BE UPLOADED TO PUBLIC GALLERY IN..." Red warning colours, pulsing numbers, a progress bar suggesting imminent upload. Ten seconds of genuine anxiety.</p>
+                            </div>
+                            <div class="description-card why">
+                                <div class="description-card-icon">💭</div>
+                                <div class="description-card-title">Design Intent</div>
+                                <p>This creates the "oh shit" moment—the visceral experience of realising your data might become public. The aesthetic shift from calming blues to alarming reds mirrors the emotional journey from trust to violation.</p>
+                            </div>
+                            <div class="description-card future">
+                                <div class="description-card-icon">🔮</div>
+                                <div class="description-card-title">Future Iterations</div>
+                                <p>The countdown could incorporate actual excerpts from their analysed data flashing on screen. Sound design—heartbeat sounds, escalating tones—would intensify the experience. The "3" here could be larger, more imposing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 4: Results -->
+                <div class="slide" data-slide="4">
+                    <div class="slide-image-container">
+                        <img src="Screenshot_2025-11-25_at_11_14_48.png" alt="Analysis results page" class="slide-image">
+                        <span class="slide-number">04 / 04</span>
+                    </div>
+                    <div class="slide-content">
+                        <span class="slide-label">Revelation</span>
+                        <h3 class="slide-title">The Analysis Results</h3>
+                        <div class="slide-description-grid">
+                            <div class="description-card what">
+                                <div class="description-card-icon">🔍</div>
+                                <div class="description-card-title">What's Happening</div>
+                                <p>A privacy exposure score (100/100 = significant data shared), conversation statistics (1711 messages, 313 days of history), and the option to contribute anonymously—now with genuine informed consent.</p>
+                            </div>
+                            <div class="description-card why">
+                                <div class="description-card-icon">💭</div>
+                                <div class="description-card-title">Design Intent</div>
+                                <p>After the anxiety of the countdown, this page reveals: "The upload was never real. Your agreement was." The data visualisation makes abstract extraction tangible—313 days of cognitive patterns now quantified.</p>
+                            </div>
+                            <div class="description-card future">
+                                <div class="description-card-icon">🔮</div>
+                                <div class="description-card-title">Future Iterations</div>
+                                <p>Add category breakdowns: personal, professional, health, financial data detected. Include environmental impact calculations. The "Contributing anonymously" toggle represents genuine consent—users can now choose, having experienced the consequences.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NAVIGATION -->
+                <div class="slideshow-nav">
+                    <button class="nav-btn" id="prevBtn" disabled>
+                        ← Previous
+                    </button>
+                    <div class="slide-dots">
+                        <button class="dot active" data-slide="1" aria-label="Go to slide 1"></button>
+                        <button class="dot" data-slide="2" aria-label="Go to slide 2"></button>
+                        <button class="dot" data-slide="3" aria-label="Go to slide 3"></button>
+                        <button class="dot" data-slide="4" aria-label="Go to slide 4"></button>
+                    </div>
+                    <button class="nav-btn" id="nextBtn">
+                        Next →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOTES SECTION -->
+        <section class="notes-section">
+            <div class="notes-grid">
+                <div class="note-card" style="--card-color-1: #f97316; --card-color-2: #ec4899;">
+                    <div class="note-card-header">
+                        <span class="note-card-icon">📋</span>
+                        <h3 class="note-card-title">Prototype Status</h3>
+                    </div>
+                    <p>This interface represents early conceptual exploration. The analyser functionality—parsing ChatGPT exports, detecting personal information, calculating exposure scores—is in development. Current screens demonstrate the intended user journey and emotional arc, not final implementation.</p>
+                    <ul>
+                        <li>Data analysis algorithms require further refinement</li>
+                        <li>Privacy score methodology needs academic validation</li>
+                        <li>Environmental impact calculations are placeholder estimates</li>
+                        <li>Gallery exhibition system not yet implemented</li>
+                    </ul>
+                </div>
+
+                <div class="note-card" style="--card-color-1: #8b5cf6; --card-color-2: #3b82f6;">
+                    <div class="note-card-header">
+                        <span class="note-card-icon">🎭</span>
+                        <h3 class="note-card-title">On "Gimmickiness"</h3>
+                    </div>
+                    <p>Viewed in isolation, some elements—the dramatic countdown, the alarming colour shift—may feel theatrical. This is intentional. The installation operates through emotional demonstration, not intellectual explanation. The "gimmick" is the pedagogy.</p>
+                    <ul>
+                        <li>Theatre serves critical function: making invisible harms visible</li>
+                        <li>The countdown creates "consent retrospection"—recognising what you agreed to</li>
+                        <li>Dramatic elements work within the full experiential context</li>
+                        <li>Real-world testing will refine emotional calibration</li>
+                    </ul>
+                </div>
+
+                <div class="note-card" style="--card-color-1: #10b981; --card-color-2: #3b82f6;">
+                    <div class="note-card-header">
+                        <span class="note-card-icon">🔒</span>
+                        <h3 class="note-card-title">Ethical Framework</h3>
+                    </div>
+                    <p>The installation creates the experience of violation without causing actual harm. All data processing occurs locally in the browser—nothing leaves the user's device during the demonstration. The simulated threat of public exhibition teaches through safe exposure.</p>
+                    <ul>
+                        <li>No data is collected, stored, or transmitted</li>
+                        <li>The "upload" is theatrical, not functional</li>
+                        <li>Only genuinely consented, anonymised excerpts reach the gallery</li>
+                        <li>University ethics approval guides all development</li>
+                    </ul>
+                </div>
+
+                <div class="note-card" style="--card-color-1: #ec4899; --card-color-2: #f97316;">
+                    <div class="note-card-header">
+                        <span class="note-card-icon">🎯</span>
+                        <h3 class="note-card-title">Critical Intention</h3>
+                    </div>
+                    <p>You Agreed. isn't anti-technology—it's pro-comprehension. The critique targets consent mechanisms designed for reversible data (cookies) being applied to irreversible extraction (AI training). The goal is to make visitors feel what they already agreed to elsewhere.</p>
+                    <ul>
+                        <li>Demonstrates the gap between legal and genuine consent</li>
+                        <li>Makes cognitive extraction tangible and visible</li>
+                        <li>Positions visitors as complicit, then aware</li>
+                        <li>Advocates for consent frameworks that match extraction stakes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- USER JOURNEY -->
+        <section class="journey-section">
+            <div class="section-header">
+                <div class="section-label">Experience Architecture</div>
+                <h3 class="section-title">The User Journey</h3>
+            </div>
+            <div class="journey-timeline">
+                <div class="journey-step">
+                    <div class="journey-dot">👋</div>
+                    <div>
+                        <div class="journey-label">Arrival</div>
+                        <div class="journey-desc">Trust established through familiar aesthetics</div>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-dot">📜</div>
+                    <div>
+                        <div class="journey-label">Consent</div>
+                        <div class="journey-desc">Terms skipped, agreement clicked</div>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-dot">😰</div>
+                    <div>
+                        <div class="journey-label">Anxiety</div>
+                        <div class="journey-desc">Countdown creates visceral threat</div>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="journey-dot">💡</div>
+                    <div>
+                        <div class="journey-label">Revelation</div>
+                        <div class="journey-desc">Recognition of consent behaviour</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-note">🔬 Work in Progress</div>
+        <p>You Agreed. | COMM3705 Digital Media Project | University of Leeds | May 2026</p>
+    </footer>
+
+    <script>
+        // Slideshow functionality
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 1;
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            // Wrap around
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Show current slide
+            document.querySelector(`[data-slide="${currentSlide}"]`).classList.add('active');
+            document.querySelector(`.dot[data-slide="${currentSlide}"]`).classList.add('active');
+
+            // Update button states
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', () => changeSlide(-1));
+        nextBtn.addEventListener('click', () => changeSlide(1));
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                goToSlide(parseInt(dot.dataset.slide));
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Journey step click to navigate
+        document.querySelectorAll('.journey-step').forEach((step, index) => {
+            step.style.cursor = 'pointer';
+            step.addEventListener('click', () => goToSlide(index + 1));
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
