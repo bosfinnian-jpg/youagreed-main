@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -299,9 +299,13 @@
         /* ASCII LAYOUT VISUALIZATION */
         .ascii-layout-container {
             margin: var(--spacing-xl) 0;
+            display: flex;
+            gap: var(--spacing-xl);
+            align-items: flex-start;
         }
 
         .ascii-layout-wrapper {
+            flex: 1;
             background: rgba(0, 0, 0, 0.6);
             border-radius: 16px;
             border: 1px solid rgba(139, 92, 246, 0.3);
@@ -352,10 +356,10 @@
 
         /* LEGEND */
         .legend-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: var(--spacing-md);
-            margin-top: var(--spacing-xl);
+            min-width: 320px;
         }
 
         .legend-item {
@@ -374,7 +378,7 @@
         }
 
         .legend-icon {
-            font-size: 2rem;
+            font-size: 1rem;
             margin-bottom: var(--spacing-sm);
             display: block;
         }
@@ -482,59 +486,6 @@
             color: var(--text);
         }
 
-        /* EXPERIENCE FLOW */
-        .experience-flow {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-md);
-            margin: var(--spacing-xl) 0;
-        }
-
-        .flow-step {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: var(--spacing-lg);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .flow-step:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .flow-number {
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
-        }
-
-        .flow-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: var(--spacing-sm);
-            margin-top: var(--spacing-sm);
-        }
-
-        .flow-description {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
         /* FLOATING PARTICLES */
         .particles-container {
             position: fixed;
@@ -577,6 +528,16 @@
             .ascii-art {
                 font-size: 12px;
             }
+
+            .ascii-layout-container {
+                flex-direction: column;
+            }
+
+            .legend-container {
+                min-width: auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
@@ -615,10 +576,6 @@
             }
 
             .legend-container {
-                grid-template-columns: 1fr;
-            }
-
-            .experience-flow {
                 grid-template-columns: 1fr;
             }
         }
@@ -682,7 +639,7 @@
                 <div class="section-number">Visual Overview</div>
                 <h3 class="section-title">Physical Space Configuration</h3>
                 <p class="section-description">
-                    Leeds University Television Studio transformed into an immersive environment where visitors physically navigate the consent mechanisms they critique.
+                    Leeds University Television Studio transformed into an immersive environment where visitors physically enact consent mechanisms.
                 </p>
             </div>
 
@@ -690,166 +647,111 @@
                 <div class="ascii-layout-wrapper">
                     <pre class="ascii-art">
 
-       ╔════════════════════════╗                    ┌─────────────────────────────────────┐
-       ║                        ║                    │                                     │
-       ║                        ║                    │  150-INCH MAIN DISPLAY              │
-       ║   ┌──────────┐         ║                    │  Navigable 3D environment           │
-       ║   │╱╱╱╱╱╱╱╱╱╱│         ║                    │  WebGL particle systems             │
-       ║   │╱╱╱╱╱╱╱╱╱╱│         ║                    │  Translucent "brain" structures     │
-       ║   └──────────┘         ║                    │                                     │
-       ║                x       ║                    └─────────────────────────────────────┘
+       ╔════════════════════════╗                   
+       ║                        ║                    
+       ║                        ║                 
+       ║   ┌──────────┐         ║                   
+       ║   │╱╱╱╱╱╱╱╱╱╱│         ║                    
+       ║   │╱╱╱╱╱╱╱╱╱╱│         ║                    
+       ║   └──────────┘         ║                    
+       ║                x       ║                   
        ║ │─┐                    ║                    
-       ║ │ │                    ║                    ┌─────────────────────────────────────┐
-       ║ └─┘    [▯] [▯] [▯]     ║                    │  CONTROLLER STATION                 │
-       ║                        ║                    │  Xbox Adaptive Controller           │
-       ║                        ║                    │  Operator/guide position            │
-       ║ │─┐                    ║                    └─────────────────────────────────────┘
+       ║ │ │                    ║                   
+       ║ └─┘    [▯] [▯] [▯]     ║                   
+       ║                        ║                   
+       ║                        ║                   
+       ║ │─┐                    ║                    
        ║ │ │  [▯] [▯] [▯] [▯]   ║                    
-       ║ └─┘                                         ┌─────────────────────────────────────┐
-       ║                                             │  SIDE MONITORS                      │
-       ╚════════════════════════╝│╮                  │  ├─ Terms & Conditions display      │
-                                 │╰─┤                │  └─ Data Analyser interface         │
-                                                     │                                     │
-                                                     │  VISITOR SEATING                    │
-                                                     │  7 positions facing main display    │
-        ┌───────────────────────┐                   │  Optimal viewing distance           │
-        │ VIEWING DIRECTION: ↑  │                   └─────────────────────────────────────┘
+       ║ └─┘                                        
+       ║                                             
+       ╚════════════════════════╝│╮                
+                                 │╰─┤               
+                                                
+                                                     
+        ┌───────────────────────┐                  
+        │ VIEWING DIRECTION: ↑  │                   
         └───────────────────────┘
                     </pre>
                 </div>
-            </div>
 
-            <!-- LEGEND -->
-            <div class="legend-container">
-                <div class="legend-item">
-                    <span class="legend-icon">📺</span>
-                    <div class="legend-title">150" Main Display</div>
-                    <div class="legend-description">Primary installation screen displaying navigable 3D environment</div>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-icon">🎮</span>
-                    <div class="legend-title">Controller Station</div>
-                    <div class="legend-description">Xbox Adaptive Controller for navigation and accessibility</div>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-icon">💻</span>
-                    <div class="legend-title">Side Monitors</div>
-                    <div class="legend-description">Terms & Conditions display + Data Analyser interface</div>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-icon">💺</span>
-                    <div class="legend-title">Visitor Seating</div>
-                    <div class="legend-description">7 positions facing main display at optimal viewing distance</div>
+                <!-- LEGEND -->
+                <div class="legend-container">
+                    <div class="legend-item">
+                        <span class="legend-icon">📺</span>
+                        <div class="legend-title">150" Main Display</div>
+                        <div class="legend-description">Navigable 3D environment visualising data extraction</div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon">🎮</span>
+                        <div class="legend-title">Controller Station</div>
+                        <div class="legend-description">Xbox Adaptive Controller for environment navigation</div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon">💻</span>
+                        <div class="legend-title">Side Monitors</div>
+                        <div class="legend-description">Terms & Conditions + Data Analyser interfaces</div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon">💺</span>
+                        <div class="legend-title">Visitor Seating</div>
+                        <div class="legend-description">7 positions at optimal viewing distance</div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- DOCUMENTATION SECTIONS -->
         <div class="documentation-grid">
-            <!-- SPATIAL CONFIGURATION -->
+            <!-- SPATIAL PURPOSE -->
             <div class="doc-section" style="--section-color-1: #3b82f6; --section-color-2: #8b5cf6; animation-delay: 0.6s;">
-                <h3>Spatial Configuration & Atmospheric Design</h3>
-                <p>The installation occupies the Leeds television studio, a controlled environment that enables precise manipulation of sensory elements. Upon entry, visitors encounter a deliberately constructed atmosphere: a low-frequency technical hum establishes an ambient soundscape reminiscent of data processing infrastructure, whilst programmable LED strips generate slow-transitioning gradients of cool blue and white light.</p>
-                <p>This creates a <strong>clinical yet ethereal environment</strong> - sterile enough to evoke server farms and computational spaces, atmospheric enough to feel immersive rather than hostile.</p>
-                <p>The aesthetic vocabulary references the designed interfaces of surveillance capitalism: clean, sophisticated, seductive. This is not the dystopian darkness of fictional surveillance states, but rather the <em>polished veneer of contemporary digital architecture.</em></p>
+                <h3>Spatial Purpose</h3>
+                <p>The Leeds television studio provides a controlled environment where visitors physically enact the consent mechanisms they critique. The space uses ambient sound, programmable lighting, and clean visual design to reference surveillance capitalism's aesthetic: not dystopian darkness, but the <em>polished, seductive interfaces of contemporary digital platforms.</em></p>
             </div>
 
-            <!-- INTERFACE ARCHITECTURE -->
+            <!-- CONSENT ARCHITECTURE -->
             <div class="doc-section" style="--section-color-1: #10b981; --section-color-2: #3b82f6; animation-delay: 0.8s;">
-                <h3>Interface Architecture: Dual Entry Points</h3>
-                <p>Visitors immediately confront two monitors positioned to create a deliberate choice architecture:</p>
+                <h3>Two-Station Consent Architecture</h3>
                 
                 <div class="highlight-box">
-                    <div class="highlight-title">Station One: Terms and Conditions Display</div>
+                    <div class="highlight-title">Station One: Terms and Conditions</div>
                     <div class="highlight-content">
-                        A vertical monitor presents extensive legal documentation - dense clauses rendered in the standardised language of digital consent frameworks. The text scrolls through hundreds of provisions, each legally precise and practically unreadable. Header text instructs users to "PLEASE READ CAREFULLY BEFORE PROCEEDING." The volume and density are calibrated to induce the exact cognitive response these documents produce in daily digital life: the immediate impulse to scroll to acceptance without genuine comprehension.
+                        A vertical monitor presents extensive legal documentation in standardised consent language. Hundreds of provisions scroll past, each legally precise and practically unreadable. Header instructs: "PLEASE READ CAREFULLY BEFORE PROCEEDING." Volume and density calibrated to induce the exact response these documents produce daily: immediate impulse to skip to acceptance.
                     </div>
                 </div>
 
                 <div class="highlight-box">
-                    <div class="highlight-title">Station Two: Conversational Data Analyser</div>
+                    <div class="highlight-title">Station Two: Data Analyser</div>
                     <div class="highlight-content">
-                        An interactive interface invites visitors to input mock AI conversation data for immediate analysis. The system visualises extraction patterns: communication styles, emotional indicators, cognitive vulnerabilities. The interface is deliberately engaging, offering the gratification of insight and the illusion of transparency. Users receive immediate feedback, creating a stark contrast with the adjacent legal display.
+                        An interactive interface analyses mock AI conversation data, visualising extraction patterns: communication styles, emotional indicators, cognitive vulnerabilities. Deliberately engaging, offering immediate feedback and the illusion of transparency.
                     </div>
                 </div>
             </div>
 
-            <!-- CRITICAL INTEGRATION -->
+            <!-- MANDATORY CONSENT MECHANISM -->
             <div class="doc-section" style="--section-color-1: #ec4899; --section-color-2: #f97316; animation-delay: 1s;">
-                <h3>The Critical Integration: Mandatory Consent</h3>
-                <p>Here's the essential intervention: <strong>To access the Analyser, users must first interact with the Terms and Conditions display.</strong> They must physically scroll to the document's conclusion and click "I AGREE" - replicating the exact muscle memory of digital consent we've all developed. This isn't optional. The analyser remains locked until consent is given.</p>
-                <p>This creates the exhibition's central mechanism: visitors perform the very act the work critiques. They experience the friction of lengthy terms, the desire to skip to functionality, and ultimately the click-through consent that characterises contemporary digital engagement.</p>
+                <h3>Mandatory Consent Mechanism</h3>
+                <p><strong>To access the Analyser, users must first scroll through the Terms and click "I AGREE".</strong> This isn't optional. The analyser remains locked until consent is given, replicating the exact muscle memory of digital consent we've all developed.</p>
+                <p>Visitors perform the very act the work critiques, experiencing the friction of lengthy terms, the desire to skip to functionality, and the click-through consent that characterises contemporary digital engagement.</p>
             </div>
 
-            <!-- PRIMARY DISPLAY -->
+            <!-- 150" DISPLAY -->
             <div class="doc-section" style="--section-color-1: #8b5cf6; --section-color-2: #ec4899; animation-delay: 1.2s;">
-                <h3>Primary Display: Navigable Surveillance Topology</h3>
-                <p>The 150-inch screen functions as the exhibition's architectural centrepiece. At this scale, the display transitions from viewed object to environmental space. The rendered world employs Three.js and WebGL to create an explorable 3D landscape populated with translucent "brain" structures - particle-based installations representing cognitive data collection points.</p>
-                <p>These structures aren't merely decorative; they form a <strong>navigable topology of extraction</strong>. Each installation corresponds to specific data categories: communication patterns, emotional analysis, behavioural prediction models. They pulse with subtle luminosity, creating what appears as a constellation of neural architecture suspended in digital space.</p>
-                <p>A drivable car provides navigation through this landscape, controlled via Xbox Adaptive Controller. The physics implementation is deliberately weighted - movement feels grounded rather than frictionless, creating a sense of embodied navigation through abstract data space.</p>
+                <h3>150" Display: Navigable Data Landscape</h3>
+                <p>The primary screen displays an explorable 3D environment representing cognitive data extraction. Structures correspond to data categories (communication patterns, emotional analysis, prediction models). A drivable car, controlled via Xbox Adaptive Controller, allows visitors to navigate this abstract representation of their data being processed and categorised.</p>
             </div>
 
-            <!-- GUIDED EXPERIENCE -->
+            <!-- THE REVEAL -->
             <div class="doc-section" style="--section-color-1: #f97316; --section-color-2: #10b981; animation-delay: 1.4s;">
-                <h3>Guided Experience Protocol</h3>
-                <p>The operator serves as both guide and interpreter, positioned at the controller station. The initial demonstration follows a structured path:</p>
-                
-                <div class="experience-flow">
-                    <div class="flow-step">
-                        <div class="flow-number">1</div>
-                        <div class="flow-title">Introduction</div>
-                        <div class="flow-description">Welcome visitors and introduce analyser functionality with visualisation of extraction mechanisms</div>
-                    </div>
-                    <div class="flow-step">
-                        <div class="flow-number">2</div>
-                        <div class="flow-title">Navigation</div>
-                        <div class="flow-description">Guided tour through 3D environment, contextualising each data structure and collection point</div>
-                    </div>
-                    <div class="flow-step">
-                        <div class="flow-number">3</div>
-                        <div class="flow-title">Connection</div>
-                        <div class="flow-description">Explanation of relationship between navigable world and analysed conversation data</div>
-                    </div>
-                    <div class="flow-step">
-                        <div class="flow-number">4</div>
-                        <div class="flow-title">Exploration</div>
-                        <div class="flow-description">Transfer control to visitors for self-directed exploration of the data landscape</div>
-                    </div>
-                </div>
-
-                <p style="margin-top: 2rem;">Following visitor exploration, the critical reveal occurs: <strong>The operator directs them back to the Terms and Conditions display and navigates to Section 11</strong>, which stipulates that analysed data may be incorporated into public exhibition. This staged moment creates visceral recognition - the realisation that they consented to precisely what they're now witnessing, without comprehension or genuine choice.</p>
+                <h3>The Reveal Moment</h3>
+                <p>After guided navigation through the 3D environment and visitor exploration, the operator directs participants back to the Terms display. <strong>Section 11 stipulates that analysed data may be incorporated into public exhibition.</strong></p>
+                <p>This staged moment creates visceral recognition: visitors realise they consented to precisely what they're witnessing, without comprehension or genuine choice. The reveal doesn't shock through fictional scenarios but through self-recognition of actual behaviour.</p>
             </div>
 
-            <!-- ENHANCED SENSORY -->
+            <!-- THEORETICAL FRAMEWORK -->
             <div class="doc-section" style="--section-color-1: #667eea; --section-color-2: #764ba2; animation-delay: 1.6s;">
-                <h3>Enhanced Sensory Design</h3>
-                
-                <div class="highlight-box">
-                    <div class="highlight-title">Soundscape Layering</div>
-                    <div class="highlight-content">
-                        Beyond the foundational technical hum, the audio environment incorporates barely perceptible whispered fragments: excerpts from AI training prompts, cookie policy language, terms of service clauses. These elements sit just below conscious recognition, creating subliminal density - the sense of being surrounded by linguistic systems that operate whether we attend to them or not.
-                    </div>
-                </div>
-
-                <div class="highlight-box">
-                    <div class="highlight-title">Responsive Lighting Architecture</div>
-                    <div class="highlight-content">
-                        The LED system integrates reactive behaviours tied to system states:<br><br>
-                        <strong>During data analysis:</strong> Subtle pulsing, slight colour temperature shifts towards cooler tones<br>
-                        <strong>During navigation:</strong> Gentle gradients that track movement through the 3D space<br>
-                        <strong>During the reveal:</strong> Lighting stabilises, becomes more clinical
-                    </div>
-                </div>
-
-                <p>This responsive design makes the physical space itself feel observant, reactive - surveillance rendered as environmental quality rather than discrete watching.</p>
-            </div>
-
-            <!-- THEORETICAL IMPLEMENTATION -->
-            <div class="doc-section" style="--section-color-1: #f093fb; --section-color-2: #667eea; animation-delay: 1.8s;">
-                <h3>Theoretical Implementation</h3>
-                <p>The exhibition operates as a <strong>functioning demonstration rather than merely a representation</strong>. Visitors don't just learn about consent mechanisms - they enact them. They don't observe surveillance aesthetics - they navigate through them. The installation creates complicity before comprehension, mirroring the exact sequence of contemporary digital engagement.</p>
-                <p>This approach advances Zuboff's surveillance capitalism framework from theoretical critique to embodied experience. The gap between legal consent and informed understanding isn't explained but <em>felt</em> - in the impulse to skip the terms, in the gratification of the analyser, in the beauty of the explorable world, and finally in the uncomfortable recognition of what was agreed to without awareness.</p>
-                <p>The work doesn't rely on shocking revelations or heavy-handed messaging. Instead, it creates conditions for self-recognition: the moment when visitors understand they've just performed, in miniature, the exact pattern of behaviour that enables large-scale cognitive extraction.</p>
+                <h3>Embodying Surveillance Capitalism Theory</h3>
+                <p>The installation operates as functioning demonstration rather than representation. Visitors enact consent mechanisms rather than observing them, creating complicity before comprehension. This mirrors contemporary digital engagement where agreements precede understanding.</p>
+                <p>The work advances Zuboff's surveillance capitalism framework from theoretical critique to embodied experience. The gap between legal consent and informed understanding isn't explained but felt, in the impulse to skip terms, in the analyser's gratification, and finally in the uncomfortable recognition of unaware agreement.</p>
             </div>
         </div>
     </main>

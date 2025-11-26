@@ -369,6 +369,8 @@
         .content-paragraph:nth-of-type(1) { animation-delay: 0.15s; }
         .content-paragraph:nth-of-type(2) { animation-delay: 0.25s; }
         .content-paragraph:nth-of-type(3) { animation-delay: 0.35s; }
+        .content-paragraph:nth-of-type(4) { animation-delay: 0.45s; }
+        .content-paragraph:nth-of-type(5) { animation-delay: 0.55s; }
 
         /* ============================================
            10. KEYWORD COMPONENT
@@ -409,7 +411,7 @@
             margin: var(--spacing-2xl) 0;
             border-radius: var(--radius-lg);
             opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.45s;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.65s;
             box-shadow: var(--shadow-md);
         }
 
@@ -429,7 +431,7 @@
             border-radius: var(--radius-xl);
             color: #fff;
             opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.55s;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.75s;
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-danger);
@@ -524,7 +526,7 @@
         .features-section {
             margin-top: var(--spacing-2xl);
             opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.65s;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.85s;
         }
 
         .features-heading {
@@ -589,7 +591,7 @@
             border-radius: var(--radius-xl);
             overflow: hidden;
             opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.75s;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.95s;
             box-shadow: var(--shadow-success);
         }
 
@@ -799,21 +801,29 @@
             <!-- Introduction Section -->
             <section aria-labelledby="introduction">
                 <p class="content-paragraph">
-                    <span class="keyword gradient-text">You Agreed.</span> is a critical intervention project which aims to expose the illusion of <span class="keyword gradient-text">informed consent</span> in the age of AI and surveillance capitalism. This exposure will come in the form of an <span class="keyword gradient-text">interactive web installation</span>, enabling users to upload their ChatGPT conversation history and receive a detailed privacy analysis—including a privacy score, personal information detected, and environmental impact. The critical mechanism: users experience a simulated threat of public exhibition through a 10-second countdown, only to discover they technically consented to it buried in terms and conditions they didn't read.
+                    <span class="keyword gradient-text">You Agreed.</span> is a critical intervention that exposes the catastrophic failure of informed consent when applied to AI cognitive extraction. Through an <span class="keyword gradient-text">interactive web installation</span>, users upload their ChatGPT conversation history for privacy analysis, receiving a detailed report on personal information detected, privacy vulnerabilities, and environmental impact. The critical mechanism: a 10-second countdown threatens public exhibition of their data, only to reveal they technically consented to it through terms and conditions they didn't read. This moment of unexpected panic exposes what's already happening invisibly with every AI conversation.
                 </p>
 
                 <p class="content-paragraph">
-                    This project emerges from observing the evolution of data exploitation in surveillance capitalism. First came cookies, tracking where we clicked. Then social media platforms like Meta began capturing everything we do—our relationships, our locations, our behaviours. Now, we're witnessing a third and fundamentally more invasive iteration: <span class="keyword gradient-text">AI systems that extract data about the way we think</span>. ChatGPT doesn't just track what we do—it captures our problem-solving methods, our creative processes, our vulnerabilities. This cognitive extraction represents a qualitative shift in what's being taken from us.
+                    The project explores the fundamental mismatch in how we currently regulate digital extraction and its roots from where it stemmed from. When surveillance capitalism first emerged through cookies and behavioural tracking, we built consent frameworks around a crucial assumption: <span class="keyword gradient-text">reversibility</span>. Data could be deleted. Tracking could be blocked. Users could opt out. These frameworks were inadequate even then dense privacy policies that nobody reads, pre-ticked boxes masquerading as choice, but at least the underlying model matched the technology. Behavioural data went into databases. Databases could be purged.
                 </p>
 
                 <p class="content-paragraph">
-                    Nevertheless, users continue clicking "I agree" to terms they haven't read, consenting to extraction they don't understand. Unlike cookies that can be cleared or social media accounts that can be deleted, <span class="keyword gradient-text">AI model training is irreversible</span>. Once your cognitive patterns have trained a model, there's no "right to be forgotten"—the model has learned from you permanently. You Agreed. makes this invisible extraction visible by creating a controlled experience where users feel the violation of having their data publicly exhibited, revealing that this harm is already happening with every ChatGPT conversation—they just couldn't see it before.
+                    But conversational AI represents something categorically different. When you engage with ChatGPT, you're not generating a behavioural footprint like you do with clicks and timestamps. You're disclosing your reasoning processes, your emotional vulnerabilities, your problem-solving methods, your communication patterns and infinitely more. The system extracts not what you do, but <span class="keyword gradient-text">how you think</span>. The very infrastructure of cognition itself. And crucially, this extraction is permanent. Once your cognitive patterns train a model, they're transformed into mathematical weights distributed across millions of parameters. There is no delete button. There is no right to be forgotten. The model has learned from you, and that learning cannot be undone without destroying the model's fundamental capabilities.
+                </p>
+
+                <p class="content-paragraph">
+                    Yet we continue applying the same broken consent theatre designed for cookie tracking to this irreversible cognitive extraction. The same dense terms of service. The same assumption that scrolling equals comprehension. The same fictional tale that "I Agree" constitutes informed decision-making. This isn't just an inadequate implementation of a sound frameworkit's a <span class="keyword gradient-text">structural category error</span>. Consent mechanisms built for reversible behavioural tracking cannot ethically govern permanent cognitive extraction, particularly when the conversational interface itself is designed to prompt disclosure. The empathetic tone, the human-like responses, the sense of helpful collaboration these aren't neutral features. They're mechanisms that manipulate users into revealing cognitive data they would never disclose through traditional interfaces.
+                </p>
+
+                <p class="content-paragraph">
+                    You Agreed. makes this invisible harm experientially visible. The countdown creates authentic dread the feeling of violation when private data faces public exhibition. That feeling isn't artificial. It's recognition. The installation reveals that this violation is already occurring with every ChatGPT conversation, every Claude discussion, every AI interaction where you believe you're simply getting help while actually providing irreversible cognitive training data. The difference is that you couldn't see it before. The consent theatre functioned as intended: maintaining legal cover while users remained genuinely ignorant of what they were agreeing to. By collapsing the gap between legal consent and experiential understanding into a single moment, the project doesn't just critique surveillance capitalism; it demonstrates why Stage 1 frameworks catastrophically fail when applied to Stage 2 extraction, making abstract regulatory inadequacy feel as immediate and urgent as it actually is.
                 </p>
             </section>
 
             <!-- Core Concept -->
             <aside class="highlight-box">
-                <p><strong class="gradient-text">The Core Concept:</strong> By making people experience the simulated threat of public data exhibition through a 10-second countdown, the project reveals the gap between legal consent (clicking "I agree") and genuine informed consent (understanding what you're agreeing to). This visceral experience demonstrates that the violation is already happening with ChatGPT and other AI systems—users just can't see it.</p>
+                <p><strong class="gradient-text">The Core Concept:</strong> By making people experience the simulated threat of public data exhibition through a 10-second countdown, the project reveals the gap between legal consent (clicking "I agree") and genuine informed consent (understanding what you're agreeing to). This visceral experience demonstrates that the violation is already happening with ChatGPT and other AI systems users just can't see it.</p>
             </aside>
 
             <!-- Critical Mechanism -->
@@ -837,7 +847,7 @@
                     <p class="twist-text">At zero:</p>
                     <span class="just-kidding">"JUST KIDDING."</span>
                     
-                    <p class="twist-text">But you DID agree to this in Section 11. You didn't read the terms. This is what AI companies do—except with them, it's irreversible.</p>
+                    <p class="twist-text">But you DID agree to this in Section 11. You didn't read the terms. This is what AI companies do except with them, it's irreversible.</p>
                 </div>
             </article>
 
@@ -873,7 +883,7 @@
                     <article class="feature-card">
                         <span class="feature-emoji" aria-hidden="true">✅</span>
                         <h4 class="feature-title">Genuine Consent</h4>
-                        <p class="feature-description">After the reveal, users can choose to ACTUALLY consent to anonymized gallery display—now that they understand what they're agreeing to.</p>
+                        <p class="feature-description">After the reveal, users can choose to ACTUALLY consent to anonymized gallery display now that they understand what they're agreeing to.</p>
                     </article>
                     
                     <article class="feature-card">
@@ -892,7 +902,7 @@
                 </header>
                 
                 <div class="ethics-content">
-                    <p><strong class="gradient-text" style="--gradient-primary: linear-gradient(135deg, #10b981, #06b6d4);">All data processing happens locally in the browser</strong>—nothing is uploaded during the demonstration. The simulated threat creates the emotional experience of violation without causing actual harm, like a fire drill teaches safety without real danger. Only users who genuinely consent after the reveal contribute anonymized excerpts to the gallery exhibition.</p>
+                    <p><strong class="gradient-text" style="--gradient-primary: linear-gradient(135deg, #10b981, #06b6d4);">All data processing happens locally in the browser</strong>nothing is uploaded during the demonstration. The simulated threat creates the emotional experience of violation without causing actual harm, like a fire drill teaches safety without real danger. Only users who genuinely consent after the reveal contribute anonymized excerpts to the gallery exhibition.</p>
                     
                     <div class="trust-badges">
                         <div class="trust-badge">

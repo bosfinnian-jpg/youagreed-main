@@ -103,11 +103,6 @@
             }
         }
 
-        @keyframes shimmer {
-            0% { left: -150%; }
-            100% { left: 150%; }
-        }
-
         .gradient-text {
             background: var(--gradient-primary);
             -webkit-background-clip: text;
@@ -296,199 +291,98 @@
             animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.15s;
         }
 
-        .intro-section {
+        .section {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: var(--radius-xl);
             padding: var(--spacing-xl);
             box-shadow: var(--shadow-lg);
-            margin-bottom: var(--spacing-2xl);
+            margin-bottom: var(--spacing-xl);
             border-left: 6px solid;
-            border-image: var(--gradient-accent) 1;
             opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.2s;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        .intro-text {
+        .section:nth-child(1) { animation-delay: 0.2s; border-image: linear-gradient(135deg, #ec4899, #f97316) 1; }
+        .section:nth-child(2) { animation-delay: 0.25s; border-image: linear-gradient(135deg, #8b5cf6, #7c3aed) 1; }
+        .section:nth-child(3) { animation-delay: 0.3s; border-image: linear-gradient(135deg, #10b981, #059669) 1; }
+        .section:nth-child(4) { animation-delay: 0.35s; border-image: linear-gradient(135deg, #3b82f6, #8b5cf6) 1; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .section-content {
             font-size: var(--font-size-lg);
             line-height: 1.8;
             color: var(--text);
         }
 
-        .intro-text strong {
+        .section-content p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-content strong {
             color: var(--accent);
             font-weight: 700;
         }
 
-        .intro-text em {
+        .section-content em {
             color: var(--accent-purple);
-            font-style: normal;
-            font-weight: 600;
+            font-style: italic;
         }
 
-        .skills-grid {
+        .skills-list {
             display: grid;
-            gap: var(--spacing-xl);
-            margin-bottom: var(--spacing-2xl);
-        }
-
-        .skill-category {
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        .skill-category:nth-child(1) { animation-delay: 0.3s; }
-        .skill-category:nth-child(2) { animation-delay: 0.35s; }
-        .skill-category:nth-child(3) { animation-delay: 0.4s; }
-        .skill-category:nth-child(4) { animation-delay: 0.45s; }
-        .skill-category:nth-child(5) { animation-delay: 0.5s; }
-
-        .category-header {
-            background: var(--gradient-primary);
-            color: white;
-            padding: var(--spacing-lg) var(--spacing-xl);
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-            display: flex;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: var(--spacing-md);
-            position: relative;
-            overflow: hidden;
+            margin: var(--spacing-lg) 0;
         }
 
-        .category-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+        .skill-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
         }
 
-        .category-header:hover::before {
-            left: 100%;
-        }
-
-        .category-icon {
-            font-size: 2.5rem;
-        }
-
-        .category-title {
-            font-size: var(--font-size-2xl);
-            font-weight: 700;
-        }
-
-        .category-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: var(--spacing-xl);
-            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-            box-shadow: var(--shadow-md);
-        }
-
-        .skill-item {
-            margin-bottom: var(--spacing-lg);
-            padding-bottom: var(--spacing-lg);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .skill-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .skill-name {
-            font-size: var(--font-size-xl);
+        .skill-card h4 {
+            font-size: var(--font-size-base);
             font-weight: 700;
             color: var(--text);
             margin-bottom: var(--spacing-xs);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
         }
 
-        .skill-level {
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .skill-level.strong {
-            background: rgba(16, 185, 129, 0.15);
-            color: #059669;
-        }
-
-        .skill-level.learning {
-            background: rgba(249, 115, 22, 0.15);
-            color: #ea580c;
-        }
-
-        .skill-level.collaborative {
-            background: rgba(139, 92, 246, 0.15);
-            color: #7c3aed;
-        }
-
-        .skill-description {
-            font-size: var(--font-size-base);
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .skill-evidence {
+        .skill-card p {
             font-size: var(--font-size-sm);
-            color: var(--text);
+            color: var(--text-secondary);
             line-height: 1.6;
-            font-style: italic;
-            padding: var(--spacing-md);
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-            border-left: 3px solid var(--accent);
-            border-radius: var(--radius-sm);
+            margin: 0;
         }
 
-        .ai-methodology {
+        .highlight-box {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
             border: 2px solid rgba(139, 92, 246, 0.3);
-            border-radius: var(--radius-xl);
-            padding: var(--spacing-xl);
-            margin-bottom: var(--spacing-2xl);
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.55s;
-        }
-
-        .ai-methodology h3 {
-            font-size: var(--font-size-3xl);
-            font-weight: 700;
-            margin-bottom: var(--spacing-lg);
-            color: #7c3aed;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-
-        .reflection-section {
-            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
-            border: 2px solid rgba(249, 115, 22, 0.3);
-            border-radius: var(--radius-xl);
-            padding: var(--spacing-xl);
-            margin-bottom: var(--spacing-2xl);
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.6s;
-        }
-
-        .reflection-section h3 {
-            font-size: var(--font-size-3xl);
-            font-weight: 700;
-            margin-bottom: var(--spacing-lg);
-            color: #ea580c;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
         }
 
         .site-footer {
@@ -540,6 +434,10 @@
             .particle:nth-child(n+8) {
                 display: none;
             }
+
+            .skills-list {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -587,314 +485,81 @@
     <main class="main-content">
         <div class="container">
             <h2 class="page-title gradient-text">Skills & Methodology</h2>
-            <p class="page-subtitle">Technical Capabilities • AI-Assisted Development • Critical Reflection</p>
+            <p class="page-subtitle">Critical Practice • AI-Assisted Development • Theoretical Foundation</p>
 
-            <!-- Introduction -->
-            <div class="intro-section">
-                <p class="intro-text">
-                    To be direct: <strong>I am not a developer.</strong> I am a thinker, a creative practitioner whose strengths lie in conceptual design, critical analysis, and visual storytelling. My technical foundation includes functional HTML knowledge—demonstrated through previous web scraping projects for social media platforms—but my JavaScript proficiency is limited, and I have no prior experience with advanced frameworks like Next.js or 3D graphics libraries. My CSS knowledge remains developmental.
-                </p>
-                <br>
-                <p class="intro-text">
-                    What I bring to this project is substantive: three years of academic training in digital media and communications, strong critical writing capabilities, and a genuine intellectual engagement with surveillance capitalism that emerged from my third-year Internet Policy module. Discovering <strong>Shoshana Zuboff's theoretical framework</strong> provided the critical foundation that drives this work—understanding how these systems extract value through normalized consent mechanisms represents more than academic interest; it reflects a commitment to making abstract digital ethics concepts tangible and accessible.
-                </p>
-                <br>
-                <p class="intro-text">
-                    My creative confidence stems from extensive experience with Adobe Creative Suite—particularly Premiere Pro, Photoshop, and After Effects. I have produced documentary content, managed complex video editing workflows, and developed strong visual design sensibilities. However, the technical web development required for this installation represents a significant learning curve that I am addressing through <em>AI-assisted development methodology</em>, which itself becomes a critical component of the project's conceptual framework.
-                </p>
+            <!-- SKILLS -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">🎯</span>
+                    <h3 class="section-title">Skills</h3>
+                </div>
+                <div class="section-content">
+                    <p>I am not a developer. I am a critical practitioner whose strengths lie in conceptual design, theoretical analysis, and visual storytelling. My foundation includes three years of academic training in digital media and communications, functional HTML knowledge from web scraping projects, and strong capabilities with Adobe Creative Suite. My JavaScript proficiency is limited, CSS knowledge is developmental, and I have no prior experience with advanced frameworks.</p>
+                    
+                    <p>What I bring: substantive engagement with <strong>Shoshana Zuboff's surveillance capitalism framework</strong> from my third-year Internet Policy module, strong academic writing capabilities, and genuine commitment to making abstract digital ethics concepts tangible. This project emerges from understanding how Stage 1 consent mechanisms (designed for reversible cookie tracking) catastrophically fail when applied to Stage 2 cognitive extraction through AI systems.</p>
+                </div>
             </div>
 
-            <!-- AI Methodology Section - NEW -->
-            <div class="ai-methodology">
-                <h3>🤖 AI-Assisted Development: The Methodological Irony</h3>
-                <p class="intro-text">
-                    This project operates within the University of Leeds' <strong>"AI Green" assessment category</strong>, which explicitly encourages generative AI use as an integral component of the work. The category framework states: <em>"In these assessments, you will demonstrate your ability to use Gen AI tools effectively and critically, to tackle complex problems, make informed judgments and generate creative solutions."</em>
-                </p>
-                <br>
-                <p class="intro-text">
-                    The methodological approach creates a deliberate tension: <strong>I am building a critique of AI data extraction using AI assistance to overcome technical limitations.</strong> This is not contradictory—it demonstrates the dual nature of these technologies and forms a critical element of the project's reflexive analysis.
-                </p>
-                <br>
-                <p class="intro-text">
-                    <strong>Without AI assistance, this project would not exist.</strong> The technical implementation—interactive data parsing, real-time analysis visualization, sophisticated countdown mechanics, responsive design patterns—exceeds my current coding capabilities. AI tools (specifically Claude and ChatGPT) enable me to translate conceptual vision into functional code, focusing my energy on what matters: the critical framework, user experience design, and educational impact.
-                </p>
-                <br>
-                <p class="intro-text">
-                    What I am <em>not</em> doing: asking AI to generate my theoretical analysis, write my critical essay, or formulate my conceptual approach. The ideation, critical thinking, ethical framework, and creative direction remain entirely mine. AI serves as a technical translator, not an intellectual replacement.
-                </p>
-                <br>
-                <p class="intro-text">
-                    <strong>The Reflexive Element:</strong> Using AI to critique AI surveillance creates a meta-layer of understanding. I benefit from this technology's democratizing potential—it grants me capabilities beyond my technical training. Simultaneously, I recognize that the same systems enabling my work operate through the consent theater mechanisms I'm trying to expose. This tension is productive, not problematic. It demonstrates that the question isn't "is AI beneficial or harmful?" but rather: <em>"What are the terms of this exchange, do users understand those terms, and are current privacy frameworks adequate?"</em>
-                </p>
-                <br>
-                <p class="intro-text">
-                    My position: AI represents genuinely transformative capability. It should be used. But it <strong>cannot be allowed to replicate the surveillance capitalism model that Meta exemplifies</strong>—where extraction happens invisibly while utility happens visibly. Privacy regulations designed for cookie tracking are inadequate for AI model training, which involves permanent, irreversible cognitive pattern extraction. We need frameworks that acknowledge this qualitative difference.
-                </p>
+            <!-- AI METHODOLOGY -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">🤖</span>
+                    <h3 class="section-title">AI-Assisted Development: The Reflexive Element</h3>
+                </div>
+                <div class="section-content">
+                    <p>This project operates within the University of Leeds' <strong>"AI Green" assessment category</strong>, which explicitly encourages generative AI use as integral to the work. The methodological approach creates deliberate tension: <strong>I am building a critique of AI data extraction using AI assistance to overcome technical limitations.</strong></p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Without AI assistance, this project simply wouldn't exist.</strong> The technical implementation: interactive data parsing, countdown mechanics, sophisticated animations, responsive design, unfortunately, exceeds my current coding capabilities. AI tools translate conceptual vision into functional code, allowing me to focus on what matters: critical framework, user experience design, and educational impact.</p>
+                    </div>
+
+                    <p><strong>What AI handles:</strong> technical implementation of defined requirements, code debugging and optimisation, animation generation based on my specifications, and architectural recommendations for features I've designed.</p>
+                    
+                    <p><strong>What remains mine:</strong> conceptual design and critical framework development, theoretical grounding in surveillance capitalism literature, user experience architecture and interaction design, visual direction and atmospheric decisions, written analysis, physical installation design and all of the execution.</p>
+
+                    <p><strong>The reflexive layer:</strong> Using AI to critique AI surveillance creates productive meta-commentary. I benefit from this technology's democratising potential while recognising that these same systems operate through the consent theatre mechanisms I'm exposing. This tension demonstrates that the question isn't "is AI beneficial or harmful?" but rather: <em>"What are the terms of exchange, do users understand those terms, and are current privacy frameworks adequate when extraction becomes permanent and irreversible?"</em></p>
+
+                    <p>My position: AI represents genuinely transformative capability and should be used. But it cannot be allowed to replicate the surveillance capitalism model where extraction happens invisibly. Privacy regulations designed for reversible cookie tracking are simply inadequate for irreversible AI model training involving permanent cognitive pattern extraction.</p>
+                </div>
             </div>
 
-            <!-- Skills Grid -->
-            <div class="skills-grid">
-                <!-- FOUNDATIONAL COMPETENCIES -->
-                <div class="skill-category">
-                    <div class="category-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-                        <div class="category-icon">✓</div>
-                        <div class="category-title">Foundational Competencies</div>
-                    </div>
-                    <div class="category-content">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                HTML & Web Architecture
-                                <span class="skill-level strong">Competent</span>
-                            </div>
-                            <div class="skill-description">
-                                Functional understanding of HTML structure, semantic markup, form handling, and DOM organization. Capable of building functional web interfaces without advanced styling or interactivity.
-                            </div>
-                            <div class="skill-evidence">
-                                Evidence: Previous projects include web scraping tools for X (Twitter) and Instagram, requiring understanding of document structure, data extraction patterns, and programmatic content access. These projects demonstrated capability to analyze and manipulate web architecture, though styling and advanced JavaScript remained limited.
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                Visual Production & Post-Production
-                                <span class="skill-level strong">Proficient</span>
-                            </div>
-                            <div class="skill-description">
-                                Strong capabilities across Adobe Creative Suite, particularly Premiere Pro for video editing, Photoshop for image manipulation, and After Effects for motion graphics. Comfortable with professional editing workflows, color grading, audio mixing, and visual composition.
-                            </div>
-                            <div class="skill-evidence">
-                                Evidence: Produced and edited documentary content during second year, managing complete post-production workflow. Extensive experience with timeline editing, color correction, sound design, and export optimization. This represents my primary creative confidence area—where technical skill meets artistic vision effectively.
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                Academic Research & Critical Writing
-                                <span class="skill-level strong">Proficient</span>
-                            </div>
-                            <div class="skill-description">
-                                Three years of university-level academic training provides strong foundation in research methodology, critical analysis, argument construction, and theoretical engagement. Capable of producing comprehensive written work that synthesizes complex theoretical frameworks with practical application.
-                            </div>
-                            <div class="skill-evidence">
-                                Evidence: Completed multiple research-intensive modules across digital media and communications curriculum. Discovered and engaged substantively with Shoshana Zuboff's surveillance capitalism framework during third-year Internet Policy module, demonstrating ability to absorb complex theory and apply it critically. The 8,000+ word written component of this project builds directly on established academic writing capabilities.
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                Surveillance Capitalism Theory
-                                <span class="skill-level strong">Engaged</span>
-                            </div>
-                            <div class="skill-description">
-                                Substantive understanding of Zuboff's surveillance capitalism framework, including the three-stage evolution of data extraction (behavioral tracking, cognitive extraction, autonomous systems). Capable of applying theoretical concepts to practical critique and translating abstract frameworks into accessible educational content.
-                            </div>
-                            <div class="skill-evidence">
-                                Evidence: This project emerges from genuine intellectual engagement rather than assignment fulfillment. The theoretical grounding reflects sustained interest in how consent mechanisms fail to provide meaningful protection against data extraction, particularly as systems evolve from behavioral tracking to cognitive pattern analysis. The conceptual framework driving this installation demonstrates ability to operationalize theory through creative practice.
-                            </div>
-                        </div>
-                    </div>
+            <!-- CORE COMPETENCIES -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">✓</span>
+                    <h3 class="section-title">Core Competencies</h3>
                 </div>
-
-                <!-- DEVELOPMENTAL SKILLS -->
-                <div class="skill-category">
-                    <div class="category-header" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">
-                        <div class="category-icon">↗</div>
-                        <div class="category-title">Skills Under Development</div>
-                    </div>
-                    <div class="category-content">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                JavaScript & Interactive Functionality
-                                <span class="skill-level learning">Learning</span>
-                            </div>
-                            <div class="skill-description">
-                                Currently developing functional JavaScript capabilities focused on practical application rather than comprehensive mastery. Learning emphasis centers on DOM manipulation, event handling, state management, and asynchronous operations required for this project's interactive components.
-                            </div>
-                            <div class="skill-evidence">
-                                Approach: Learning through implementation of specific required features—upload interface, countdown timer mechanics, reveal sequencing, data parsing logic. Using AI assistance to understand code patterns, debug errors, and build functional components while developing comprehension of underlying JavaScript concepts. Focus remains on achieving working functionality within project timeline rather than comprehensive language mastery.
-                            </div>
+                <div class="section-content">
+                    <div class="skills-list">
+                        <div class="skill-card">
+                            <h4>Surveillance Capitalism Theory</h4>
+                            <p>Substantive understanding of Zuboff's framework, including Stage 1 (behavioural extraction) vs Stage 2 (cognitive extraction). Capable of applying theoretical concepts to practical critique and translating abstract frameworks into accessible educational content.</p>
                         </div>
-
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                CSS & Responsive Layout Design
-                                <span class="skill-level learning">Developing</span>
-                            </div>
-                            <div class="skill-description">
-                                Building understanding of modern CSS layout systems (Flexbox, Grid) and responsive design principles. Current knowledge allows basic styling but lacks sophistication in complex layouts, cross-device optimization, and advanced visual effects.
-                            </div>
-                            <div class="skill-evidence">
-                                Approach: Studying practical CSS patterns through implementation needs. Considering Tailwind CSS adoption to accelerate development while learning underlying concepts. Priority focuses on achieving professional presentation quality that serves the installation's conceptual requirements rather than demonstrating CSS mastery as an end goal.
-                            </div>
+                        <div class="skill-card">
+                            <h4>Academic Research & Writing</h4>
+                            <p>Strong foundation in research methodology, critical analysis, and argument construction, constructing complex theoretical frameworks with practical application.</p>
                         </div>
-
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                User Experience & Interaction Design
-                                <span class="skill-level learning">Developing</span>
-                            </div>
-                            <div class="skill-description">
-                                Developing understanding of how interaction design creates emotional impact and guides user attention. The installation requires that the countdown mechanism generates genuine anxiety, the upload process feels authentic, and the reveal sequence lands with appropriate weight—all demanding sophisticated UX consideration beyond basic functionality.
-                            </div>
-                            <div class="skill-evidence">
-                                Approach: Iterative testing with peer groups to evaluate emotional responses and interaction effectiveness. Drawing from video editing experience with pacing and timing to inform web-based interaction sequencing. Learning to translate cinematic techniques (tension building, reveal timing, atmospheric design) into interactive digital experiences.
-                            </div>
+                        <div class="skill-card">
+                            <h4>Visual Production</h4>
+                            <p>Proficient with Adobe Creative Suite (Premiere Pro, Photoshop, Illustrator). Comfortable with professional editing workflows, colour grading, audio mixing, and visual composition from documentary production work.</p>
                         </div>
-
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                Data Format Parsing & Analysis
-                                <span class="skill-level learning">Learning</span>
-                            </div>
-                            <div class="skill-description">
-                                Developing capability to parse ChatGPT export formats (likely JSON structure), extract relevant information, and implement rule-based analysis to identify privacy-sensitive content. This requires understanding data structures, pattern matching, and algorithmic thinking—all new territory.
-                            </div>
-                            <div class="skill-evidence">
-                                Approach: Beginning with examination of actual ChatGPT export files to understand data structure. Building simple parsing algorithms incrementally, starting with basic text pattern matching (names, locations, dates) before adding complexity. Using AI assistance to translate analytical logic into functional code while developing understanding of data processing concepts.
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                Physical Installation & Technical Setup
-                                <span class="skill-level learning">Developing</span>
-                            </div>
-                            <div class="skill-description">
-                                First experience with large-scale physical installation involving 150-inch display, LED atmospheric lighting, controlled black cloth environment, and Xbox Adaptive Controller input system. Requires coordination with university technical staff and understanding of hardware integration.
-                            </div>
-                            <div class="skill-evidence">
-                                Approach: Early booking of university TV and photography studio to secure equipment access. Working collaboratively with technical support staff to understand setup requirements and troubleshoot hardware challenges. Planning multiple test sessions to identify and resolve display-specific performance issues before exhibition. Developing comprehensive setup documentation and backup contingency plans.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AI-ASSISTED IMPLEMENTATION -->
-                <div class="skill-category">
-                    <div class="category-header" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
-                        <div class="category-icon">🤝</div>
-                        <div class="category-title">AI-Assisted Implementation</div>
-                    </div>
-                    <div class="category-content">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                Advanced Visual Effects & Animation
-                                <span class="skill-level collaborative">AI-Assisted</span>
-                            </div>
-                            <div class="skill-description">
-                                Atmospheric particle systems, GPU-accelerated animations, WebGL effects, and cinematic post-processing represent advanced technical territory beyond current independent capability. These elements serve the installation's conceptual requirements for creating an ethereal, slightly unsettling visual environment that reinforces the surveillance critique.
-                            </div>
-                            <div class="skill-evidence">
-                                Implementation Strategy: Using AI assistance to generate Three.js particle system code, WebGL shader implementations, and sophisticated animation sequences. My role focuses on defining desired visual outcomes, evaluating generated code effectiveness, and iterating based on performance testing. Learning occurs through examining AI-generated solutions and understanding how they achieve specific visual effects, though comprehensive mastery of GPU programming remains beyond project scope.
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                Framework Architecture & Component Design
-                                <span class="skill-level collaborative">AI-Assisted</span>
-                            </div>
-                            <div class="skill-description">
-                                Decision between vanilla JavaScript implementation versus modern framework adoption (Next.js/React) involves trade-offs between learning curve steepness and development efficiency. Current approach leverages AI to handle complex architectural decisions while I focus on understanding component relationships and user flow logic.
-                            </div>
-                            <div class="skill-evidence">
-                                Implementation Strategy: Using AI to provide architectural recommendations, generate boilerplate code, and implement complex routing or state management patterns. Focusing personal learning on understanding why certain architectural patterns serve project needs rather than comprehensive framework mastery. May ultimately choose simpler vanilla JavaScript approach if framework complexity exceeds practical benefit within timeline constraints.
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                Performance Optimization for Large Displays
-                                <span class="skill-level collaborative">AI-Assisted</span>
-                            </div>
-                            <div class="skill-description">
-                                Ensuring smooth performance on 150-inch display requires optimization techniques beyond standard laptop development. Animation frame rates, render performance, memory management, and display-specific debugging all demand technical sophistication I'm developing through this project rather than bringing to it.
-                            </div>
-                            <div class="skill-evidence">
-                                Implementation Strategy: Using AI to identify performance bottlenecks, suggest optimization approaches, and generate efficient code patterns. Working with university technical staff to conduct real-world testing in actual studio environment. Building understanding of performance profiling through iterative debugging supported by AI analysis of performance metrics and optimization recommendations.
-                            </div>
+                        <div class="skill-card">
+                            <h4>Web Architecture</h4>
+                            <p>Functional HTML understanding from previous web scraping projects (X/Twitter, Instagram). Capable of analysing document structure and programmatic content access, though advanced styling and JavaScript remain limited.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Critical Reflection -->
-            <div class="reflection-section">
-                <h3>💭 Critical Assessment & Learning Outcomes</h3>
-                <p class="intro-text">
-                    This project represents ambitious scope for someone developing JavaScript capabilities concurrently with implementation. However, the ambition serves pedagogical purpose: <strong>learning occurs most effectively when necessity drives acquisition.</strong> I am not pursuing technical mastery for its own sake but rather developing specific capabilities required to realize conceptual vision.
-                </p>
-                <br>
-                <p class="intro-text">
-                    What I will not achieve: GPU-accelerated particle systems running at 60fps on massive displays, sophisticated Three.js animations with custom shaders, or framework-based architecture demonstrating React mastery. These would be impressive technically but represent means, not ends.
-                </p>
-                <br>
-                <p class="intro-text">
-                    What I will achieve: A functioning countdown mechanism that creates genuine psychological discomfort. An upload interface that feels authentic until the reveal. A data analysis display that makes privacy exposure visible and visceral. Physical installation setup that creates appropriate atmospheric tension. <strong>These are the components that matter—the elements that translate theoretical critique into experiential understanding.</strong>
-                </p>
-                <br>
-                <p class="intro-text">
-                    The documentary I produced last year involved learning video production through practice. I did not know how to film, light, or edit documentary content before beginning—I developed those capabilities through the work itself. This project follows the same trajectory: <em>learning through making, supported by appropriate tools and assistance.</em>
-                </p>
-                <br>
-                <p class="intro-text">
-                    <strong>On AI Dependency:</strong> Some will inevitably critique this project as "AI-generated work" that undermines claims to authorship. This criticism misunderstands both the assessment framework and the nature of the work. My contribution encompasses:
-                </p>
-                <br>
-                <p class="intro-text" style="padding-left: 2rem;">
-                    • Conceptual design and critical framework development<br>
-                    • Theoretical grounding in surveillance capitalism literature<br>
-                    • User experience architecture and interaction design<br>
-                    • Visual direction and atmospheric design decisions<br>
-                    • Ethical analysis and risk assessment<br>
-                    • Critical reflection on AI-assisted methodology itself<br>
-                    • 8,000+ word written analysis (human-authored)<br>
-                    • Physical installation design and execution
-                </p>
-                <br>
-                <p class="intro-text">
-                    AI assistance handles: technical implementation of defined requirements, code debugging and optimization, complex animation generation based on my specifications, and architectural recommendations for features I've designed.
-                </p>
-                <br>
-                <p class="intro-text">
-                    The intellectual work—the critical thinking, the conceptual innovation, the educational purpose—remains mine. AI serves as technical enabler, not creative replacement. <strong>This distinction matters, and I can defend it.</strong>
-                </p>
-            </div>
-
-            <!-- Future Trajectory -->
-            <div class="ai-methodology">
-                <h3>→ Beyond Assessment: Potential Trajectories</h3>
-                <p class="intro-text">
-                    If this installation succeeds in making surveillance capitalism concepts tangibly understandable—if visitors leave questioning their relationship with AI systems and reconsidering consent mechanisms they've normalized—then it merits existence beyond academic assessment context.
-                </p>
-                <br>
-                <p class="intro-text">
-                    Organizations like Mozilla conduct public exhibitions addressing internet ethics. Art festivals increasingly engage with surveillance culture and technology critique. Independent galleries in Leeds and beyond might find this work relevant to contemporary digital culture discourse. The concept scales beyond university exhibition context because <strong>the underlying issue is genuinely urgent and underexplored in accessible formats.</strong>
-                </p>
-                <br>
-                <p class="intro-text">
-                    I cannot predict whether broader exhibition opportunities will materialize—they may prove aspirational rather than achievable. However, the possibility exists, and it drives work quality beyond minimum assessment requirements. This project aims to educate, provoke reflection, and make abstract consent theater concepts viscerally understandable. If it achieves those goals effectively, audiences beyond academic assessment could benefit from experiencing it.
-                </p>
-                <br>
-                <p class="intro-text">
-                    The current moment offers particular relevance: we are watching cookie-era consent theater patterns repeat with AI, despite qualitatively different stakes. Privacy frameworks designed for temporary behavioral tracking prove inadequate for permanent cognitive model training. Regulatory responses lag technological development. Public understanding of what users consent to when using AI remains superficial.
-                </p>
-                <br>
-                <p class="intro-text">
-                    <strong>This project attempts to close that understanding gap</strong>—not through academic papers that reach small specialized audiences, but through experiential installation that makes the invisible visible and the abstract concrete. That mission justifies the learning curve, the technical challenges, and the methodological complexity of building AI critique using AI assistance.
-                </p>
-                <br>
-                <p class="intro-text">
-                    Because ultimately, the question isn't whether AI tools are valuable—they demonstrably are. <strong>The question is: what are users trading for that value, do they genuinely understand the trade, and are current regulatory frameworks adequate to ensure fairness?</strong>
-                </p>
-                <br>
-                <p class="intro-text">
-                    Right now, the answers are: cognitive patterns permanently embedded in AI models, no they don't understand, and no the frameworks are inadequate.
-                </p>
-                <br>
-                <p class="intro-text">
-                    <em>That's what needs to change. Even if it takes learning JavaScript to make it happen.</em>
-                </p>
+            <!-- SKILLS UNDER DEVELOPMENT -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-icon">↗</span>
+                    <h3 class="section-title">Skills Under Development</h3>
+                </div>
+                <div class="section-content">
+                    <p>JavaScript interactive functionality (DOM manipulation, event handling, state management), modern CSS layout systems (Flexbox, Grid), data format parsing (JSON structure, pattern matching), user experience design for emotional impact, and physical installation setup with large-scale displays.</p>
+                </div>
             </div>
 
         </div>
@@ -902,7 +567,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>You Agreed. | COMM3705 Digital Media Project | Skills, Methodology & Critical Reflection</p>
+            <p>You Agreed. | COMM3705 Digital Media Project | Methodology & Critical Reflection</p>
         </div>
     </footer>
 

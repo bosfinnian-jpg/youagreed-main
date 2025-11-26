@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,14 +20,14 @@
             --text: #ffffff;
             --text-secondary: #a1a1aa;
             
-            /* Project Colors */
+            /* Project Colours */
             --blue-primary: #2479df;
             --blue-light: #3b9bff;
-            --pink-soft: #ffcee;
-            --yellow-bright: #ffc55f;
+            --pink: #ec4899;
+            --purple: #8b5cf6;
             --white: #ffffff;
             --black: #231f20;
-            --green-lime: #cc0888;
+            --green-lime: #c0ff88;
             --purple-soft: #b0c3fd;
             --coral: #f56c5c;
             
@@ -253,7 +253,7 @@
             padding: 0 var(--spacing-lg) 4rem;
         }
 
-        /* COLOR PALETTE SECTION */
+        /* COLOUR PALETTE SECTION */
         .palette-section {
             background: rgba(20, 20, 30, 0.6);
             backdrop-filter: blur(20px);
@@ -308,7 +308,7 @@
             line-height: 1.6;
         }
 
-        /* COLOR GRID */
+        /* COLOUR GRID */
         .color-category {
             margin-bottom: var(--spacing-2xl);
         }
@@ -405,7 +405,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #f56c5c, #ffc55f, #cc0888);
+            background: linear-gradient(90deg, #f56c5c, #8b5cf6, #c0ff88);
         }
 
         .font-showcase {
@@ -565,13 +565,13 @@
     </section>
 
     <main class="main-container">
-        <!-- COLOR PALETTE -->
+        <!-- COLOUR PALETTE -->
         <div class="palette-section">
             <div class="section-header">
                 <div class="section-number">Visual System</div>
                 <h3 class="section-title">The Colour Palette</h3>
                 <p class="section-description">
-                    Vibrant pastel primary colours carefully considered for a broad target audience of all ages, genders, and preferences — appealing to all.
+                    Vibrant pastel primary colours carefully considered for a broad target audience of all ages, genders, and preferences, appealing to all.
                 </p>
             </div>
 
@@ -586,13 +586,13 @@
                         <div class="color-name">Sky Blue</div>
                         <div class="color-hex">#3b9bff</div>
                     </div>
-                    <div class="color-swatch" style="background: #ffccee;">
-                        <div class="color-name">Soft Pink</div>
-                        <div class="color-hex">#ffccee</div>
+                    <div class="color-swatch" style="background: #ec4899;">
+                        <div class="color-name">Pink</div>
+                        <div class="color-hex">#ec4899</div>
                     </div>
-                    <div class="color-swatch" style="background: #ffc55f;">
-                        <div class="color-name">Bright Yellow</div>
-                        <div class="color-hex">#ffc55f</div>
+                    <div class="color-swatch" style="background: #8b5cf6;">
+                        <div class="color-name">Purple</div>
+                        <div class="color-hex">#8b5cf6</div>
                     </div>
                     <div class="color-swatch" style="background: #ffffff; border-color: #3b9bff;">
                         <div class="color-name" style="color: #000;">Pure White</div>
@@ -608,9 +608,9 @@
             <div class="color-category">
                 <h4 class="category-title">Highlights</h4>
                 <div class="color-grid">
-                    <div class="color-swatch" style="background: #cc0888;">
+                    <div class="color-swatch" style="background: #c0ff88;">
                         <div class="color-name">Lime Green</div>
-                        <div class="color-hex">#cc0888</div>
+                        <div class="color-hex">#c0ff88</div>
                     </div>
                     <div class="color-swatch" style="background: #b0c3fd;">
                         <div class="color-name">Soft Purple</div>
@@ -679,17 +679,8 @@
             </div>
 
             <div class="philosophy-content">
-                <p style="margin-bottom: 1.5rem;">
-                    The visual identity of <strong>You Agreed</strong> deliberately employs the aesthetic vocabulary of contemporary tech interfaces — clean, vibrant, inviting. This isn't accidental. The colour palette and typography mirror the designed environments we encounter daily in digital spaces: the friendly blues of social platforms, the soft pastels of consumer apps, the approachable sans-serifs of modern web design.
-                </p>
-                <p style="margin-bottom: 1.5rem;">
-                    This creates a critical tension: <strong>the work uses the visual language of the systems it critiques.</strong> The aesthetic that typically signals trust, accessibility, and user-friendliness here becomes a tool for revealing how those same design choices facilitate surveillance and extraction.
-                </p>
-                <p style="margin-bottom: 1.5rem;">
-                    The pastels aren't hostile or dystopian — they're the same colours that surround our daily digital engagement. The typography isn't ominous — it's the readable, accessible typeface of legitimate platforms. This is intentional: <strong>surveillance capitalism doesn't look threatening.</strong> It looks polished, professional, even beautiful.
-                </p>
                 <p>
-                    By adopting this aesthetic, the installation doesn't ask viewers to imagine a different world — it asks them to see the one they already inhabit with fresh recognition.
+                    The visual identity of <strong>You Agreed</strong> borrows the soft colours and friendly clarity of the digital spaces we move through every day. That familiarity is the point: the installation looks safe, polished, and trustworthy because the systems it critiques do too. By using their aesthetic, it invites viewers to recognise that surveillance rarely appears sinister – most of the time, it looks comforting, seamless, and designed to be welcomed in.
                 </p>
             </div>
         </div>
@@ -719,7 +710,7 @@
             }
         }, { passive: true });
 
-        // COLOR SWATCH CLICK TO COPY
+        // COLOUR SWATCH CLICK TO COPY
         document.querySelectorAll('.color-swatch').forEach(swatch => {
             swatch.addEventListener('click', () => {
                 const hex = swatch.querySelector('.color-hex').textContent;
